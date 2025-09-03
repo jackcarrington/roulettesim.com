@@ -30,7 +30,8 @@ export const GET: APIRoute = async ({ url }) => {
     const apiUrl = new URL('https://slotslaunch.com/api/games');
     apiUrl.searchParams.set('token', slotsLaunchToken);
     apiUrl.searchParams.set('per_page', '150'); // Max allowed
-    apiUrl.searchParams.set('published', 'true'); // Only published games
+    apiUrl.searchParams.set('published', '1'); // Only published games
+    apiUrl.searchParams.set('type[]', '22'); // Roulette games only
 
     const response = await fetch(apiUrl.toString(), {
       method: 'GET',
@@ -47,30 +48,8 @@ export const GET: APIRoute = async ({ url }) => {
 
     const allGames = await response.json();
     
-    // Enhanced roulette game identification using documented API structure
-    const rouletteGames = allGames.data?.filter((game: any) => {
-      // Search across all available game metadata fields
-      const searchableText = [
-        game.name,
-        game.type,
-        game.type_slug,
-        game.description,
-        ...(game.themes?.map((theme: any) => theme.name) || []),
-        ...(game.themes?.map((theme: any) => theme.slug) || [])
-      ].filter(Boolean).join(' ').toLowerCase();
-      
-      // Comprehensive roulette detection patterns
-      return (
-        searchableText.includes('roulette') ||
-        searchableText.includes('wheel') ||
-        // Look for table game types that might include roulette
-        (game.type_slug?.includes('table') && searchableText.includes('roulette')) ||
-        // European/American/French table games are likely roulette
-        (searchableText.includes('european') && (searchableText.includes('table') || searchableText.includes('casino'))) ||
-        (searchableText.includes('american') && (searchableText.includes('table') || searchableText.includes('casino'))) ||
-        (searchableText.includes('french') && (searchableText.includes('table') || searchableText.includes('casino')))
-      );
-    }) || [];
+    // All games returned are already roulette games (filtered by type[]=22)
+    const rouletteGames = allGames.data || [];
 
     const processedGames: RouletteGame[] = rouletteGames.map((game: any) => ({
       id: game.id.toString(),
