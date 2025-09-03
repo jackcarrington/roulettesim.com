@@ -1,0 +1,44 @@
+---
+export interface Props {
+  gameId: string;
+  variant: 'european' | 'american' | 'french';
+  className?: string;
+}
+
+const { gameId, variant, className = '' } = Astro.props;
+
+// Generate iframe URL directly for static generation
+const iframeUrl = `https://slotslaunch.com/iframe/${gameId}`;
+---
+
+<div class={`game-frame ${className}`} data-variant={variant}>
+  {iframeUrl ? (
+    <iframe 
+      src={iframeUrl}
+      title={`${variant} roulette game`}
+      allow="fullscreen"
+      loading="lazy"
+      class="w-full h-full border-0 rounded-lg"
+    ></iframe>
+  ) : (
+    <div class="flex items-center justify-center h-full bg-gray-100 rounded-lg">
+      <p class="text-gray-600">Game temporarily unavailable</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .game-frame {
+    aspect-ratio: 16/9;
+    min-height: 400px;
+    max-height: 80vh;
+    position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    .game-frame {
+      aspect-ratio: 4/3;
+      min-height: 300px;
+    }
+  }
+</style>

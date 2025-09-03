@@ -1,0 +1,143 @@
+---
+export interface Props {
+  currentVariant?: 'european' | 'american' | 'french';
+  className?: string;
+}
+
+const { currentVariant = 'european', className = '' } = Astro.props;
+
+const variants = [
+  {
+    key: 'european',
+    label: 'European Roulette',
+    description: 'Single zero (0) - Best odds for players',
+    houseEdge: '2.7%'
+  },
+  {
+    key: 'american', 
+    label: 'American Roulette',
+    description: 'Double zero (0, 00) - Classic American style',
+    houseEdge: '5.26%'
+  },
+  {
+    key: 'french',
+    label: 'French Roulette', 
+    description: 'Single zero with La Partage rule',
+    houseEdge: '1.35%'
+  }
+];
+---
+
+<div class={`variant-selector ${className}`}>
+  <h3 class="selector-title font-bold text-xl mb-4">Choose Roulette Variant</h3>
+  
+  <div class="variants-grid">
+    {variants.map(variant => (
+      <a 
+        href={`/games/${variant.key}-roulette`}
+        class={`variant-card ${currentVariant === variant.key ? 'active' : ''}`}
+        aria-label={`Play ${variant.label} - ${variant.description}`}
+      >
+        <div class="variant-header">
+          <h4 class="variant-title font-semibold text-lg">{variant.label}</h4>
+          <span class="house-edge text-sm font-medium">{variant.houseEdge} house edge</span>
+        </div>
+        
+        <p class="variant-description text-gray-600 text-sm mb-3">
+          {variant.description}
+        </p>
+        
+        <div class="variant-cta">
+          <span class="cta-text font-medium text-blue-600">
+            {currentVariant === variant.key ? 'Currently Playing' : 'Play Now'}
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .variant-selector {
+    width: 100%;
+    margin: 2rem 0;
+  }
+  
+  .variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .variant-card {
+    display: block;
+    padding: 1.5rem;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  
+  .variant-card:hover {
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.15);
+  }
+  
+  .variant-card:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+  }
+  
+  .variant-card.active {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+  
+  .variant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .house-edge {
+    background: #fef3c7;
+    color: #d97706;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .variant-card.active .house-edge {
+    background: #d1fae5;
+    color: #059669;
+  }
+  
+  .cta-text {
+    font-size: 0.875rem;
+  }
+  
+  .variant-card.active .cta-text {
+    color: #059669;
+  }
+  
+  @media (max-width: 768px) {
+    .variants-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    
+    .variant-card {
+      padding: 1rem;
+    }
+    
+    .variant-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>

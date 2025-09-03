@@ -1,0 +1,106 @@
+---
+import type { RouletteGame } from '../../types/game.ts';
+
+export interface Props {
+  games: RouletteGame[];
+  variant?: 'european' | 'american' | 'french';
+}
+
+const { games, variant } = Astro.props;
+
+// Filter games by variant if specified
+const filteredGames = variant ? games.filter(game => game.variant === variant) : games;
+---
+
+<div class="game-library">
+  {filteredGames.length === 0 ? (
+    <div class="no-games">
+      <h3>No games available</h3>
+      <p>Please check back later or try a different variant.</p>
+    </div>
+  ) : (
+    <div class="games-grid">
+      {filteredGames.map((game, index) => (
+        <div class="game-card" data-game-id={game.id}>
+          <div class="game-thumbnail">
+            <img 
+              src={game.thumbnail} 
+              alt={`${game.name} thumbnail`}
+              loading="lazy"
+              class="w-full h-32 object-cover rounded-t-lg"
+            />
+          </div>
+          <div class="game-info p-4">
+            <h4 class="game-title font-semibold text-lg mb-2">{game.name}</h4>
+            <div class="game-meta text-sm text-gray-600 mb-3">
+              <span class="provider">{game.provider}</span>
+              <span class="variant-badge ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded">
+                {game.variant}
+              </span>
+            </div>
+            <div class="game-details text-sm mb-4">
+              <p>Min bet: ${game.metadata.minBet}</p>
+              <p>Max bet: ${game.metadata.maxBet}</p>
+            </div>
+            <a 
+              href={`/games/${game.id}`}
+              class="play-button block w-full text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label={`Play ${game.name}`}
+            >
+              Play Game
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .game-library {
+    width: 100%;
+  }
+  
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .game-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.15);
+  }
+  
+  .no-games {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+  }
+  
+  .variant-badge {
+    font-size: 0.75rem;
+    text-transform: capitalize;
+  }
+  
+  @media (max-width: 768px) {
+    .games-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .game-card {
+      margin: 0 0.5rem;
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 {
-  "name": "steadfast-sphere",
-  "description": "An Accessible Starter Theme for Astro including several accessibility features and tools to help you build faster.",
+  "name": "roulettesim",
+  "description": "Educational roulette platform with SlotsLaunch API integration for authentic casino game practice.",
   "version": "4.1.1",
   "author": "Incluud",
   "license": "MIT",
@@ -10,7 +10,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:a11y": "npx @axe-core/cli@latest --include /",
+    "type-check": "astro check"
   },
   "keywords": [
     "astro",
@@ -34,13 +38,20 @@
     "url": "https://github.com/incluud/accessible-astro-starter/issues"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/partytown": "^2.1.4",
+    "@astrojs/react": "^4.0.0",
+    "@axe-core/cli": "^4.8.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.27.0",
     "@iconify-json/lucide": "^1.2.44",
+    "@playwright/test": "^1.40.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "@vitest/ui": "^1.0.0",
     "astro": "^5.8.0",
     "astro-compress": "^2.3.8",
     "astro-eslint-parser": "^1.2.2",
@@ -49,6 +60,7 @@
     "eslint-plugin-astro": "^1.3.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "globals": "^16.1.0",
+    "jsdom": "^26.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-css-order": "^2.1.2",
@@ -56,10 +68,17 @@
     "sanitize-html": "^2.17.0",
     "sass": "^1.89.0",
     "svgo": "^3.3.2",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5.9.2",
+    "vitest": "^1.0.0"
   },
   "dependencies": {
+    "@netlify/edge-functions": "^2.0.0",
     "@tailwindcss/vite": "^4.1.7",
-    "accessible-astro-components": "^4.1.2"
+    "accessible-astro-components": "^4.1.2",
+    "nanostores": "^0.9.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "zod": "^3.22.0"
   }
 }

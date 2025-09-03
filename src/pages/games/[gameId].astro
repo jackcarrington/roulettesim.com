@@ -1,0 +1,183 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import GameFrame from '@components/game/GameFrame.astro';
+import { api } from '../../services/apiClient.ts';
+
+export async function getStaticPaths() {
+  const games = await api.getRouletteGames();
+  
+  return games.map(game => ({
+    params: { gameId: game.id },
+    props: { game }
+  }));
+}
+
+const { gameId } = Astro.params;
+const { game } = Astro.props;
+
+if (!gameId || !game) {
+  return Astro.redirect('/games');
+}
+
+const currentGame = game;
+
+const title = `${currentGame.name} - Practice Roulette`;
+const description = `Practice ${currentGame.variant} roulette with ${currentGame.name} from ${currentGame.provider}. Learn strategies while playing this authentic casino game.`;
+---
+
+<DefaultLayout title={title} description={description}>
+  <section class="game-play-section py-8">
+    <div class="container">
+      <header class="game-header mb-6">
+        <nav class="breadcrumb mb-4">
+          <a href="/games" class="text-blue-600 hover:underline">← Back to Games</a>
+        </nav>
+        
+        <h1 class="text-3xl font-bold mb-2">{currentGame.name}</h1>
+        <div class="game-meta flex flex-wrap gap-4 text-gray-600">
+          <span class="provider">Provider: {currentGame.provider}</span>
+          <span class="variant">Variant: {currentGame.variant} roulette</span>
+          <span class="betting-range">
+            Betting: ${currentGame.metadata.minBet} - ${currentGame.metadata.maxBet}
+          </span>
+        </div>
+      </header>
+
+      <div class="game-layout grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="game-area lg:col-span-3">
+          <GameFrame 
+            gameId={currentGame.id} 
+            variant={currentGame.variant}
+            className="main-game-frame"
+          />
+          
+          <div class="game-controls mt-4 flex flex-wrap gap-3">
+            <button 
+              class="control-btn bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onclick="window.location.reload()"
+            >
+              🔄 Refresh Game
+            </button>
+            <button 
+              class="control-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onclick="document.querySelector('iframe')?.requestFullscreen()"
+            >
+              ⛶ Fullscreen
+            </button>
+          </div>
+        </div>
+        
+        <aside class="educational-sidebar lg:col-span-1">
+          <div class="sidebar-content bg-gray-50 p-4 rounded-lg">
+            <h3 class="font-bold text-lg mb-3">Quick Strategy Tips</h3>
+            
+            {currentGame.variant === 'european' && (
+              <div class="strategy-tip mb-4">
+                <h4 class="font-semibold mb-2">European Roulette (2.7% house edge)</h4>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Best odds due to single zero</li>
+                  <li>• Even money bets have ~48.6% chance</li>
+                  <li>• Focus on outside bets for beginners</li>
+                </ul>
+              </div>
+            )}
+            
+            {currentGame.variant === 'american' && (
+              <div class="strategy-tip mb-4">
+                <h4 class="font-semibold mb-2">American Roulette (5.26% house edge)</h4>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Double zero increases house edge</li>
+                  <li>• Avoid the five-number bet (7.89% edge)</li>
+                  <li>• Consider European variant for better odds</li>
+                </ul>
+              </div>
+            )}
+            
+            {currentGame.variant === 'french' && (
+              <div class="strategy-tip mb-4">
+                <h4 class="font-semibold mb-2">French Roulette (1.35% house edge)</h4>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• La Partage rule reduces house edge</li>
+                  <li>• Best variant for even money bets</li>
+                  <li>• Half bet returned on zero with even bets</li>
+                </ul>
+              </div>
+            )}
+            
+            <div class="responsible-gambling mt-6 p-3 bg-yellow-50 border border-yellow-200 rounded">
+              <h4 class="font-semibold text-yellow-800 mb-2">⚠️ Practice Only</h4>
+              <p class="text-sm text-yellow-700">
+                This is for learning purposes. Never bet more than you can afford to lose in real casinos.
+              </p>
+            </div>
+            
+            <a 
+              href="/strategy" 
+              class="learn-more-btn block w-full text-center bg-green-600 text-white py-2 px-4 rounded mt-4 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            >
+              Learn Full Strategy
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style>
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .game-layout {
+    min-height: 500px;
+  }
+  
+  .main-game-frame {
+    min-height: 500px;
+  }
+  
+  .control-btn {
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+  
+  .educational-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+  
+  @media (max-width: 1024px) {
+    .game-layout {
+      grid-template-columns: 1fr;
+    }
+    
+    .educational-sidebar {
+      position: static;
+      order: -1;
+      margin-bottom: 1rem;
+    }
+    
+    .sidebar-content {
+      margin: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 0.75rem;
+    }
+    
+    .game-controls {
+      justify-content: center;
+    }
+    
+    .control-btn {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
+</style>
