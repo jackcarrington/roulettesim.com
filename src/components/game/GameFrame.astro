@@ -7,8 +7,9 @@ export interface Props {
 
 const { gameId, variant, className = '' } = Astro.props;
 
-// Generate iframe URL directly for static generation
-const iframeUrl = `https://slotslaunch.com/iframe/${gameId}`;
+// Generate iframe URL with token for SlotsLaunch API compliance
+const token = import.meta.env.SLOTSLAUNCH_API_TOKEN;
+const iframeUrl = token ? `https://slotslaunch.com/iframe/${gameId}?token=${token}` : null;
 ---
 
 <div class={`game-frame ${className}`} data-variant={variant}>
