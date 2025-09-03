@@ -48,7 +48,7 @@ export default async function cacheGames(request: Request, context: Context) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Origin': 'localhost:4321'
+        'Origin': 'https://zingy-sfogliatella-7901c5.netlify.app'
       }
     });
     
