@@ -1,0 +1,360 @@
+---
+// Roulette Rules Cheat Sheet - PDF-ready page
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import { Image } from 'astro:assets'
+import logo from '../../assets/img/logo.svg'
+
+const title = 'Free Roulette Rules Cheat Sheet - Complete Betting Guide & Payouts Chart'
+const description = 'Free downloadable roulette cheat sheet with complete betting options, payout odds, and house edge comparison for European, American, and French roulette. Perfect quick reference for casino players.'
+---
+
+<DefaultLayout title={title} description={description}>
+  <!-- SEO Schema -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Complete Roulette Rules and Betting Guide",
+      "description": "Learn roulette rules, betting options, and payouts with our comprehensive cheat sheet covering European, American, and French roulette variants",
+      "image": "https://roulettesim.com/social-preview-image.png",
+      "totalTime": "PT5M",
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Casino chips or virtual credits"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Roulette table (physical or online)"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Choose Your Game Type",
+          "text": "Select European roulette (2.7% house edge) or French roulette (1.35% house edge) over American roulette (5.26% house edge) for better odds."
+        },
+        {
+          "@type": "HowToStep", 
+          "name": "Start with Outside Bets",
+          "text": "Begin with Red/Black, Odd/Even, or High/Low bets (1:1 payout, 48.6% win rate) for the best odds as a beginner."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Understand Inside Bets",
+          "text": "Learn higher-risk inside bets like straight up (35:1), split (17:1), and street (11:1) for bigger payouts with lower win rates."
+        }
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "RouletteSim.com",
+        "url": "https://roulettesim.com"
+      }
+    }
+  </script>
+  
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white text-slate-800 font-serif leading-relaxed">
+    
+    <!-- SEO Context Introduction -->
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Free Roulette Rules Cheat Sheet</h1>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+        Master roulette with our comprehensive betting guide and payouts chart. This free downloadable cheat sheet covers all roulette variants, betting strategies, and essential terminology for both beginners and experienced players.
+      </p>
+      <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm text-slate-500">
+        <span class="bg-slate-100 px-2 py-1 rounded">European Roulette</span>
+        <span class="bg-slate-100 px-2 py-1 rounded">American Roulette</span>
+        <span class="bg-slate-100 px-2 py-1 rounded">French Roulette</span>
+        <span class="bg-slate-100 px-2 py-1 rounded">Betting Odds</span>
+        <span class="bg-slate-100 px-2 py-1 rounded">Payout Chart</span>
+      </div>
+    </div>
+
+    <!-- Header with branding -->
+    <header class="border-b border-slate-300 pb-6 mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1">
+          <Image src={logo} alt="RouletteSim Logo" width="100" height="79" class="flex-shrink-0 min-w-[100px]" />
+          <div class="flex-1 text-center">
+            <h2 class="text-xl sm:text-2xl font-normal text-slate-800 mb-1">Quick Reference Guide</h2>
+            <p class="text-sm text-slate-600 italic">Professional roulette education and practice</p>
+          </div>
+        </div>
+        <div class="text-center sm:text-right flex-shrink-0">
+          <p class="text-lg font-medium text-slate-700">RouletteSim.com</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Rules Table -->
+    <section class="space-y-10">
+
+      <!-- Betting Options -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-medium text-slate-800 mb-4">Complete Roulette Betting Chart & Payouts</h2>
+        <p class="text-slate-600 mb-4">
+          This comprehensive betting chart shows all available roulette bets, their payout odds, win rates, and difficulty level. Outside bets (highlighted in green) offer the best odds for beginners, while inside bets provide higher payouts with increased risk.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full border border-slate-200 rounded bg-white">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">Bet Type</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 hidden md:table-cell">Coverage</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">Payout</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 hidden sm:table-cell">Win Rate</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">Risk Level</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="bg-green-50 border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Red/Black</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">18 numbers</td>
+                <td class="px-3 py-3 text-slate-600">1:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">48.6%</td>
+                <td class="px-3 py-3 text-slate-600">Beginners</td>
+              </tr>
+              <tr class="bg-green-50 border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Odd/Even</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">18 numbers</td>
+                <td class="px-3 py-3 text-slate-600">1:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">48.6%</td>
+                <td class="px-3 py-3 text-slate-600">Beginners</td>
+              </tr>
+              <tr class="bg-green-50 border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">High/Low</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">18 numbers</td>
+                <td class="px-3 py-3 text-slate-600">1:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">48.6%</td>
+                <td class="px-3 py-3 text-slate-600">Beginners</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Dozens</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">12 numbers</td>
+                <td class="px-3 py-3 text-slate-600">2:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">32.4%</td>
+                <td class="px-3 py-3 text-slate-600">Intermediate</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Columns</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">12 numbers</td>
+                <td class="px-3 py-3 text-slate-600">2:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">32.4%</td>
+                <td class="px-3 py-3 text-slate-600">Intermediate</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Single Number</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">1 number</td>
+                <td class="px-3 py-3 text-slate-600">35:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">2.7%</td>
+                <td class="px-3 py-3 text-slate-600">High risk</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Split</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">2 numbers</td>
+                <td class="px-3 py-3 text-slate-600">17:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">5.4%</td>
+                <td class="px-3 py-3 text-slate-600">High risk</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Street</td>
+                <td class="px-3 py-3 text-slate-600 hidden md:table-cell">3 numbers</td>
+                <td class="px-3 py-3 text-slate-600">11:1</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">8.1%</td>
+                <td class="px-3 py-3 text-slate-600">High risk</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Game Types -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-medium text-slate-800 mb-4">Roulette Game Variants Comparison</h2>
+        <p class="text-slate-600 mb-4">
+          Understanding the differences between roulette variants is crucial for maximizing your winning potential. European and French roulette offer significantly better odds than American roulette due to having only one zero pocket instead of two.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full border border-slate-200 rounded bg-white">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">Variant</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">Numbers</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200">House Edge</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 hidden sm:table-cell">Special Rules</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">European</td>
+                <td class="px-3 py-3 text-slate-600">37 (0-36)</td>
+                <td class="px-3 py-3 text-slate-600">2.7%</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Standard rules</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">French</td>
+                <td class="px-3 py-3 text-slate-600">37 (0-36)</td>
+                <td class="px-3 py-3 text-slate-600">1.35%</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">La Partage, En Prison</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">American</td>
+                <td class="px-3 py-3 text-slate-600">38 (0, 00, 1-36)</td>
+                <td class="px-3 py-3 text-slate-600">5.26%</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Double zero wheel</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Glossary of Terms -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-medium text-slate-800 mb-4">Essential Roulette Terminology & Definitions</h2>
+        <p class="text-slate-600 mb-4">
+          Master these key roulette terms to understand casino gameplay, betting strategies, and game rules. This glossary covers terminology used in European, American, and French roulette variants.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full border border-slate-200 rounded bg-white">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 w-[20%]">Term</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 hidden sm:table-cell w-[60%]">Meaning</th>
+                <th class="px-3 py-3 text-left text-sm font-medium text-slate-800 border-b border-slate-200 w-[20%]">Applies To</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">House Edge</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">The mathematical advantage the casino has over players</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Inside Bets</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bets placed on specific numbers or small groups of numbers</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Outside Bets</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bets placed on larger groups (Red/Black, Odd/Even, etc.)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">En Prison</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Rule allowing even-money bets to "stay in prison" when 0 hits</td>
+                <td class="px-3 py-3 text-slate-600">French only</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">La Partage</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Rule returning half your even-money bet when 0 hits</td>
+                <td class="px-3 py-3 text-slate-600">French only</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Straight Up</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on a single number (pays 35:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Split</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on two adjacent numbers (pays 17:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Street</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on three numbers in a horizontal row (pays 11:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Corner</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on four numbers forming a square (pays 8:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Dozen</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on 1-12, 13-24, or 25-36 (pays 2:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Column</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Bet on one of three vertical columns (pays 2:1)</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Croupier</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">The casino dealer who operates the roulette wheel</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">No More Bets</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Call made by dealer when betting must stop for that spin</td>
+                <td class="px-3 py-3 text-slate-600">All variants</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="px-3 py-3 font-medium">Zero/Double Zero</td>
+                <td class="px-3 py-3 text-slate-600 hidden sm:table-cell">Green pockets that cause most outside bets to lose</td>
+                <td class="px-3 py-3 text-slate-600">European (1 zero), American (2 zeros)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <!-- Strategy Context & Next Steps -->
+    <div class="bg-slate-50 p-6 rounded-lg mt-10 mb-8">
+      <h2 class="text-xl font-medium text-slate-800 mb-4">Ready to Practice? Try Our Free Roulette Simulator</h2>
+      <p class="text-slate-600 mb-4">
+        Now that you understand the rules and betting options, practice your strategy risk-free with our professional roulette simulator. Test different betting systems, learn the timing, and build confidence before playing with real money.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/games" class="button">
+          Play Free Roulette Games
+        </a>
+        <a href="/strategy" class="button color-secondary">
+          Learn Advanced Strategies
+        </a>
+      </div>
+      <div class="mt-4 text-sm text-slate-600">
+        <p><strong>What's included:</strong> European, American & French roulette variants • No downloads required • Practice bankroll management • Learn optimal betting patterns</p>
+      </div>
+    </div>
+
+    <footer class="border-t border-slate-300 pt-6 mt-8">
+      <div class="flex flex-col sm:flex-row sm:justify-between gap-6 mb-4">
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <Image src={logo} alt="RouletteSim Logo" width="32" height="25" class="flex-shrink-0" />
+            <span class="text-lg font-medium text-slate-800">RouletteSim.com</span>
+          </div>
+          <p class="text-sm text-slate-600 italic">Professional roulette education and practice platform</p>
+        </div>
+        <div class="text-sm text-slate-600 space-y-1 sm:text-right">
+          <p>80+ Free Demo Games</p>
+          <p>Expert Strategy Guides</p>
+          <p>Casino Reviews & Recommendations</p>
+        </div>
+      </div>
+      <div class="bg-slate-50 px-4 py-3 rounded border border-slate-200 mt-4">
+        <p class="text-xs text-slate-600 text-center">
+          <span class="font-medium">Responsible Gaming:</span> Gambling should be entertainment, not investment. 
+          Never bet money you cannot afford to lose. Help: 1-800-522-4700
+        </p>
+      </div>
+    </footer>
+  </div>
+</DefaultLayout>
+
+<style>
+  @media print {
+    .max-w-4xl {
+      max-width: none;
+      margin: 0;
+      padding: 20mm;
+    }
+  }
+</style>
+
