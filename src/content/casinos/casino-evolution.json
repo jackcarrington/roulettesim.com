@@ -1,0 +1,15 @@
+{
+  "casinoId": "evolution-live-casino",
+  "name": "Evolution Live Casino",
+  "supportedVariants": ["european", "french"],
+  "features": {
+    "liveDealers": true,
+    "mobileApp": true,
+    "bonusOffering": "100% up to $500 + 200 Free Spins",
+    "reputation": 9
+  },
+  "affiliateUrl": "https://example-affiliate-link.com/evolution",
+  "geographicAvailability": ["US", "CA", "GB", "DE", "SE", "NO", "FI"],
+  "conversionPriority": 1,
+  "lastVerified": "2025-09-03"
+}

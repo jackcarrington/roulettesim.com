@@ -1,0 +1,15 @@
+{
+  "casinoId": "netent-games-casino",
+  "name": "NetEnt Games Casino",
+  "supportedVariants": ["european", "french"],
+  "features": {
+    "liveDealers": false,
+    "mobileApp": true,
+    "bonusOffering": "200% First Deposit Bonus",
+    "reputation": 7
+  },
+  "affiliateUrl": "https://example-affiliate-link.com/netent",
+  "geographicAvailability": ["GB", "SE", "NO", "FI", "DE", "AT", "CH"],
+  "conversionPriority": 3,
+  "lastVerified": "2025-09-03"
+}

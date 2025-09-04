@@ -1,0 +1,15 @@
+{
+  "casinoId": "playtech-premium",
+  "name": "Playtech Premium Casino",
+  "supportedVariants": ["european", "american", "french"],
+  "features": {
+    "liveDealers": true,
+    "mobileApp": true,
+    "bonusOffering": "Welcome Package up to $1000",
+    "reputation": 8
+  },
+  "affiliateUrl": "https://example-affiliate-link.com/playtech",
+  "geographicAvailability": ["GB", "DE", "SE", "NO", "FI", "DK", "NL"],
+  "conversionPriority": 2,
+  "lastVerified": "2025-09-03"
+}
