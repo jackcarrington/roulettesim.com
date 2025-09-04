@@ -10,10 +10,11 @@
   border: 2px solid light-dark(var(--color-primary-300), var(--color-primary-400));
   border-radius: var(--radius-s);
   background-color: light-dark(var(--color-primary-200), var(--color-primary-400));
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-2xs) var(--space-xs);
   inline-size: fit-content;
   color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   font-weight: 700;
+  font-size: var(--font-size--1);
 
   @include text-decoration(transparent, currentColor);
 
