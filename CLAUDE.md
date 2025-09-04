@@ -93,6 +93,38 @@ The project has shadcn CLI configured via `.mcp.json` for component management.
 
 Use shadcn MCP only after understanding the component requirements and integration approach.
 
+## Design System & Consistency Guidelines
+
+### Button System
+**IMPORTANT**: Always use the unified `.button` class for all interactive elements across the site.
+
+- **Primary buttons**: `<a class="button">` or `<a class="button has-icon">`
+- **Secondary buttons**: `<a class="button color-secondary">` 
+- **Never create custom button styles** - this maintains accessibility and consistency
+- **All buttons support light/dark modes** automatically with proper contrast ratios
+- **Located in**: `/src/assets/scss/base/_button.scss`
+
+### Site-wide Consistency Rules
+1. **Use existing components** before creating new ones
+2. **Check component library** in `/src/components/` for reusable elements
+3. **Follow CSS variable system** defined in `/src/assets/scss/base/_root.scss`
+4. **Maintain accessibility standards** (WCAG compliance with 4.5:1+ contrast ratios)
+5. **Test both light and dark modes** for all new components
+6. **Use consistent spacing** with CSS variables (`--space-*`)
+7. **Follow typography scale** defined in `_font.scss` (h1-h5 hierarchy)
+
+### Brand Colors (Fixed Contrast System)
+- **Primary**: Purple variants (`--color-primary-*`) with proper light/dark mode variants
+- **Secondary**: Cyan variants (`--color-secondary-*`) with proper light/dark mode variants
+- **Colors automatically adjust** for light/dark mode accessibility
+- **Never hardcode colors** - always use CSS variables
+
+### Component Integration Priority
+1. **First**: Check if existing component can be modified
+2. **Second**: Use established `.button`, `.container`, `.card` classes
+3. **Third**: Follow existing SCSS architecture in `/src/assets/scss/`
+4. **Last Resort**: Create new component (must follow existing patterns)
+
 ## Deployment Workflow
 
 ### GitHub Integration (Recommended)
