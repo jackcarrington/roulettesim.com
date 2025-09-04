@@ -7,29 +7,33 @@
   align-items: center;
   transition: all var(--animation-speed-fast) var(--cubic-bezier);
   cursor: pointer;
-  border: 3px solid light-dark(var(--color-primary-200), var(--color-primary-100));
+  border: 2px solid light-dark(var(--color-primary-300), var(--color-primary-400));
   border-radius: var(--radius-s);
-  background-color: light-dark(var(--color-primary-200), var(--color-primary-100));
+  background-color: light-dark(var(--color-primary-200), var(--color-primary-400));
   padding: var(--space-xs) var(--space-s);
   inline-size: fit-content;
-  color: var(--color-neutral-900);
+  color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   font-weight: 700;
 
   @include text-decoration(transparent, currentColor);
 
   &:where(:hover, :focus-visible) {
-    border-color: light-dark(var(--color-primary-300), var(--color-primary-300));
+    border-color: light-dark(var(--color-primary-400), var(--color-primary-300));
     background-color: light-dark(var(--color-primary-300), var(--color-primary-300));
     text-decoration-thickness: 2px;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px light-dark(oklch(from var(--color-primary-300) l c h / 0.25), oklch(from var(--color-primary-400) l c h / 0.4));
   }
 
   &.color-secondary {
-    border-color: light-dark(var(--color-secondary-100), var(--color-secondary-100));
-    background-color: light-dark(var(--color-secondary-100), var(--color-secondary-100));
+    border-color: light-dark(var(--color-secondary-300), var(--color-secondary-400));
+    background-color: light-dark(var(--color-secondary-200), var(--color-secondary-400));
+    color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
 
     &:where(:hover, :focus-visible) {
-      border-color: light-dark(var(--color-secondary-300), var(--color-secondary-300));
+      border-color: light-dark(var(--color-secondary-400), var(--color-secondary-300));
       background-color: light-dark(var(--color-secondary-300), var(--color-secondary-300));
+      box-shadow: 0 4px 12px light-dark(oklch(from var(--color-secondary-300) l c h / 0.25), oklch(from var(--color-secondary-400) l c h / 0.4));
     }
   }
 

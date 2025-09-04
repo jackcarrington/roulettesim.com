@@ -54,13 +54,13 @@ const filteredGames = variant ? games.filter(game => game.variant === variant) :
             </div>
             <a 
               href={`/games/${generateGameSlug(game)}`}
-              class="play-button"
+              class="button has-icon w-full justify-center"
               aria-label={`Play ${game.name}`}
             >
-              <span>Play Game</span>
-              <svg class="play-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
               </svg>
+              Play Game
             </a>
           </div>
         </div>
@@ -201,58 +201,13 @@ const filteredGames = variant ? games.filter(game => game.variant === variant) :
     opacity: 0.8;
   }
   
-  .play-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2xs);
+  /* Button consistency handled by global .button class */
+  .w-full {
     width: 100%;
-    padding: var(--space-s) var(--space-m);
-    background-color: var(--color-primary-400);
-    color: var(--color-neutral-100);
-    border: none;
-    border-radius: var(--radius-small);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all var(--animation-speed-fast) var(--cubic-bezier);
-    position: relative;
-    overflow: hidden;
   }
   
-  .play-button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      45deg,
-      var(--color-primary-300),
-      var(--color-secondary-300)
-    );
-    opacity: 0;
-    transition: opacity var(--animation-speed-fast);
-  }
-  
-  .play-button:hover::before {
-    opacity: 1;
-  }
-  
-  .play-button span,
-  .play-icon {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .play-button:focus {
-    outline: 2px solid var(--link-color);
-    outline-offset: 2px;
-  }
-  
-  .play-icon {
-    transition: transform var(--animation-speed-fast);
-  }
-  
-  .play-button:hover .play-icon {
-    transform: translateX(2px);
+  .justify-center {
+    justify-content: center;
   }
   
   @media (max-width: 768px) {

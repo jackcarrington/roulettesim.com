@@ -3,7 +3,6 @@ import type { RouletteGame } from '../../types/game';
 import { generateGameSlug } from '../../utils/slugHelpers';
 import { useGameSearch } from '../../hooks/useGameSearch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@components/components/ui/card';
-import { Button } from '@components/components/ui/button';
 import { 
   Pagination, 
   PaginationContent, 
@@ -224,16 +223,13 @@ export default function GameGridPro({ games, variant, itemsPerPage = 20 }: GameG
                 )}
               </div>
               
-              <Button 
-                asChild 
-                className="w-full bg-[var(--color-primary-400)] hover:bg-[var(--color-primary-300)] text-white"
-                size="sm"
+              <a 
+                href={`/games/${generateGameSlug(game)}`}
+                className="button w-full justify-center has-icon"
               >
-                <a href={`/games/${generateGameSlug(game)}`}>
-                  <Play className="w-4 h-4 mr-2" />
-                  Play Game
-                </a>
-              </Button>
+                <Play className="w-4 h-4" />
+                Play Game
+              </a>
             </CardContent>
           </Card>
         ))}
