@@ -35,17 +35,7 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
   if (!animationData) {
     return (
       <div className={className} style={{ width, height }}>
-        <img 
-          src="/animations/roulette-fallback.svg" 
-          alt="Roulette wheel" 
-          style={{ 
-            width: width, 
-            height: height, 
-            maxWidth: '100%', 
-            maxHeight: '100%',
-            objectFit: 'contain' 
-          }}
-        />
+        {/* Empty div during 1-second delay before animation loads */}
       </div>
     );
   }
