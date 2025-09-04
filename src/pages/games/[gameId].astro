@@ -1,36 +1,58 @@
 ---
 import DefaultLayout from '@layouts/DefaultLayout.astro';
 import GameFrame from '@components/game/GameFrame.astro';
+import SEOHead from '@components/seo/SEOHead.astro';
 import { api } from '../../services/apiClient.ts';
+import { generateGameSlug, type RouletteGame } from '../../utils/slugHelpers.ts';
+import { createGameSchema } from '../../utils/seoHelpers.ts';
 
 export async function getStaticPaths() {
   const games = await api.getRouletteGames();
   
-  return games.map(game => ({
-    params: { gameId: game.id },
-    props: { game }
-  }));
+  return games.map(game => {
+    const slug = generateGameSlug(game);
+    return {
+      params: { gameId: slug },
+      props: { game, slug }
+    };
+  });
 }
 
 const { gameId } = Astro.params;
-const { game } = Astro.props;
+const { game, slug } = Astro.props;
 
 if (!gameId || !game) {
   return Astro.redirect('/games');
 }
 
 const currentGame = game;
+const gameUrl = `https://roulettesim.com/games/${slug}`;
 
-const title = `${currentGame.name} - Practice Roulette`;
-const description = `Practice ${currentGame.variant} roulette with ${currentGame.name} from ${currentGame.provider}. Learn strategies while playing this authentic casino game.`;
+const title = `${currentGame.name} - Free Roulette Demo | Roulettesim.com`;
+const description = `Practice ${currentGame.variant} roulette with ${currentGame.name} from ${currentGame.provider}. Free demo game for learning strategies and rules.`;
+
+const schema = createGameSchema(currentGame, gameUrl);
 ---
 
 <DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical={gameUrl}
+    openGraph={{
+      title,
+      description,
+      image: `https://roulettesim.com/games/${currentGame.variant}-roulette-preview.png`,
+      type: 'article'
+    }}
+    schema={schema}
+  />
+  
   <section class="game-play-section py-8">
     <div class="container">
       <header class="game-header mb-6">
         <nav class="breadcrumb mb-4">
-          <a href="/games" class="text-blue-600 hover:underline">← Back to Games</a>
+          <a href="/" style="color: var(--link-color);" class="hover:underline">← Back to Homepage</a>
         </nav>
         
         <h1 class="text-3xl font-bold mb-2">{currentGame.name}</h1>

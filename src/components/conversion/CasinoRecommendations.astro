@@ -1,0 +1,160 @@
+---
+import type { CasinoRecommendation } from '../../types/casino.ts';
+import { Card } from 'accessible-astro-components';
+
+interface Props {
+  recommendations: CasinoRecommendation[];
+  rationales?: Record<string, string[]>;
+}
+
+const { recommendations, rationales = {} } = Astro.props;
+---
+
+<section class="casino-recommendations" aria-labelledby="recommendations-heading">
+  <h2 id="recommendations-heading" class="text-3xl font-bold text-center mb-8">
+    Recommended Casinos for You
+  </h2>
+  
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {recommendations.map((casino) => (
+      <Card>
+        <div class="casino-card">
+          <header class="casino-header">
+            <h3 class="text-xl font-semibold mb-2">{casino.name}</h3>
+            <div class="reputation-badge" aria-label={`Reputation ${casino.features.reputation} out of 10`}>
+              <span class="stars" aria-hidden="true">
+                {'★'.repeat(casino.features.reputation)}{'☆'.repeat(10 - casino.features.reputation)}
+              </span>
+              <span class="sr-only">Reputation: {casino.features.reputation} out of 10 stars</span>
+            </div>
+          </header>
+
+          <div class="casino-features mb-4">
+            <p class="text-sm text-gray-600 mb-2">
+              <strong>Variants:</strong> {casino.supportedVariants.map(v => 
+                v.charAt(0).toUpperCase() + v.slice(1)).join(', ')} Roulette
+            </p>
+            
+            {casino.features.bonusOffering && (
+              <p class="bonus-offer text-sm font-medium text-green-700 mb-2">
+                🎁 {casino.features.bonusOffering}
+              </p>
+            )}
+
+            <div class="feature-tags flex flex-wrap gap-2 mb-3">
+              {casino.features.liveDealers && (
+                <span class="tag live-dealers">📺 Live Dealers</span>
+              )}
+              {casino.features.mobileApp && (
+                <span class="tag mobile-app">📱 Mobile App</span>
+              )}
+            </div>
+          </div>
+
+          {rationales[casino.casinoId] && (
+            <div class="recommendation-reasons mb-4">
+              <h4 class="text-sm font-semibold mb-2">Why we recommend this casino:</h4>
+              <ul class="text-xs space-y-1">
+                {rationales[casino.casinoId].map((reason) => (
+                  <li>• {reason}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div class="casino-actions">
+            <a 
+              href={casino.affiliateUrl}
+              class="cta-button w-full bg-primary text-white px-4 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-casino-id={casino.casinoId}
+              data-analytics-event="casino-click"
+            >
+              Visit {casino.name}
+              <span aria-hidden="true"> →</span>
+            </a>
+            
+            <p class="disclaimer text-xs text-gray-500 mt-2 text-center">
+              18+ • Gamble Responsibly • T&Cs Apply
+            </p>
+          </div>
+        </div>
+      </Card>
+    ))}
+  </div>
+
+  <div class="responsible-gambling-notice mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+    <h3 class="text-lg font-semibold text-yellow-800 mb-2">
+      ⚠️ Responsible Gambling Reminder
+    </h3>
+    <p class="text-sm text-yellow-700">
+      Gambling involves risk of financial loss. Set limits before you play and never gamble more than you can afford to lose. 
+      If you need help, contact the <a href="tel:1-800-522-4700" class="underline font-medium">National Problem Gambling Helpline: 1-800-522-4700</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .casino-card {
+    @apply p-6 h-full flex flex-col;
+  }
+
+  .reputation-badge .stars {
+    @apply text-yellow-500 text-lg;
+  }
+
+  .feature-tags .tag {
+    @apply px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full;
+  }
+
+  .feature-tags .tag.live-dealers {
+    @apply bg-red-100 text-red-800;
+  }
+
+  .feature-tags .tag.mobile-app {
+    @apply bg-green-100 text-green-800;
+  }
+
+  .cta-button {
+    @apply transform transition-transform hover:scale-105;
+    margin-top: auto;
+  }
+
+  .casino-actions {
+    @apply mt-auto;
+  }
+
+  .recommendation-reasons {
+    @apply bg-gray-50 p-3 rounded-md;
+  }
+
+  .bonus-offer {
+    @apply bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-md px-3 py-2;
+  }
+</style>
+
+<script>
+  // Track casino clicks for analytics
+  document.addEventListener('DOMContentLoaded', () => {
+    const casinoButtons = document.querySelectorAll('[data-analytics-event="casino-click"]');
+    
+    casinoButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        const casinoId = button.getAttribute('data-casino-id');
+        
+        // Send analytics event
+        fetch('/api/analytics/session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'casino-click',
+            data: { casinoId, timestamp: new Date() }
+          })
+        }).catch(error => {
+          console.warn('Analytics tracking failed:', error);
+        });
+      });
+    });
+  });
+</script>

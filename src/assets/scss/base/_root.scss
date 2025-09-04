@@ -139,9 +139,9 @@
   --backdrop-blur: blur(3px);
 
   // kbd
-  --kbd-color-text: light-dark(var(--color-gray-200), var(--color-gray-800));
-  --kbd-color-border: light-dark(var(--color-gray-700), var(--color-gray-300));
-  --kbd-color-background: light-dark(var(--color-gray-1000), var(--color-gray-200));
+  --kbd-color-text: light-dark(var(--color-neutral-200), var(--color-neutral-800));
+  --kbd-color-border: light-dark(var(--color-neutral-700), var(--color-neutral-300));
+  --kbd-color-background: light-dark(var(--color-neutral-900), var(--color-neutral-200));
 }
 
 // dark color scheme overrides

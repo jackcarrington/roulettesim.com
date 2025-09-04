@@ -1,0 +1,256 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import { Card } from 'accessible-astro-components'
+import { getCollection } from 'astro:content'
+import SEOHead from '@components/seo/SEOHead.astro'
+
+const educationalContent = await getCollection('educational');
+
+// Sort by featured first, then by category
+const sortedContent = educationalContent.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return a.data.category.localeCompare(b.data.category);
+});
+
+const title = 'Roulette Strategy Guide | Expert Tips & Betting Systems';
+const description = 'Master roulette with expert strategies, betting systems, and rules from casino professionals. Learn European, American, and French roulette variants with responsible gaming practices.';
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/strategy"
+    openGraph={{
+      title: 'Roulette Strategy Guide - Expert Tips & Betting Systems',
+      description,
+      image: 'https://roulettesim.com/strategy-preview.png',
+      type: 'website'
+    }}
+  />
+  
+  <PageHeader
+    title="Roulette Strategy & Education"
+    subtitle="Master roulette with expert strategies, betting systems, and comprehensive guides. Learn from casino professionals with 15+ years of experience."
+    bgType="bordered"
+  />
+
+  <section class="my-12">
+    <div class="container">
+      <div class="education-categories mb-8">
+        <h2 class="text-2xl font-bold mb-4">Educational Categories</h2>
+        <div class="category-filters flex flex-wrap gap-3 mb-8">
+          <button class="category-btn active" data-category="all">All Topics</button>
+          <button class="category-btn" data-category="rules">Game Rules</button>
+          <button class="category-btn" data-category="strategies">Strategies</button>
+          <button class="category-btn" data-category="odds-probability">Odds & Probability</button>
+          <button class="category-btn" data-category="responsible-gambling">Responsible Gaming</button>
+        </div>
+      </div>
+
+      <div class="educational-grid">
+        <ul class="content-list grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sortedContent.map((content) => (
+            <li data-category={content.data.category}>
+              <Card
+                url={`/strategy/${content.id}`}
+                title={content.data.title}
+                footer={`${content.data.category.replace('-', ' ')} • ${content.data.readingTime} min read${content.data.featured ? ' • Featured' : ''}`}
+              >
+                <p class="content-description">{content.data.description}</p>
+                <div class="author-info mt-3">
+                  <strong>{content.data.authorCredentials.name}</strong>
+                  <span class="author-title"> - {content.data.authorCredentials.title}</span>
+                </div>
+                <div class="related-variants mt-2">
+                  <span class="variants-label">Applies to: </span>
+                  {content.data.relatedVariant.map((variant, index) => (
+                    <span class="variant-tag">
+                      {variant}
+                      {index < content.data.relatedVariant.length - 1 ? ', ' : ''}
+                    </span>
+                  ))}
+                </div>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="responsible-gaming-notice mt-12 p-6 rounded-lg">
+        <h3 class="text-xl font-bold mb-3">🛡️ Responsible Gaming Reminder</h3>
+        <p>All our educational content promotes responsible gaming practices. Gambling should be entertainment, not a way to make money. Always set limits and never bet more than you can afford to lose.</p>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const contentItems = document.querySelectorAll('.content-list li');
+
+    function filterContent(category) {
+      contentItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update active button
+      categoryButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-category') === category) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        filterContent(category);
+      });
+    });
+  });
+</script>
+
+<style lang="scss">
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-s);
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .category-btn {
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-neutral-200);
+    color: var(--foreground-color);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-small);
+    font-size: var(--font-size--1);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--animation-speed-fast);
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: var(--color-neutral-300);
+      border-color: var(--border-color);
+    }
+
+    &.active {
+      background-color: var(--color-primary-400);
+      color: var(--color-neutral-100);
+      border-color: var(--color-primary-400);
+    }
+
+    &:focus {
+      outline: 2px solid var(--link-color);
+      outline-offset: 2px;
+    }
+  }
+
+  .content-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    align-items: center;
+    font-size: var(--font-size--1);
+  }
+
+  .category-badge {
+    padding: var(--space-5xs) var(--space-2xs);
+    background-color: light-dark(var(--color-secondary-200), var(--color-secondary-500));
+    color: light-dark(var(--color-secondary-500), var(--color-neutral-100));
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size--2);
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .reading-time {
+    color: var(--foreground-color);
+    opacity: 0.6;
+    font-size: var(--font-size--2);
+  }
+
+  .featured-badge {
+    padding: var(--space-5xs) var(--space-2xs);
+    background-color: var(--color-primary-400);
+    color: var(--color-neutral-100);
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size--2);
+    font-weight: 600;
+  }
+
+  .content-description {
+    color: var(--foreground-color);
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-bottom: var(--space-xs);
+  }
+
+  .author-info {
+    font-size: var(--font-size--1);
+    color: var(--foreground-color);
+    
+    strong {
+      color: var(--link-color);
+    }
+    
+    .author-title {
+      opacity: 0.7;
+    }
+  }
+
+  .related-variants {
+    font-size: var(--font-size--2);
+    color: var(--foreground-color);
+    opacity: 0.7;
+    
+    .variants-label {
+      font-weight: 500;
+    }
+    
+    .variant-tag {
+      text-transform: capitalize;
+      color: var(--link-color);
+    }
+  }
+
+  .responsible-gaming-notice {
+    background-color: light-dark(var(--color-neutral-200), var(--color-neutral-800));
+    border: 1px solid var(--border-color-subtle);
+    
+    h3 {
+      color: var(--foreground-color);
+    }
+    
+    p {
+      color: var(--foreground-color);
+      opacity: 0.8;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .category-filters {
+      justify-content: center;
+    }
+    
+    .content-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

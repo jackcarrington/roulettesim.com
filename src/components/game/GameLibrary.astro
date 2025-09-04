@@ -1,5 +1,6 @@
 ---
 import type { RouletteGame } from '../../types/game.ts';
+import { generateGameSlug } from '../../utils/slugHelpers.ts';
 
 export interface Props {
   games: RouletteGame[];
@@ -32,22 +33,34 @@ const filteredGames = variant ? games.filter(game => game.variant === variant) :
           </div>
           <div class="game-info p-4">
             <h4 class="game-title font-semibold text-lg mb-2">{game.name}</h4>
-            <div class="game-meta text-sm text-gray-600 mb-3">
+            <div class="game-meta mb-3">
               <span class="provider">{game.provider}</span>
-              <span class="variant-badge ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded">
+              <span class="variant-badge">
                 {game.variant}
               </span>
             </div>
-            <div class="game-details text-sm mb-4">
-              <p>Min bet: ${game.metadata.minBet}</p>
-              <p>Max bet: ${game.metadata.maxBet}</p>
+            <div class="game-details mb-4">
+              <div class="betting-range">
+                <span class="bet-label">Betting Range:</span>
+                <span class="bet-values">${game.metadata.minBet} - ${game.metadata.maxBet}</span>
+              </div>
+              {game.metadata.features.length > 0 && (
+                <div class="features">
+                  {game.metadata.features.slice(0, 2).map(feature => (
+                    <span class="feature-tag">{feature}</span>
+                  ))}
+                </div>
+              )}
             </div>
             <a 
-              href={`/games/${game.id}`}
-              class="play-button block w-full text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              href={`/games/${generateGameSlug(game)}`}
+              class="play-button"
               aria-label={`Play ${game.name}`}
             >
-              Play Game
+              <span>Play Game</span>
+              <svg class="play-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
+              </svg>
             </a>
           </div>
         </div>
@@ -69,28 +82,177 @@ const filteredGames = variant ? games.filter(game => game.variant === variant) :
   }
   
   .game-card {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
+    position: relative;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
     overflow: hidden;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--elevation-1);
+    transition: all var(--animation-speed-medium) var(--cubic-bezier);
   }
   
   .game-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.15);
+    transform: translateY(-4px);
+    box-shadow: var(--elevation-3);
+    border-color: var(--border-color);
+  }
+  
+  .game-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      light-dark(var(--color-primary-100), var(--color-primary-500)) 0%,
+      transparent 25%
+    );
+    opacity: 0;
+    transition: opacity var(--animation-speed-medium);
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .game-card:hover::before {
+    opacity: 0.3;
   }
   
   .no-games {
     text-align: center;
-    padding: 3rem 1rem;
-    color: #6b7280;
+    padding: var(--space-3xl) var(--space-l);
+    color: var(--foreground-color);
+    opacity: 0.6;
+  }
+  
+  .game-thumbnail {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .game-thumbnail::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-400),
+      var(--color-secondary-400)
+    );
+  }
+  
+  .game-info {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .game-title {
+    color: var(--foreground-color);
+  }
+  
+  .provider {
+    color: var(--foreground-color);
+    opacity: 0.7;
+    font-weight: 500;
   }
   
   .variant-badge {
-    font-size: 0.75rem;
+    padding: var(--space-3xs) var(--space-2xs);
+    background-color: light-dark(var(--color-secondary-200), var(--color-secondary-500));
+    color: light-dark(var(--color-secondary-500), var(--color-neutral-100));
+    border-radius: var(--radius-small);
+    font-size: var(--font-size--2);
+    font-weight: 600;
     text-transform: capitalize;
+  }
+  
+  .betting-range {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size--1);
+  }
+  
+  .bet-label {
+    color: var(--foreground-color);
+    opacity: 0.6;
+  }
+  
+  .bet-values {
+    color: var(--foreground-color);
+    font-weight: 600;
+  }
+  
+  .features {
+    display: flex;
+    gap: var(--space-3xs);
+    flex-wrap: wrap;
+    margin-top: var(--space-2xs);
+  }
+  
+  .feature-tag {
+    padding: var(--space-5xs) var(--space-3xs);
+    background-color: var(--color-neutral-300);
+    color: var(--foreground-color);
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size--2);
+    text-transform: capitalize;
+    opacity: 0.8;
+  }
+  
+  .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    width: 100%;
+    padding: var(--space-s) var(--space-m);
+    background-color: var(--color-primary-400);
+    color: var(--color-neutral-100);
+    border: none;
+    border-radius: var(--radius-small);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .play-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      var(--color-primary-300),
+      var(--color-secondary-300)
+    );
+    opacity: 0;
+    transition: opacity var(--animation-speed-fast);
+  }
+  
+  .play-button:hover::before {
+    opacity: 1;
+  }
+  
+  .play-button span,
+  .play-icon {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .play-button:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+  }
+  
+  .play-icon {
+    transition: transform var(--animation-speed-fast);
+  }
+  
+  .play-button:hover .play-icon {
+    transform: translateX(2px);
   }
   
   @media (max-width: 768px) {

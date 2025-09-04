@@ -7,5 +7,5 @@
   port = 4321
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20.5.1"
   NPM_FLAGS = "--legacy-peer-deps"

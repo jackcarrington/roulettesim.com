@@ -1,0 +1,263 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import SocialShares from '@components/SocialShares.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import { Card } from 'accessible-astro-components'
+import { createEducationalSchema } from '@utils/seoHelpers.ts'
+
+export async function getStaticPaths() {
+  const { getCollection, render } = await import('astro:content');
+  const educationalContent = await getCollection('educational');
+  
+  return await Promise.all(educationalContent.map(async (content) => {
+    const { Content } = await render(content);
+    return {
+      params: { post: content.id },
+      props: { content, Content, allEducationalContent: educationalContent },
+    };
+  }));
+}
+
+const { content, Content, allEducationalContent } = Astro.props;
+
+const postUrl = `https://roulettesim.com/strategy/${content.id}`;
+const schema = createEducationalSchema(content.data, postUrl);
+
+const author = {
+  name: content.data.authorCredentials.name,
+  image: '/author-avatar.png',
+  bio: content.data.authorCredentials.title,
+  credentials: content.data.authorCredentials.credentials
+};
+---
+
+<DefaultLayout title={`${content.data.title} | Roulettesim.com`} description={content.data.description}>
+  <SEOHead 
+    title={`${content.data.title} | Roulettesim Strategy`}
+    description={content.data.description}
+    canonical={postUrl}
+    openGraph={{
+      title: content.data.title,
+      description: content.data.description,
+      image: `https://roulettesim.com/strategy/${content.data.category}-preview.png`,
+      type: 'article'
+    }}
+    schema={schema}
+  />
+  
+  <PageHeader
+    title={content.data.title}
+    subtitle={content.data.description}
+    author={author}
+    bgType="bordered"
+  />
+
+  <section class="article-content my-12">
+    <div class="narrow container space-content">
+      <div class="article-meta mb-6">
+        <div class="meta-tags">
+          <span class="category-tag">{content.data.category.replace('-', ' ')}</span>
+          <span class="reading-time">{content.data.readingTime} min read</span>
+          <span class="last-updated">Updated: {content.data.lastUpdated.toLocaleDateString()}</span>
+        </div>
+        
+        <div class="related-variants mt-3">
+          <strong>Applies to:</strong>
+          {content.data.relatedVariant.map((variant, index) => (
+            <span class="variant-link">
+              <a href={`/games?variant=${variant}`}>{variant} roulette</a>
+              {index < content.data.relatedVariant.length - 1 ? ', ' : ''}
+            </span>
+          ))}
+        </div>
+
+        <div class="author-credentials mt-4">
+          <h3 class="author-name">{content.data.authorCredentials.name}</h3>
+          <p class="author-title">{content.data.authorCredentials.title}</p>
+          <ul class="credentials-list">
+            {content.data.authorCredentials.credentials.map(credential => (
+              <li>{credential}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <Content />
+
+      {content.data.responsibleGambling && (
+        <div class="responsible-gaming-notice mt-8">
+          <h3>🛡️ Responsible Gaming</h3>
+          <p>Remember that gambling should be for entertainment only. Never bet more than you can afford to lose, and seek help if gambling becomes problematic.</p>
+          <a href="/responsible-gambling" class="help-link">Learn more about responsible gambling →</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="related-content my-12">
+    <div class="narrow container">
+      <h2 class="text-2xl font-bold mb-6">Related Strategy Articles</h2>
+      <div class="related-grid grid grid-cols-1 md:grid-cols-2 gap-4">
+        {allEducationalContent
+          .filter(item => item.id !== content.id && item.data.category === content.data.category)
+          .slice(0, 2)
+          .map(relatedContent => (
+            <Card
+              url={`/strategy/${relatedContent.id}`}
+              title={relatedContent.data.title}
+              footer={`${relatedContent.data.readingTime} min read`}
+            >
+              {relatedContent.data.description}
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="social-share my-12">
+    <div class="narrow container">
+      <h2>Share this strategy guide</h2>
+      <p>Found this helpful? Share it with other roulette players!</p>
+      <SocialShares />
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .narrow {
+    max-width: 800px;
+  }
+
+  .article-meta {
+    padding: var(--space-m);
+    background-color: light-dark(var(--color-neutral-200), var(--color-neutral-800));
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-m);
+  }
+
+  .meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .category-tag {
+    padding: var(--space-3xs) var(--space-s);
+    background-color: var(--color-secondary-400);
+    color: var(--color-neutral-100);
+    border-radius: var(--radius-small);
+    font-size: var(--font-size--1);
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .reading-time, .last-updated {
+    color: var(--foreground-color);
+    opacity: 0.6;
+    font-size: var(--font-size--1);
+  }
+
+  .related-variants {
+    font-size: var(--font-size-0);
+    color: var(--foreground-color);
+    
+    strong {
+      color: var(--foreground-color);
+      opacity: 0.8;
+    }
+  }
+
+  .variant-link a {
+    color: var(--link-color);
+    text-decoration: none;
+    text-transform: capitalize;
+    
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+  }
+
+  .author-credentials {
+    border-top: 1px solid var(--border-color-subtle);
+    padding-top: var(--space-s);
+  }
+
+  .author-name {
+    color: var(--link-color);
+    font-size: var(--font-size-1);
+    font-weight: 600;
+    margin-bottom: var(--space-5xs);
+  }
+
+  .author-title {
+    color: var(--foreground-color);
+    opacity: 0.7;
+    font-size: var(--font-size-0);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .credentials-list {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      color: var(--foreground-color);
+      opacity: 0.6;
+      font-size: var(--font-size--1);
+      margin-bottom: var(--space-5xs);
+      
+      &::before {
+        content: '✓ ';
+        color: var(--color-secondary-400);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .responsible-gaming-notice {
+    background-color: light-dark(var(--color-primary-100), var(--color-primary-500));
+    border: 1px solid var(--color-primary-300);
+    border-radius: var(--radius-m);
+    padding: var(--space-l);
+    
+    h3 {
+      color: var(--foreground-color);
+      margin-bottom: var(--space-s);
+    }
+    
+    p {
+      color: var(--foreground-color);
+      opacity: 0.8;
+      margin-bottom: var(--space-s);
+    }
+  }
+
+  .help-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+  }
+
+  .related-grid {
+    margin-top: var(--space-l);
+  }
+
+  @media (max-width: 768px) {
+    .meta-tags {
+      justify-content: center;
+    }
+    
+    .related-variants {
+      text-align: center;
+    }
+  }
+</style>
