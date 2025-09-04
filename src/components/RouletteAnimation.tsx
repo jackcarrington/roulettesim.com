@@ -35,7 +35,13 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
         <img 
           src="/animations/roulette-fallback.svg" 
           alt="Roulette wheel" 
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          style={{ 
+            width: width, 
+            height: height, 
+            maxWidth: '100%', 
+            maxHeight: '100%',
+            objectFit: 'contain' 
+          }}
         />
       </div>
     );
@@ -47,7 +53,12 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
         animationData={animationData}
         loop={false} // Play once
         autoplay={true}
-        style={{ width: '100%', height: '100%' }}
+        style={{ 
+          width: width, 
+          height: height, 
+          maxWidth: '100%', 
+          maxHeight: '100%' 
+        }}
       />
     </div>
   );
