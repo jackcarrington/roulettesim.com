@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Lottie from 'lottie-react';
 
 interface RouletteAnimationProps {
   className?: string;
@@ -12,45 +11,29 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
   width = 800, 
   height = 600 
 }) => {
-  const [animationData, setAnimationData] = useState(null);
+  const [shouldSpin, setShouldSpin] = useState(false);
 
   useEffect(() => {
-    // Dynamically import the animation data with 1 second delay
-    const loadAnimation = async () => {
-      try {
-        // Wait 1 second before starting animation
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const response = await fetch('/animations/roulette.json');
-        const data = await response.json();
-        setAnimationData(data);
-      } catch (error) {
-        console.error('Failed to load animation:', error);
-      }
-    };
+    // Wait 1 second before starting spin animation
+    const timer = setTimeout(() => {
+      setShouldSpin(true);
+    }, 1000);
 
-    loadAnimation();
+    return () => clearTimeout(timer);
   }, []);
-
-  if (!animationData) {
-    return (
-      <div className={className} style={{ width, height }}>
-        {/* Empty div during 1-second delay before animation loads */}
-      </div>
-    );
-  }
 
   return (
     <div className={className} style={{ width, height }}>
-      <Lottie 
-        animationData={animationData}
-        loop={false} // Play once
-        autoplay={true}
+      <img 
+        src="/animations/roulette-wheel.svg" 
+        alt="Roulette wheel" 
+        className={`roulette-svg ${shouldSpin ? 'spinning' : ''}`}
         style={{ 
           width: width, 
           height: height, 
           maxWidth: '100%', 
-          maxHeight: '100%' 
+          maxHeight: '100%',
+          objectFit: 'contain'
         }}
       />
     </div>
@@ -58,3 +41,35 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
 };
 
 export default RouletteAnimation;
+
+// Add CSS animation styles
+const styles = `
+.roulette-svg {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.roulette-svg.spinning {
+  animation: rouletteSpin 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes rouletteSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(1800deg); /* 5 full rotations */
+  }
+  100% {
+    transform: rotate(1860deg); /* Stop at a specific position */
+  }
+}
+`;
+
+// Inject styles
+if (typeof document !== 'undefined' && !document.querySelector('#roulette-spin-styles')) {
+  const styleSheet = document.createElement('style');
+  styleSheet.id = 'roulette-spin-styles';
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
+}
