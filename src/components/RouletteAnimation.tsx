@@ -32,9 +32,11 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
   if (!animationData) {
     return (
       <div className={className} style={{ width, height }}>
-        <div className="flex items-center justify-center w-full h-full bg-gray-100 rounded-lg">
-          <div className="text-gray-500">Loading animation...</div>
-        </div>
+        <img 
+          src="/animations/roulette-fallback.svg" 
+          alt="Roulette wheel" 
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        />
       </div>
     );
   }
