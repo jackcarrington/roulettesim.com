@@ -2,57 +2,103 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import Hero from '@components/Hero.astro'
 import Feature from '@components/Feature.astro'
-import VariantSelector from '@components/game/VariantSelector.astro'
+import GameGridPro from '@components/game/GameGridPro.tsx'
+import SEOHead from '@components/seo/SEOHead.astro'
 import { api } from '../services/apiClient.ts';
 
-let featuredGames = [];
+let games = [];
+let error = null;
 
 try {
-  const allGames = await api.getRouletteGames();
-  featuredGames = allGames.slice(0, 3);
+  games = await api.getRouletteGames();
 } catch (err) {
-  console.error('Failed to load featured games:', err);
+  error = err instanceof Error ? err.message : 'Failed to load games';
+  console.error('Failed to load games:', err);
 }
 
-const title = 'Master Roulette - Practice & Learn';
-const description = 'Learn roulette strategies and practice with authentic casino games. Master European, American, and French roulette variants with expert guidance.';
+const title = 'Roulette Simulator - Practice & Master Roulette | Roulettesim.com';
+const description = 'Ultimate roulette simulator with authentic casino games. Practice European, American, and French roulette variants risk-free. Master strategies with our professional roulette simulator.';
+
+const homepageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Roulette Simulator - Roulettesim.com",
+  "description": "Professional roulette simulator with authentic casino games and educational content",
+  "url": "https://roulettesim.com",
+  "mainEntityOfPage": "https://roulettesim.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://roulettesim.com/games/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
 ---
 
 <DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com"
+    openGraph={{
+      title: 'Roulette Simulator - Professional Practice Games',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+    schema={homepageSchema}
+  />
+  
   <Hero />
   
-  <section class="my-16">
+  <!-- Professional Roulette Simulator Games -->
+  <section class="game-library-section my-16">
     <div class="container">
-      <h2 class="mb-8 text-4xl font-bold text-center">Practice Roulette Games</h2>
-      <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12">
-        Master roulette with authentic casino games. Learn strategies and practice with real game mechanics from top providers.
-      </p>
-      
-      <VariantSelector />
-      
-      <div class="cta-section text-center mt-12">
-        <a 
-          href="/games" 
-          class="primary-cta bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 inline-block"
-        >
-          Browse All Games
-        </a>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Roulette Simulator Games</h2>
+        <p class="text-xl max-w-3xl mx-auto text-gray-600 mb-8">
+          Experience authentic casino roulette with our professional simulator. Practice strategies, master variants, and perfect your gameplay risk-free.
+        </p>
+        <div class="flex justify-center items-center gap-6 text-sm text-gray-500">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-green-500 rounded"></div>
+            <span>European Roulette (2.7% house edge)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-red-500 rounded"></div>
+            <span>American Roulette (5.26% house edge)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-blue-500 rounded"></div>
+            <span>French Roulette (1.35% house edge)</span>
+          </div>
+        </div>
       </div>
+      
+      
+      {error ? (
+        <div class="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto">
+          <h3 class="font-semibold mb-2">Simulator temporarily unavailable</h3>
+          <p>{error}</p>
+          <p class="mt-2 text-sm">Please try again later or explore our <a href="/strategy" class="underline font-medium">strategy guides</a>.</p>
+        </div>
+      ) : null}
+
+      <GameGridPro games={games} client:visible />
     </div>
   </section>
 
-  <section class="my-16 bg-gray-50 py-16">
+  <section class="my-16 py-16" style="background-color: var(--color-neutral-200);">
     <div class="container">
-      <h2 class="mb-12 text-4xl font-bold text-center">Why Learn Roulette?</h2>
+      <h2 class="mb-12 text-4xl font-bold text-center">Why Use Our Roulette Simulator?</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-        <Feature icon="lucide:target" title="Master the Odds">
-          Understand probability and house edge differences between European (2.7%), French (1.35%), and American (5.26%) variants.
+        <Feature icon="lucide:target" title="Professional Training">
+          Practice with authentic casino mechanics. Our simulator uses real game engines from top providers for genuine roulette experience.
         </Feature>
-        <Feature icon="lucide:brain" title="Strategic Thinking">
-          Learn betting systems, bankroll management, and when to walk away. Practice makes perfect without financial risk.
+        <Feature icon="lucide:brain" title="Strategy Development">
+          Test betting systems, bankroll management, and advanced strategies. Perfect your approach with unlimited practice rounds.
         </Feature>
-        <Feature icon="lucide:shield-check" title="Responsible Gaming">
-          Learn to gamble responsibly with our educational approach. Understand risks before playing with real money.
+        <Feature icon="lucide:shield-check" title="Risk-Free Learning">
+          Master roulette variants without financial risk. Build confidence and understanding before playing with real money.
         </Feature>
       </div>
     </div>
