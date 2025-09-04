@@ -1,20 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
+import RouletteAnimation from './RouletteAnimation.tsx'
 
 /**
  * Hero Component
  *
- * @description A component that displays a hero section with a title, description, and image
+ * @description A component that displays a hero section with a title, description, and Lottie animation
  */
-interface Props {
-  /**
-   * The source URL for the image
-   */
-  src?: string
-}
-
-const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
 ---
 
 <section class="hero my-24">
@@ -38,7 +30,7 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
           </a>
         </div>
       </div>
-      <Image class="hidden lg:block" src={src} alt="" decoding="async" width={800} height={600} loading="eager" />
+      <RouletteAnimation className="hidden lg:block" width={800} height={600} client:load />
     </div>
   </div>
 </section>
