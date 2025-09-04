@@ -25,5 +25,17 @@ const { loading = 'eager' }: Props = Astro.props
 <style lang="scss">
   a {
     color: var(--foreground-color);
+    
+    img {
+      // In dark mode, invert the logo colors to make it white
+      @media (prefers-color-scheme: dark) {
+        filter: invert(1) brightness(1);
+      }
+      
+      // Also support the .darkmode class for manual dark mode toggle
+      :global(.darkmode) & {
+        filter: invert(1) brightness(1);
+      }
+    }
   }
 </style>
