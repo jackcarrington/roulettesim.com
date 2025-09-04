@@ -38,7 +38,7 @@ export const GET: APIRoute = async ({ url }) => {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Origin': import.meta.env.ORIGIN_DOMAIN || 'https://zingy-sfogliatella-7901c5.netlify.app'
+        'Origin': import.meta.env.ORIGIN_DOMAIN || 'https://roulettesim.com'
       }
     });
 
