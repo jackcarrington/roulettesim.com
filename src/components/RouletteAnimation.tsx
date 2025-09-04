@@ -23,16 +23,27 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
   }, []);
 
   return (
-    <div className={className} style={{ width, height }}>
+    <div 
+      className={`roulette-container ${className}`} 
+      style={{ 
+        width: Math.min(width, 400), 
+        height: Math.min(height, 400),
+        maxWidth: '400px',
+        maxHeight: '400px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
       <img 
         src="/animations/roulette-wheel.svg" 
         alt="Roulette wheel" 
         className={`roulette-svg ${shouldSpin ? 'spinning' : ''}`}
         style={{ 
-          width: width, 
-          height: height, 
-          maxWidth: '100%', 
-          maxHeight: '100%',
+          width: '100%', 
+          height: '100%', 
+          maxWidth: '400px', 
+          maxHeight: '400px',
           objectFit: 'contain'
         }}
       />
