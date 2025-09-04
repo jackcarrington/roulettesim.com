@@ -32,7 +32,8 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
         maxHeight: '400px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: '0 auto' // Center within parent grid column
       }}
     >
       <img 
