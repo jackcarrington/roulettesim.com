@@ -15,9 +15,12 @@ const RouletteAnimation: React.FC<RouletteAnimationProps> = ({
   const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
-    // Dynamically import the animation data
+    // Dynamically import the animation data with 1 second delay
     const loadAnimation = async () => {
       try {
+        // Wait 1 second before starting animation
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
         const response = await fetch('/animations/roulette.json');
         const data = await response.json();
         setAnimationData(data);
