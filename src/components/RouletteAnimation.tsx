@@ -8,8 +8,8 @@ interface RouletteAnimationProps {
 
 const RouletteAnimation: React.FC<RouletteAnimationProps> = ({ 
   className = '', 
-  width = 500, 
-  height = 500 
+  width = 350, 
+  height = 350 
 }) => {
   const [shouldSpin, setShouldSpin] = useState(false);
 
@@ -50,18 +50,15 @@ const styles = `
 }
 
 .roulette-svg.spinning {
-  animation: rouletteSpin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: rouletteSpin 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 @keyframes rouletteSpin {
   0% {
     transform: rotate(0deg);
   }
-  70% {
-    transform: rotate(1080deg); /* 3 full rotations */
-  }
   100% {
-    transform: rotate(1140deg); /* Stop at a specific position */
+    transform: rotate(900deg); /* 2.5 smooth rotations with natural deceleration */
   }
 }
 `;
