@@ -1,0 +1,265 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  article: {
+    title: string
+    description: string
+    readingTime: string
+    href: string
+    author: {
+      name: string
+      credentials: string
+    }
+    supportLevel: 'educational' | 'moderate-concern' | 'high-concern'
+  }
+  class?: string
+}
+
+const { article, class: className } = Astro.props
+
+const supportLevelConfig = {
+  'educational': {
+    label: 'Educational',
+    class: 'educational'
+  },
+  'moderate-concern': {
+    label: 'Moderate Concern',
+    class: 'moderate-concern'
+  },
+  'high-concern': {
+    label: 'High Concern',
+    class: 'high-concern'
+  }
+}
+
+const supportConfig = supportLevelConfig[article.supportLevel]
+---
+
+<article class:list={[className, 'educational-article']}>
+  <div class="article-header">
+    <div class="article-meta">
+      <span class="reading-time">
+        <Icon name="lucide:clock" aria-hidden="true" />
+        {article.readingTime}
+      </span>
+      <span class="roulette-specific">
+        <Icon name="lucide:target" aria-hidden="true" />
+        Roulette Specific
+      </span>
+    </div>
+    
+    <h3>
+      <a href={article.href}>
+        {article.title}
+      </a>
+    </h3>
+    
+    <p class="article-description">{article.description}</p>
+  </div>
+  
+  <div class="author-credentials">
+    <Icon name="lucide:user-check" aria-hidden="true" />
+    <div class="author-info">
+      <strong>{article.author.name}</strong>
+      <span>{article.author.credentials}</span>
+    </div>
+  </div>
+  
+  <div class="article-footer">
+    <div class:list={['support-level', supportConfig.class]}>
+      <Icon name="lucide:shield" aria-hidden="true" />
+      <span>{supportConfig.label}</span>
+    </div>
+    
+    <a 
+      href={article.href} 
+      class="read-article-button button color-secondary"
+      aria-label={`Read full article: ${article.title}`}
+    >
+      Read Article
+      <Icon name="lucide:arrow-right" aria-hidden="true" />
+    </a>
+  </div>
+</article>
+
+<style lang="scss">
+  .educational-article {
+    background: var(--background-color);
+    border: 2px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
+    padding: var(--space-l);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    height: 100%;
+    
+    &:hover {
+      border-color: light-dark(var(--color-primary-300), var(--color-primary-400));
+      box-shadow: var(--elevation-2);
+      transform: translateY(-2px);
+    }
+  }
+  
+  .article-header {
+    .article-meta {
+      display: flex;
+      gap: var(--space-s);
+      margin-bottom: var(--space-s);
+      font-size: var(--font-size--1);
+      
+      .reading-time,
+      .roulette-specific {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2xs);
+        color: light-dark(var(--color-neutral-600), var(--color-neutral-400));
+        
+        svg {
+          width: 1em;
+          height: 1em;
+        }
+      }
+      
+      .roulette-specific {
+        color: light-dark(var(--color-primary-500), var(--color-primary-400));
+        font-weight: 600;
+      }
+    }
+    
+    h3 {
+      font-size: var(--font-size-2);
+      color: var(--foreground-color);
+      margin-bottom: var(--space-s);
+      line-height: 1.3;
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+        
+        &:hover {
+          color: light-dark(var(--color-primary-500), var(--color-primary-400));
+          text-decoration: underline;
+        }
+      }
+    }
+    
+    .article-description {
+      color: light-dark(var(--color-neutral-700), var(--color-neutral-300));
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+  
+  .author-credentials {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s);
+    background: light-dark(var(--color-neutral-100), var(--color-neutral-800));
+    border-radius: var(--radius-m);
+    border: 1px solid light-dark(var(--color-neutral-200), var(--color-neutral-700));
+    
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: light-dark(var(--color-secondary-500), var(--color-secondary-400));
+      flex-shrink: 0;
+    }
+    
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5xs);
+      
+      strong {
+        font-weight: 700;
+        color: var(--foreground-color);
+        font-size: var(--font-size--1);
+      }
+      
+      span {
+        color: light-dark(var(--color-neutral-600), var(--color-neutral-400));
+        font-size: var(--font-size--2);
+      }
+    }
+  }
+  
+  .article-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    margin-top: auto;
+    
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+    }
+    
+    .support-level {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      font-size: var(--font-size--1);
+      font-weight: 600;
+      padding: var(--space-2xs) var(--space-xs);
+      border-radius: var(--radius-s);
+      
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+      
+      &.educational {
+        background: light-dark(var(--color-secondary-100), var(--color-secondary-900));
+        color: light-dark(var(--color-secondary-700), var(--color-secondary-300));
+        border: 1px solid light-dark(var(--color-secondary-200), var(--color-secondary-800));
+      }
+      
+      &.moderate-concern {
+        background: light-dark(#fef3c7, #92400e);
+        color: light-dark(#92400e, #fbbf24);
+        border: 1px solid light-dark(#fbbf24, #78350f);
+      }
+      
+      &.high-concern {
+        background: light-dark(#fef2f2, #7f1d1d);
+        color: light-dark(#dc2626, #fca5a5);
+        border: 1px solid light-dark(#fca5a5, #991b1b);
+      }
+    }
+    
+    .read-article-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      white-space: nowrap;
+      
+      svg {
+        width: 1rem;
+        height: 1rem;
+        transition: transform var(--animation-speed-fast) var(--cubic-bezier);
+      }
+      
+      &:hover svg {
+        transform: translateX(2px);
+      }
+    }
+  }
+  
+  // Dark mode adjustments
+  .darkmode & {
+    .educational-article {
+      background: light-dark(var(--background-color), var(--color-neutral-900));
+      border-color: light-dark(var(--border-color-subtle), var(--color-neutral-700));
+      
+      &:hover {
+        border-color: light-dark(var(--color-primary-400), var(--color-primary-300));
+        box-shadow: var(--elevation-2);
+      }
+    }
+  }
+</style>

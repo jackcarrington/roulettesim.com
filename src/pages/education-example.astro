@@ -1,0 +1,96 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import PageHeader from '@components/PageHeader.astro'
+import EducationalGrid from '@components/education/EducationalGrid.astro'
+
+const title = 'Educational Resources - Example Page | Roulettesim.com'
+const description = 'Example page showcasing standardized educational card components with consistent design system'
+
+// Sample data matching your preferred card design
+const educationalArticles = [
+  {
+    title: 'Understanding Roulette Risk Patterns: When the Wheel Becomes a Problem',
+    description: 'Learn to recognize dangerous gambling patterns specific to roulette play, including time distortion, betting escalation, and the psychology behind the spinning wheel.',
+    readingTime: '8 min read',
+    href: '/strategy/roulette-risk-patterns',
+    author: {
+      name: 'Dr. Sarah Mitchell',
+      credentials: 'Licensed Clinical Psychologist'
+    },
+    supportLevel: 'educational' as const
+  },
+  {
+    title: 'The Psychology Behind Roulette\'s House Edge: Why Your Brain Ignores the Math',
+    description: 'Understand how roulette\'s design exploits cognitive biases and why even knowing the house edge doesn\'t protect most players from overconfidence and poor decisions.',
+    readingTime: '7 min read',
+    href: '/strategy/psychology-house-edge',
+    author: {
+      name: 'Dr. Michael Chen',
+      credentials: 'Behavioral Economics Researcher'
+    },
+    supportLevel: 'educational' as const
+  },
+  {
+    title: 'Roulette Betting Fallacies: The Most Dangerous Myths That Cost Players Money',
+    description: 'Expose the most common and costly roulette betting myths, from hot numbers to dealer signatures. Learn why these fallacies persist and how to recognize them in your own thinking.',
+    readingTime: '9 min read',
+    href: '/strategy/betting-fallacies',
+    author: {
+      name: 'Dr. Jennifer Williams',
+      credentials: 'Mathematics Professor & Casino Game Analyst'
+    },
+    supportLevel: 'educational' as const
+  },
+  {
+    title: 'Roulette Addiction and Family: A Guide for Concerned Loved Ones',
+    description: 'A comprehensive guide for family members and friends concerned about a loved one\'s roulette gambling. Learn warning signs, intervention strategies, and how to protect yourself and your family.',
+    readingTime: '12 min read',
+    href: '/strategy/family-guide',
+    author: {
+      name: 'Dr. Maria Rodriguez',
+      credentials: 'Licensed Family Therapist & Gambling Specialist'
+    },
+    supportLevel: 'moderate-concern' as const
+  }
+]
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/education-example"
+    openGraph={{
+      title: 'Educational Resources Example',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+  />
+
+  <PageHeader 
+    title="Educational Resources"
+    subtitle="Example page showcasing the standardized educational card components with your preferred design, now fully integrated with the design system."
+    bgType="gradient"
+    showBreadcrumbs={true}
+  />
+
+  <main>
+    <div class="container">
+      <EducationalGrid 
+        articles={educationalArticles}
+        title="In-Depth Educational Resources"
+        subtitle="Our expert-authored articles provide comprehensive analysis of roulette risks, based on peer-reviewed research and clinical experience treating gambling problems."
+      />
+    </div>
+  </main>
+</DefaultLayout>
+
+<style lang="scss">
+  .container {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    padding: 0 var(--grid-gutter);
+  }
+</style>

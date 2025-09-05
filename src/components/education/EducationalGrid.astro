@@ -1,0 +1,81 @@
+---
+import EducationalCard from './EducationalCard.astro'
+
+interface Props {
+  title?: string
+  subtitle?: string
+  articles: Array<{
+    title: string
+    description: string
+    readingTime: string
+    href: string
+    author: {
+      name: string
+      credentials: string
+    }
+    supportLevel: 'educational' | 'moderate-concern' | 'high-concern'
+  }>
+  class?: string
+}
+
+const { 
+  title = "In-Depth Educational Resources", 
+  subtitle = "Our expert-authored articles provide comprehensive analysis of roulette risks, based on peer-reviewed research and clinical experience treating gambling problems.",
+  articles, 
+  class: className 
+} = Astro.props
+---
+
+<section class:list={[className, 'educational-content']}>
+  <div class="content-header">
+    <h2>{title}</h2>
+    {subtitle && <p class="section-intro">{subtitle}</p>}
+  </div>
+  
+  <div class="articles-grid">
+    {articles.map((article) => (
+      <EducationalCard article={article} />
+    ))}
+  </div>
+</section>
+
+<style lang="scss">
+  .educational-content {
+    padding: var(--space-2xl) 0;
+    
+    .content-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      
+      h2 {
+        font-size: var(--font-size-3);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-m);
+        line-height: 1.2;
+      }
+      
+      .section-intro {
+        font-size: var(--font-size-1);
+        color: light-dark(var(--color-neutral-700), var(--color-neutral-300));
+        max-width: 65ch;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+    }
+  }
+  
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: var(--space-l);
+    }
+    
+    @media (max-width: 400px) {
+      gap: var(--space-m);
+    }
+  }
+</style>

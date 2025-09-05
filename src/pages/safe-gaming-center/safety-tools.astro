@@ -60,55 +60,421 @@ const description = 'Access self-assessment tools, limit-setting features, and p
           <h2>Roulette Risk Self-Assessment</h2>
           <p>
             This comprehensive assessment is specifically designed for roulette players. 
-            Answer honestly to get personalized insights and recommendations.
+            Answer honestly to get personalized insights and recommendations based on clinical research.
           </p>
         </div>
 
-        <!-- Assessment Quiz Component -->
-        <div class="quiz-container">
-          <RiskAssessmentQuiz variant="comprehensive" client:load />
+        <!-- Quick Assessment Cards -->
+        <div class="quick-assessment-cards">
+          <div class="assessment-card warning-signs">
+            <h3>Warning Signs Checklist</h3>
+            <p>Check any statements that apply to your roulette playing:</p>
+            <div class="checklist">
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I've played roulette for longer than planned (even once)
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I've increased my bet size after losses to "get even"
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I think about roulette strategies when not playing
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I've borrowed money or used credit for gambling
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I get anxious when I can't play roulette
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I've lied about my gambling activities to others
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I've missed work/family time due to gambling
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                I believe I have a "system" that works for roulette
+              </label>
+            </div>
+            <div class="assessment-result">
+              <div class="result-display" id="warning-result">
+                Complete the checklist above to see your risk assessment.
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-card practice-transition">
+            <h3>Practice-to-Real-Money Assessment</h3>
+            <p>Answer these questions if you're considering or have started playing with real money:</p>
+            <div class="question-group">
+              <div class="question">
+                <label>How long do you typically play practice roulette?</label>
+                <select class="assessment-select">
+                  <option value="">Select duration...</option>
+                  <option value="15min">15 minutes or less</option>
+                  <option value="30min">16-30 minutes</option>
+                  <option value="1hour">31-60 minutes</option>
+                  <option value="2hour">1-2 hours</option>
+                  <option value="over2">Over 2 hours</option>
+                </select>
+              </div>
+              <div class="question">
+                <label>When you play with real money, do you play longer than practice?</label>
+                <select class="assessment-select">
+                  <option value="">Select answer...</option>
+                  <option value="never">I only play practice</option>
+                  <option value="same">Same duration</option>
+                  <option value="little">A little longer</option>
+                  <option value="much">Much longer</option>
+                  <option value="cant-stop">I have trouble stopping</option>
+                </select>
+              </div>
+              <div class="question">
+                <label>What's the largest amount you've bet on a single roulette spin?</label>
+                <select class="assessment-select">
+                  <option value="">Select amount...</option>
+                  <option value="practice">Practice money only</option>
+                  <option value="under5">Under $5</option>
+                  <option value="5to25">$5-$25</option>
+                  <option value="25to100">$25-$100</option>
+                  <option value="over100">Over $100</option>
+                </select>
+              </div>
+            </div>
+            <div class="transition-tips">
+              <h4>Safe Transition Guidelines:</h4>
+              <ul>
+                <li><strong>Start micro:</strong> Begin with 25¢ minimum bets</li>
+                <li><strong>Time limits:</strong> Never exceed your practice session times</li>
+                <li><strong>Loss limits:</strong> Set strict limits before playing</li>
+                <li><strong>No chasing:</strong> Stop immediately when limits are reached</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="assessment-card emotional-state">
+            <h3>Emotional State Assessment</h3>
+            <p>Understanding your emotional relationship with roulette:</p>
+            <div class="emotion-scale">
+              <div class="emotion-question">
+                <label>How do you feel when you can't play roulette?</label>
+                <div class="scale-options">
+                  <label><input type="radio" name="no-play-feeling" value="fine"> Fine/Normal</label>
+                  <label><input type="radio" name="no-play-feeling" value="disappointed"> Disappointed</label>
+                  <label><input type="radio" name="no-play-feeling" value="restless"> Restless</label>
+                  <label><input type="radio" name="no-play-feeling" value="anxious"> Anxious</label>
+                  <label><input type="radio" name="no-play-feeling" value="desperate"> Desperate</label>
+                </div>
+              </div>
+              <div class="emotion-question">
+                <label>How do you feel after a losing session?</label>
+                <div class="scale-options">
+                  <label><input type="radio" name="loss-feeling" value="accept"> I accept it as entertainment cost</label>
+                  <label><input type="radio" name="loss-feeling" value="disappointed"> Disappointed but move on</label>
+                  <label><input type="radio" name="loss-feeling" value="frustrated"> Frustrated, want to play again</label>
+                  <label><input type="radio" name="loss-feeling" value="obsessed"> Obsessed with getting even</label>
+                  <label><input type="radio" name="loss-feeling" value="desperate"> Desperate to recover losses</label>
+                </div>
+              </div>
+            </div>
+            <div class="emotional-guidance">
+              <p><strong>Healthy emotional response:</strong> Viewing losses as entertainment costs and accepting outcomes without strong emotional reactions.</p>
+              <p><strong>Warning signs:</strong> Feeling anxious when not playing, obsessing over losses, or feeling desperate to recover money.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Assessment Component -->
+        <div class="professional-assessment">
+          <div class="assessment-header">
+            <Icon name="lucide:clipboard-check" />
+            <div>
+              <h3>Professional Roulette Risk Assessment</h3>
+              <p>Complete our comprehensive 20-question assessment developed with clinical psychologists</p>
+            </div>
+          </div>
+          <div class="quiz-container">
+            <RiskAssessmentQuiz variant="comprehensive" client:load />
+          </div>
         </div>
       </section>
 
-      <!-- Additional Tools Section -->
-      <section class="additional-tools">
-        <h2>Additional Safety Tools</h2>
+      <!-- Practical Safety Tools Section -->
+      <section class="practical-tools">
+        <h2>Immediate Safety Tools You Can Use Today</h2>
+        <p class="section-intro">
+          These evidence-based tools have helped thousands of roulette players maintain healthy gambling habits. 
+          Start with whichever tool feels most relevant to your situation.
+        </p>
+
         <div class="tools-grid">
-          
-          <div class="tool-card">
+          <div class="tool-card interactive">
             <div class="tool-icon">
               <Icon name="lucide:clock" />
             </div>
-            <h3>Session Time Limits</h3>
-            <p>Set time-based limits for your roulette sessions with automatic reminders.</p>
-            <div class="tool-status">Coming Soon</div>
+            <h3>Session Timer & Alerts</h3>
+            <p>Set custom time limits for your roulette sessions with progressive alerts.</p>
+            
+            <div class="tool-interface">
+              <div class="timer-setup">
+                <label>Set session limit:</label>
+                <select class="tool-select">
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="45">45 minutes</option>
+                  <option value="60">1 hour</option>
+                </select>
+                <button class="tool-button start-timer">Start Timer</button>
+              </div>
+              <div class="timer-display" id="session-timer">
+                <span class="timer-text">Select time limit and click start</span>
+              </div>
+              <div class="timer-tips">
+                <h4>Timer Best Practices:</h4>
+                <ul>
+                  <li>Set timer before starting any gambling session</li>
+                  <li>Stop immediately when time expires - no extensions</li>
+                  <li>Take 15-minute break between sessions minimum</li>
+                  <li>If you want to override timer, wait 24 hours before playing</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="tool-card">
+          <div class="tool-card interactive">
             <div class="tool-icon">
               <Icon name="lucide:dollar-sign" />
             </div>
-            <h3>Spending Limits</h3>
-            <p>Track and set limits on your gambling budget with personalized recommendations.</p>
-            <div class="tool-status">Coming Soon</div>
+            <h3>Loss Limit Calculator</h3>
+            <p>Calculate safe loss limits based on your income and financial situation.</p>
+            
+            <div class="tool-interface">
+              <div class="calculator">
+                <div class="input-group">
+                  <label>Monthly disposable income:</label>
+                  <input type="number" class="tool-input" placeholder="Amount after all bills" id="disposable-income">
+                </div>
+                <div class="input-group">
+                  <label>Risk tolerance (recommended: Conservative):</label>
+                  <select class="tool-select" id="risk-level">
+                    <option value="conservative">Conservative (2%)</option>
+                    <option value="moderate">Moderate (5%)</option>
+                    <option value="aggressive">Aggressive (10%)</option>
+                  </select>
+                </div>
+                <button class="tool-button calculate">Calculate Safe Limits</button>
+                <div class="calculation-result" id="limit-results">
+                  Enter your information to get personalized recommendations.
+                </div>
+              </div>
+              <div class="limit-guidelines">
+                <h4>Financial Safety Guidelines:</h4>
+                <ul>
+                  <li><strong>Never gamble money needed for bills, rent, or food</strong></li>
+                  <li>Only use money you can afford to lose completely</li>
+                  <li>Set daily/weekly/monthly limits before gambling</li>
+                  <li>Consider all gambling as entertainment expense</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="tool-card">
+          <div class="tool-card interactive">
+            <div class="tool-icon">
+              <Icon name="lucide:brain" />
+            </div>
+            <h3>Cognitive Bias Checker</h3>
+            <p>Identify and counter common roulette betting fallacies in real-time.</p>
+            
+            <div class="tool-interface">
+              <div class="bias-checker">
+                <h4>Check Your Thinking:</h4>
+                <div class="bias-questions">
+                  <div class="bias-question">
+                    <p><strong>Are you thinking any of these thoughts?</strong></p>
+                    <label class="bias-item">
+                      <input type="checkbox" class="bias-checkbox" data-bias="hot-numbers">
+                      "This number is hot and likely to hit again"
+                    </label>
+                    <label class="bias-item">
+                      <input type="checkbox" class="bias-checkbox" data-bias="due-number">
+                      "This number is due to hit because it hasn't come up"
+                    </label>
+                    <label class="bias-item">
+                      <input type="checkbox" class="bias-checkbox" data-bias="pattern">
+                      "I can see a pattern in the recent results"
+                    </label>
+                    <label class="bias-item">
+                      <input type="checkbox" class="bias-checkbox" data-bias="system">
+                      "My betting system gives me an edge"
+                    </label>
+                    <label class="bias-item">
+                      <input type="checkbox" class="bias-checkbox" data-bias="recovery">
+                      "I need to bet more to recover my losses"
+                    </label>
+                  </div>
+                </div>
+                <div class="bias-results" id="bias-feedback">
+                  Check any thoughts that apply to see reality-based corrections.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card interactive">
             <div class="tool-icon">
               <Icon name="lucide:pause-circle" />
             </div>
-            <h3>Cool-Down Tools</h3>
-            <p>Take structured breaks from gambling with guided cooling-off periods.</p>
-            <div class="tool-status">Coming Soon</div>
+            <h3>Cool-Down & Reality Check</h3>
+            <p>Structured break tool with mindfulness exercises and financial reality check.</p>
+            
+            <div class="tool-interface">
+              <div class="cooldown-tool">
+                <div class="reality-check">
+                  <h4>Before You Continue Playing:</h4>
+                  <div class="check-questions">
+                    <div class="check-item">
+                      <label>How long have you been playing?</label>
+                      <input type="text" class="tool-input" placeholder="Hours and minutes">
+                    </div>
+                    <div class="check-item">
+                      <label>How much have you spent so far?</label>
+                      <input type="number" class="tool-input" placeholder="Total amount">
+                    </div>
+                    <div class="check-item">
+                      <label>What else could you do with this time/money?</label>
+                      <textarea class="tool-textarea" placeholder="Think of 3 alternative activities..."></textarea>
+                    </div>
+                  </div>
+                  <div class="breathing-exercise">
+                    <button class="tool-button start-breathing">Start 3-Minute Breathing Exercise</button>
+                    <div class="breathing-guide" id="breathing-timer" style="display: none;">
+                      <div class="breath-circle"></div>
+                      <p class="breath-instruction">Breathe in slowly...</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="cooldown-recommendations">
+                  <h4>Healthy Break Activities:</h4>
+                  <ul>
+                    <li>Take a 10-minute walk outside</li>
+                    <li>Call a friend or family member</li>
+                    <li>Do a quick workout or stretching</li>
+                    <li>Listen to music or a podcast</li>
+                    <li>Practice deep breathing or meditation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="tool-card">
             <div class="tool-icon">
-              <Icon name="lucide:bar-chart" />
+              <Icon name="lucide:shield-alert" />
             </div>
-            <h3>Progress Tracking</h3>
-            <p>Monitor your gambling habits and progress toward healthier patterns.</p>
-            <div class="tool-status">Coming Soon</div>
+            <h3>Emergency Stop Tools</h3>
+            <p>Immediate resources when you feel gambling is getting out of control.</p>
+            
+            <div class="emergency-tools">
+              <div class="emergency-contacts">
+                <h4>Crisis Support (24/7):</h4>
+                <div class="contact-item">
+                  <strong>National Problem Gambling Helpline:</strong>
+                  <a href="tel:1-800-522-4700" class="emergency-link">1-800-522-4700</a>
+                </div>
+                <div class="contact-item">
+                  <strong>Crisis Text Line:</strong>
+                  <span>Text HOME to 741741</span>
+                </div>
+              </div>
+              <div class="blocking-tools">
+                <h4>Gambling Blocking Software:</h4>
+                <ul>
+                  <li><strong>GamBlock:</strong> Blocks all gambling sites</li>
+                  <li><strong>Betblocker:</strong> Free comprehensive blocker</li>
+                  <li><strong>Gamban:</strong> Mobile and desktop protection</li>
+                  <li><strong>Cold Turkey:</strong> Website and app blocker</li>
+                </ul>
+              </div>
+              <div class="immediate-actions">
+                <h4>Right Now Actions:</h4>
+                <ul>
+                  <li>Close all gambling websites immediately</li>
+                  <li>Remove saved payment methods from gambling sites</li>
+                  <li>Tell a trusted person about your situation</li>
+                  <li>Install gambling blocking software</li>
+                  <li>Schedule appointment with a counselor</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <Icon name="lucide:target" />
+            </div>
+            <h3>Goal Setting & Accountability</h3>
+            <p>Set specific, measurable goals for healthy gambling habits with accountability features.</p>
+            
+            <div class="goal-setting">
+              <div class="goal-templates">
+                <h4>Choose Your Primary Goal:</h4>
+                <div class="goal-options">
+                  <label class="goal-option">
+                    <input type="radio" name="primary-goal" value="time-limit">
+                    <div class="goal-content">
+                      <strong>Time Management:</strong>
+                      <p>Never play for more than X minutes per session</p>
+                    </div>
+                  </label>
+                  <label class="goal-option">
+                    <input type="radio" name="primary-goal" value="spending-limit">
+                    <div class="goal-content">
+                      <strong>Spending Control:</strong>
+                      <p>Never spend more than $X per week on gambling</p>
+                    </div>
+                  </label>
+                  <label class="goal-option">
+                    <input type="radio" name="primary-goal" value="frequency">
+                    <div class="goal-content">
+                      <strong>Frequency Reduction:</strong>
+                      <p>Only gamble X times per week maximum</p>
+                    </div>
+                  </label>
+                  <label class="goal-option">
+                    <input type="radio" name="primary-goal" value="complete-stop">
+                    <div class="goal-content">
+                      <strong>Complete Break:</strong>
+                      <p>Take a complete break from gambling for X days/weeks</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="accountability">
+                <h4>Accountability Partner:</h4>
+                <p>Share your goal with someone you trust. Having someone to check in with increases success rates by 65%.</p>
+                <div class="partner-setup">
+                  <input type="text" class="tool-input" placeholder="Partner's name">
+                  <input type="email" class="tool-input" placeholder="Their email (optional)">
+                  <button class="tool-button">Set Up Check-ins</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
