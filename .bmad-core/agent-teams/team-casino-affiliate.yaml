@@ -1,0 +1,16 @@
+# <!-- Powered by BMAD™ Core -->
+bundle:
+  name: Team Casino Affiliate
+  icon: 🎰
+  description: Specialized team for casino affiliate sites, roulette simulators, gambling educational content, and compliance-aware content development.
+agents:
+  - bmad-orchestrator
+  - topical-map          # Ronald - Casino SEO & Topical Authority
+  - analyst              # Market research & competitor analysis
+  - ux-expert           # Gaming UX and conversion optimization
+  - dev                 # Implementation of casino features
+  - qa                  # Compliance and quality assurance
+workflows:
+  - casino-content.yaml
+  - affiliate-optimization.yaml
+  - gambling-compliance.yaml

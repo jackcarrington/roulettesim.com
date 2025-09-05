@@ -1,0 +1,413 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import SafetyAlert from '@components/safety/SafetyAlert.astro'
+import RiskAssessmentQuiz from '@components/safety/RiskAssessmentQuiz.tsx'
+import { Icon } from 'astro-icon/components'
+
+const title = 'Personal Safety Tools - Safe Gaming Center | Roulettesim.com'
+const description = 'Access self-assessment tools, limit-setting features, and personalized recommendations designed specifically for roulette players. Take control of your gaming habits.'
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/safe-gaming-center/safety-tools"
+    openGraph={{
+      title: 'Personal Safety Tools - Roulette Self-Assessment',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+  />
+
+  <div class="safety-tools-page">
+    <div class="container">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/safe-gaming-center">Safe Gaming Center</a></li>
+          <li aria-current="page">Personal Safety Tools</li>
+        </ol>
+      </nav>
+
+      <!-- Page Header -->
+      <header class="page-header">
+        <div class="header-icon">
+          <Icon name="lucide:shield-check" aria-hidden="true" />
+        </div>
+        <h1>Personal Safety Tools</h1>
+        <p class="header-description">
+          Take our roulette-specific self-assessment and access personalized tools to help you maintain healthy gambling habits.
+        </p>
+      </header>
+
+      <!-- Crisis Support Alert -->
+      <SafetyAlert
+        variant="crisis-support"
+        title="Need immediate help?"
+        message="If you're struggling with gambling urges or are in crisis, professional help is available 24/7."
+        actionText="Get Crisis Support"
+        actionUrl="/safe-gaming-center/get-support"
+        persistent={false}
+      />
+
+      <!-- Self-Assessment Section -->
+      <section class="assessment-section">
+        <div class="section-header">
+          <h2>Roulette Risk Self-Assessment</h2>
+          <p>
+            This comprehensive assessment is specifically designed for roulette players. 
+            Answer honestly to get personalized insights and recommendations.
+          </p>
+        </div>
+
+        <!-- Assessment Quiz Component -->
+        <div class="quiz-container">
+          <RiskAssessmentQuiz variant="comprehensive" client:load />
+        </div>
+      </section>
+
+      <!-- Additional Tools Section -->
+      <section class="additional-tools">
+        <h2>Additional Safety Tools</h2>
+        <div class="tools-grid">
+          
+          <div class="tool-card">
+            <div class="tool-icon">
+              <Icon name="lucide:clock" />
+            </div>
+            <h3>Session Time Limits</h3>
+            <p>Set time-based limits for your roulette sessions with automatic reminders.</p>
+            <div class="tool-status">Coming Soon</div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <Icon name="lucide:dollar-sign" />
+            </div>
+            <h3>Spending Limits</h3>
+            <p>Track and set limits on your gambling budget with personalized recommendations.</p>
+            <div class="tool-status">Coming Soon</div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <Icon name="lucide:pause-circle" />
+            </div>
+            <h3>Cool-Down Tools</h3>
+            <p>Take structured breaks from gambling with guided cooling-off periods.</p>
+            <div class="tool-status">Coming Soon</div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <Icon name="lucide:bar-chart" />
+            </div>
+            <h3>Progress Tracking</h3>
+            <p>Monitor your gambling habits and progress toward healthier patterns.</p>
+            <div class="tool-status">Coming Soon</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation to Other Sections -->
+      <section class="related-sections">
+        <h2>More Safe Gaming Resources</h2>
+        <div class="sections-grid">
+          <a href="/safe-gaming-center/roulette-risks" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:brain" />
+            </div>
+            <h3>Understanding Roulette Risks</h3>
+            <p>Learn about roulette-specific psychological patterns and risk factors.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/get-support" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:users" />
+            </div>
+            <h3>Get Professional Support</h3>
+            <p>Connect with counselors, crisis support, and treatment resources.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/family-support" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:heart" />
+            </div>
+            <h3>Family Resources</h3>
+            <p>Help for family members concerned about a loved one's gambling.</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style lang="scss">
+  .safety-tools-page {
+    padding: var(--space-xl) 0;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-m);
+    }
+  }
+
+  .breadcrumb {
+    margin-bottom: var(--space-l);
+    
+    ol {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: var(--space-s);
+      font-size: var(--font-size--1);
+      
+      li {
+        display: flex;
+        align-items: center;
+        
+        &:not(:last-child)::after {
+          content: '›';
+          margin-left: var(--space-s);
+          color: var(--color-neutral-500);
+        }
+        
+        a {
+          color: var(--color-primary-500);
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        
+        &[aria-current="page"] {
+          color: var(--color-neutral-600);
+        }
+      }
+    }
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    
+    .header-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto var(--space-l);
+      background: var(--color-primary-100);
+      border-radius: var(--radius-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-500);
+      
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    
+    h1 {
+      font-size: var(--font-size-5);
+      color: var(--foreground-color);
+      margin-bottom: var(--space-m);
+    }
+    
+    .header-description {
+      font-size: var(--font-size-1);
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .assessment-section {
+    margin-bottom: var(--space-3xl);
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      
+      h2 {
+        font-size: var(--font-size-3);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-m);
+      }
+      
+      p {
+        font-size: var(--font-size-0);
+        color: var(--color-neutral-700);
+        max-width: 60ch;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+    }
+    
+    .quiz-container {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      margin: 0 auto;
+    }
+  }
+
+  .additional-tools {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .tool-card {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      text-align: center;
+      position: relative;
+      
+      .tool-icon {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto var(--space-m);
+        background: var(--color-neutral-200);
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-neutral-500);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin-bottom: var(--space-m);
+      }
+      
+      .tool-status {
+        padding: var(--space-xs) var(--space-s);
+        background: var(--color-neutral-200);
+        color: var(--color-neutral-600);
+        border-radius: var(--radius-s);
+        font-size: var(--font-size--1);
+        font-weight: 600;
+        display: inline-block;
+      }
+    }
+  }
+
+  .related-sections {
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .sections-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-l);
+    }
+    
+    .section-card {
+      display: block;
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      text-decoration: none;
+      transition: all var(--animation-speed-fast) var(--cubic-bezier);
+      
+      &:hover {
+        border-color: var(--color-primary-300);
+        transform: translateY(-2px);
+        box-shadow: var(--elevation-2);
+      }
+      
+      .section-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-primary-100);
+        color: var(--color-primary-500);
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+
+  // Dark mode adjustments
+  .darkmode {
+    .quiz-container,
+    .tool-card,
+    .section-card {
+      background: var(--color-neutral-800);
+      border-color: var(--color-neutral-700);
+      
+      &:hover {
+        border-color: var(--color-primary-400);
+      }
+    }
+    
+    .tool-icon {
+      background: var(--color-neutral-700);
+    }
+    
+    .tool-status {
+      background: var(--color-neutral-700);
+      color: var(--color-neutral-300);
+    }
+  }
+</style>

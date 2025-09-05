@@ -1,0 +1,158 @@
+---
+/**
+ * GameCard Component
+ * 
+ * Reusable game preview card for the homepage game library section
+ * Following the design system with proper accessibility
+ */
+
+export interface Props {
+  gameId: string;
+  name: string;
+  variant: 'european' | 'american' | 'french';
+  thumbnail?: string;
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  isAvailable?: boolean;
+}
+
+const { 
+  gameId, 
+  name, 
+  variant, 
+  thumbnail = '/games/roulette-placeholder.jpg',
+  difficulty = 'beginner',
+  isAvailable = true 
+} = Astro.props;
+
+const difficultyColors = {
+  beginner: 'var(--color-secondary-400)',
+  intermediate: 'var(--color-primary-400)', 
+  advanced: 'var(--color-neutral-600)'
+};
+
+const variantDisplayNames = {
+  european: 'European',
+  american: 'American', 
+  french: 'French'
+};
+---
+
+<div class="game-card" data-game-id={gameId} data-variant={variant}>
+  <div class="game-card__thumbnail">
+    <img 
+      src={thumbnail} 
+      alt={`${name} roulette game thumbnail`}
+      loading="lazy"
+      width="300"
+      height="200"
+    />
+    <div class="game-card__difficulty" style={`background-color: ${difficultyColors[difficulty]}`}>
+      {difficulty}
+    </div>
+  </div>
+  
+  <div class="game-card__content">
+    <h3 class="game-card__title">{name}</h3>
+    <p class="game-card__variant">{variantDisplayNames[variant]} Roulette</p>
+    
+    {isAvailable ? (
+      <a 
+        href={`/games/${gameId}`}
+        class="button game-card__cta"
+        aria-label={`Play ${name} - ${variant} roulette`}
+      >
+        Play Now
+      </a>
+    ) : (
+      <button 
+        class="button" 
+        disabled
+        aria-label={`${name} is temporarily unavailable`}
+      >
+        Temporarily Unavailable
+      </button>
+    )}
+  </div>
+</div>
+
+<style>
+  .game-card {
+    background: var(--background-color);
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    box-shadow: var(--elevation-2);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    border: 1px solid var(--border-color-subtle);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--elevation-3);
+  }
+  
+  .game-card__thumbnail {
+    position: relative;
+    aspect-ratio: var(--ratio-landscape);
+    overflow: hidden;
+  }
+  
+  .game-card__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--animation-speed-medium) var(--cubic-bezier);
+  }
+  
+  .game-card:hover .game-card__thumbnail img {
+    transform: scale(1.05);
+  }
+  
+  .game-card__difficulty {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-xs);
+    color: var(--color-neutral-100);
+    font-size: var(--font-size--1);
+    font-weight: 600;
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: var(--radius-s);
+    text-transform: capitalize;
+  }
+  
+  .game-card__content {
+    padding: var(--space-s);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-card__title {
+    font-size: var(--font-size-1);
+    font-weight: 700;
+    margin-bottom: var(--space-3xs);
+    color: var(--foreground-color);
+  }
+  
+  .game-card__variant {
+    color: var(--color-neutral-600);
+    font-size: var(--font-size--1);
+    margin-bottom: var(--space-s);
+    flex-grow: 1;
+  }
+  
+  .game-card__cta {
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .game-card__thumbnail {
+      aspect-ratio: var(--ratio-widescreen);
+    }
+  }
+</style>

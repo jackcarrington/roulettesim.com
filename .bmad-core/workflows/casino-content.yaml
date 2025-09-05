@@ -1,0 +1,68 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  name: Casino Content Development
+  icon: 🎰
+  description: End-to-end workflow for creating SEO-optimized casino, roulette, and gambling affiliate content with compliance awareness
+  domain: casino-affiliate
+  
+phases:
+  - phase: research-analysis
+    name: Market Research & Competitive Analysis
+    agents: [analyst, topical-map]
+    tasks:
+      - competitor-content-analysis: Analyze top casino affiliates and roulette sites
+      - keyword-cluster-analysis: Map casino/roulette semantic keyword clusters
+      - gambling-regulations: Research regulatory requirements by jurisdiction
+      - casino-industry-entities: Identify key entities and terminology
+    deliverables:
+      - competitor-analysis-report.md
+      - casino-keyword-map.md
+      - compliance-requirements.md
+      
+  - phase: strategy-planning
+    name: Content Strategy & Topical Mapping
+    agents: [topical-map, pm, ux-expert]
+    tasks:
+      - create-topical-map: Build comprehensive casino site topical authority map
+      - content-gap-identification: Identify content opportunities vs competitors
+      - casino-content-strategy: Develop casino-specific content strategy
+      - content-calendar: Create editorial calendar for casino content
+    deliverables:
+      - topical-map.md
+      - content-gaps-report.md
+      - casino-content-strategy.md
+      - editorial-calendar.md
+      
+  - phase: content-creation
+    name: Content Development & Optimization
+    agents: [topical-map, ux-expert]
+    tasks:
+      - content-brief: Generate detailed briefs for each content piece
+      - semantic-keyword-mapping: Optimize content for semantic SEO
+      - entity-mapping: Create entity relationships for casino topics
+      - nlp-content-analysis: Analyze content for semantic optimization
+    deliverables:
+      - content-briefs/
+      - optimized-content/
+      - entity-maps.md
+      
+  - phase: implementation
+    name: Technical Implementation & QA
+    agents: [dev, qa, topical-map]
+    tasks:
+      - implement-content: Deploy content with proper SEO structure
+      - casino-compliance-checklist: Verify regulatory compliance
+      - seo-technical-audit: Ensure technical SEO implementation
+      - content-performance-tracking: Set up analytics and tracking
+    deliverables:
+      - deployed-content/
+      - compliance-report.md
+      - seo-audit-report.md
+      - tracking-setup.md
+
+success-criteria:
+  - Topical authority map covers 80%+ of casino/roulette search landscape
+  - Content gaps identified with actionable recommendations
+  - All content meets gambling advertising compliance requirements
+  - Semantic SEO optimization achieves target keyword coverage
+  - Technical implementation follows SEO best practices

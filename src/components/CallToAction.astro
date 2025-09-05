@@ -4,36 +4,44 @@ import { Icon } from 'astro-icon/components'
 /**
  * CallToAction Component
  *
- * @description A prominent call-to-action section with a title and link
+ * @description A prominent call-to-action section promoting the Safe Gaming Centre with title, description, and link
  */
 interface Props {
   /**
    * The title text to display
-   * @default "Get this theme on GitHub"
+   * @default "Safe Gaming Centre"
    */
   title?: string
   /**
+   * Optional description text to display below the title
+   */
+  description?: string
+  /**
    * The URL the button should link to
-   * @default "https://github.com/incluud/accessible-astro-starter"
+   * @default "/safe-gaming-center"
    */
   link?: string
   /**
    * The text to display on the button
-   * @default "Get Started"
+   * @default "Learn Safe Gaming"
    */
   linkText?: string
 }
 
 const {
-  title = 'Get this theme on GitHub',
-  link = 'https://github.com/incluud/accessible-astro-starter',
-  linkText = 'Use this theme',
+  title = 'Safe Gaming Centre',
+  description = 'Learn about responsible roulette play, understand the risks, and access tools to help you maintain healthy gambling habits.',
+  link = '/safe-gaming-center',
+  linkText = 'Learn Safe Gaming',
 } = Astro.props
 ---
 
 <div class="container">
   <div class="call-to-action mt-24 mb-32 flex flex-col items-center gap-12 rounded-xl px-12 py-20 md:px-24">
     <h2 class="text-center text-3xl md:text-6xl">{title}</h2>
+    {description && (
+      <p class="description text-center text-lg md:text-xl max-w-3xl">{description}</p>
+    )}
     <a href={link} class="text-center text-2xl">
       {linkText}
       <Icon name="lucide:arrow-right" />
@@ -53,6 +61,11 @@ const {
     );
 
     color: var(--color-neutral-900);
+  }
+
+  .description {
+    line-height: 1.6;
+    opacity: 0.8;
   }
 
   a,

@@ -1,0 +1,93 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  name: Gambling Compliance & Regulatory Review
+  icon: ⚖️
+  description: Comprehensive workflow for ensuring gambling content compliance across jurisdictions, responsible gambling practices, and regulatory adherence
+  domain: casino-compliance
+  
+phases:
+  - phase: regulatory-research
+    name: Regulatory Research & Requirements Analysis
+    agents: [analyst, topical-map, qa]
+    tasks:
+      - jurisdiction-analysis: Research gambling laws by target markets
+      - advertising-regulations: Analyze gambling advertising restrictions
+      - responsible-gambling-requirements: Document responsible gambling mandates
+      - content-restrictions: Identify prohibited content and claims
+    deliverables:
+      - jurisdiction-compliance-matrix.md
+      - advertising-guidelines.md
+      - responsible-gambling-requirements.md
+      - content-restrictions-guide.md
+      
+  - phase: compliance-framework
+    name: Compliance Framework Development
+    agents: [qa, topical-map, pm]
+    tasks:
+      - compliance-checklist: Create comprehensive compliance checklist
+      - content-review-process: Establish content review workflow
+      - legal-disclaimer-templates: Create required legal disclaimers
+      - age-verification-requirements: Document age verification needs
+    deliverables:
+      - casino-compliance-checklist.md
+      - content-review-workflow.md
+      - legal-disclaimer-templates/
+      - age-verification-guide.md
+      
+  - phase: content-audit
+    name: Content Compliance Audit
+    agents: [qa, topical-map]
+    tasks:
+      - existing-content-audit: Review existing content for compliance
+      - risk-assessment: Assess compliance risks across content
+      - responsible-gambling-integration: Integrate responsible gambling messaging
+      - disclaimer-placement: Ensure proper disclaimer placement
+    deliverables:
+      - content-compliance-audit.md
+      - compliance-risk-assessment.md
+      - responsible-gambling-content.md
+      - disclaimer-implementation.md
+      
+  - phase: implementation
+    name: Compliance Implementation & Monitoring
+    agents: [dev, qa, topical-map]
+    tasks:
+      - compliance-implementation: Implement compliance requirements
+      - monitoring-setup: Set up compliance monitoring systems
+      - staff-training: Train team on compliance requirements
+      - documentation-maintenance: Maintain compliance documentation
+    deliverables:
+      - compliance-implementation-report.md
+      - monitoring-system-setup.md
+      - compliance-training-materials.md
+      - compliance-documentation/
+      
+  - phase: ongoing-monitoring
+    name: Ongoing Compliance Monitoring
+    agents: [qa, analyst]
+    tasks:
+      - regular-compliance-reviews: Schedule regular compliance audits
+      - regulatory-updates-monitoring: Monitor regulatory changes
+      - incident-response: Handle compliance incidents
+      - compliance-reporting: Generate compliance reports
+    deliverables:
+      - compliance-monitoring-schedule.md
+      - regulatory-updates-tracker.md
+      - incident-response-procedures.md
+      - compliance-reports/
+
+compliance-areas:
+  - age-restrictions: Ensure all content includes appropriate age restrictions
+  - responsible-gambling: Integrate responsible gambling messaging
+  - advertising-claims: Verify all claims are substantiated and legal
+  - jurisdictional-compliance: Ensure compliance across target markets
+  - data-protection: Implement required data protection measures
+  - financial-disclosures: Include required financial disclosures
+
+success-criteria:
+  - 100% content compliance across all target jurisdictions
+  - Responsible gambling messaging integrated throughout site
+  - Legal disclaimers properly placed and up-to-date
+  - Compliance monitoring system operational
+  - Staff trained on current compliance requirements
+  - Documentation maintained and current

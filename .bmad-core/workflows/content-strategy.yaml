@@ -1,0 +1,106 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  name: Comprehensive Content Strategy
+  icon: 📝
+  description: End-to-end content strategy workflow from research to implementation, focusing on topical authority, user experience, and business objectives
+  domain: content-marketing
+  
+phases:
+  - phase: strategic-research
+    name: Strategic Research & Discovery
+    agents: [analyst, topical-map]
+    tasks:
+      - market-research: Analyze target market and audience segments
+      - competitor-analysis: Deep competitive content analysis
+      - keyword-research: Comprehensive keyword and topic research
+      - user-intent-mapping: Map user search intent across customer journey
+    deliverables:
+      - market-research-report.md
+      - competitive-landscape-analysis.md
+      - keyword-research-comprehensive.md
+      - user-intent-journey-map.md
+      
+  - phase: content-architecture
+    name: Content Architecture & Information Design
+    agents: [topical-map, ux-expert, architect]
+    tasks:
+      - create-topical-map: Build comprehensive site topical architecture
+      - information-architecture: Design optimal content organization
+      - user-journey-mapping: Map content to user journey stages
+      - content-taxonomy: Create content categorization system
+    deliverables:
+      - site-topical-map.md
+      - information-architecture.md
+      - user-journey-content-map.md
+      - content-taxonomy.md
+      
+  - phase: strategy-development
+    name: Content Strategy Development
+    agents: [topical-map, pm, ux-expert]
+    tasks:
+      - content-strategy-framework: Develop overarching content strategy
+      - content-gap-identification: Identify strategic content opportunities
+      - content-calendar: Create comprehensive editorial calendar
+      - content-governance: Establish content creation and maintenance processes
+    deliverables:
+      - content-strategy-document.md
+      - content-gaps-strategy.md
+      - master-editorial-calendar.md
+      - content-governance-guide.md
+      
+  - phase: content-planning
+    name: Detailed Content Planning & Brief Creation
+    agents: [topical-map, ux-expert]
+    tasks:
+      - content-brief: Create detailed briefs for each content piece
+      - seo-optimization-planning: Plan SEO optimization for each piece
+      - content-format-planning: Plan optimal content formats and media
+      - distribution-strategy: Plan content distribution and promotion
+    deliverables:
+      - content-briefs/
+      - seo-optimization-plans/
+      - content-format-guide.md
+      - distribution-strategy.md
+      
+  - phase: creation-optimization
+    name: Content Creation & Optimization
+    agents: [topical-map, ux-expert]
+    tasks:
+      - content-creation-oversight: Oversee content creation process
+      - semantic-optimization: Optimize content for semantic SEO
+      - user-experience-optimization: Optimize for user engagement
+      - quality-assurance: Ensure content quality and consistency
+    deliverables:
+      - optimized-content/
+      - semantic-optimization-reports/
+      - user-engagement-analysis.md
+      - quality-assurance-reports/
+      
+  - phase: performance-optimization
+    name: Performance Measurement & Optimization
+    agents: [analyst, topical-map]
+    tasks:
+      - performance-tracking-setup: Set up comprehensive content analytics
+      - content-performance-analysis: Analyze content performance metrics
+      - optimization-recommendations: Provide data-driven optimization recommendations
+      - strategy-iteration: Iterate strategy based on performance data
+    deliverables:
+      - analytics-setup-guide.md
+      - content-performance-dashboard.md
+      - optimization-recommendations.md
+      - strategy-iteration-plan.md
+
+strategic-objectives:
+  - topical-authority: Build comprehensive topical authority in target domains
+  - user-engagement: Maximize user engagement and conversion
+  - search-visibility: Achieve optimal search engine visibility
+  - brand-positioning: Establish thought leadership and brand authority
+  - business-growth: Drive measurable business objectives through content
+
+success-criteria:
+  - Topical map covers 90%+ of target topic landscape
+  - Content strategy aligned with business objectives
+  - Editorial calendar covers 12+ months with strategic themes
+  - Content creation process streamlined and scalable
+  - Performance measurement system operational
+  - Measurable improvement in key content metrics

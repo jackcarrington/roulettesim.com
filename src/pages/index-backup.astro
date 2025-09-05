@@ -1,0 +1,111 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import Hero from '@components/Hero.astro'
+import Feature from '@components/Feature.astro'
+import GameGridPro from '@components/game/GameGridPro.tsx'
+import SEOHead from '@components/seo/SEOHead.astro'
+import { api } from '../services/apiClient.ts';
+
+let games = [];
+let error = null;
+
+try {
+  games = await api.getRouletteGames();
+} catch (err) {
+  error = err instanceof Error ? err.message : 'Failed to load games';
+  console.error('Failed to load games:', err);
+}
+
+const title = 'Roulette Simulator - Practice & Master Roulette | Roulettesim.com';
+const description = 'Ultimate roulette simulator with authentic casino games. Practice European, American, and French roulette variants risk-free. Master strategies with our professional roulette simulator.';
+
+const homepageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Roulette Simulator - Roulettesim.com",
+  "description": "Professional roulette simulator with authentic casino games and educational content",
+  "url": "https://roulettesim.com",
+  "mainEntityOfPage": "https://roulettesim.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://roulettesim.com/games/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com"
+    openGraph={{
+      title: 'Roulette Simulator - Professional Practice Games',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+    schema={homepageSchema}
+  />
+  
+  <Hero />
+  
+  <!-- Professional Roulette Simulator Games -->
+  <section class="game-library-section my-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Roulette Simulator Games</h2>
+        <p class="text-xl max-w-3xl mx-auto text-gray-600 mb-8">
+          Experience authentic casino roulette with our professional simulator. Practice strategies, master variants, and perfect your gameplay risk-free.
+        </p>
+      </div>
+      
+      
+      {error ? (
+        <div class="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto">
+          <h3 class="font-semibold mb-2">Simulator temporarily unavailable</h3>
+          <p>{error}</p>
+          <p class="mt-2 text-sm">Please try again later or explore our <a href="/strategy" class="underline font-medium">strategy guides</a>.</p>
+        </div>
+      ) : null}
+
+      <GameGridPro games={games} client:visible />
+    </div>
+  </section>
+
+  <section class="my-16 py-16" style="background-color: var(--color-neutral-200);">
+    <div class="container">
+      <h2 class="mb-12 text-4xl font-bold text-center">Why Use Our Roulette Simulator?</h2>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <Feature icon="lucide:target" title="Professional Training">
+          Practice with authentic casino mechanics. Our simulator uses real game engines from top providers for genuine roulette experience.
+        </Feature>
+        <Feature icon="lucide:brain" title="Strategy Development">
+          Test betting systems, bankroll management, and advanced strategies. Perfect your approach with unlimited practice rounds.
+        </Feature>
+        <Feature icon="lucide:shield-check" title="Risk-Free Learning">
+          Master roulette variants without financial risk. Build confidence and understanding before playing with real money.
+        </Feature>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 0.75rem;
+    }
+    
+    .primary-cta {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>

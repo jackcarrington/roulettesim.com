@@ -1,0 +1,84 @@
+# <!-- Powered by BMAD™ Core -->
+workflow:
+  name: SEO Optimization & Topical Authority
+  icon: 🔍
+  description: Comprehensive SEO workflow for building topical authority through semantic content optimization and strategic keyword targeting
+  domain: content-strategy
+  
+phases:
+  - phase: seo-research
+    name: SEO Research & Analysis
+    agents: [topical-map, analyst]
+    tasks:
+      - keyword-research: Deep keyword research with search intent analysis
+      - topic-cluster: Generate comprehensive topic clusters
+      - competitor-analysis: Analyze competitor SEO strategies
+      - semantic-keyword-mapping: Map semantic relationships between keywords
+    deliverables:
+      - keyword-research-report.md
+      - topic-clusters.md
+      - competitor-seo-analysis.md
+      - semantic-keyword-map.md
+      
+  - phase: content-planning
+    name: Content Strategy & Planning
+    agents: [topical-map, pm, ux-expert]
+    tasks:
+      - create-topical-map: Build comprehensive site topical map
+      - content-gap-identification: Identify content opportunities
+      - content-calendar: Create SEO-driven editorial calendar
+      - content-brief: Generate optimized content briefs
+    deliverables:
+      - site-topical-map.md
+      - content-gaps-analysis.md
+      - seo-editorial-calendar.md
+      - content-briefs/
+      
+  - phase: content-optimization
+    name: Content Creation & Optimization
+    agents: [topical-map, ux-expert]
+    tasks:
+      - semantic-optimization: Optimize content for semantic SEO
+      - entity-mapping: Create entity relationship maps
+      - nlp-analysis: Analyze content using NLP techniques
+      - content-scoring: Score content for topical relevance
+    deliverables:
+      - optimized-content/
+      - entity-relationship-maps.md
+      - nlp-analysis-report.md
+      - content-scores.md
+      
+  - phase: technical-seo
+    name: Technical SEO Implementation
+    agents: [topical-map, dev]
+    tasks:
+      - technical-seo-audit: Comprehensive technical SEO audit
+      - schema-implementation: Implement structured data markup
+      - internal-linking: Optimize internal linking structure
+      - performance-optimization: Optimize for Core Web Vitals
+    deliverables:
+      - technical-seo-report.md
+      - schema-markup/
+      - internal-linking-strategy.md
+      - performance-report.md
+      
+  - phase: monitoring-optimization
+    name: Performance Monitoring & Optimization
+    agents: [topical-map, analyst]
+    tasks:
+      - seo-performance-tracking: Set up SEO tracking and monitoring
+      - content-performance-analysis: Analyze content performance
+      - topical-authority-measurement: Measure topical authority growth
+      - optimization-recommendations: Provide ongoing optimization recommendations
+    deliverables:
+      - seo-tracking-setup.md
+      - content-performance-report.md
+      - topical-authority-report.md
+      - optimization-roadmap.md
+
+success-criteria:
+  - Comprehensive keyword coverage across target topics
+  - Topical authority maps demonstrate content depth and breadth
+  - Technical SEO audit achieves 90%+ optimization score
+  - Content performance shows measurable organic traffic growth
+  - Semantic optimization achieves target entity coverage

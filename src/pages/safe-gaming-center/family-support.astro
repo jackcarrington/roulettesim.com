@@ -1,0 +1,994 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import SafetyAlert from '@components/safety/SafetyAlert.astro'
+import { Icon } from 'astro-icon/components'
+
+const title = 'Family Support Resources - Safe Gaming Center | Roulettesim.com'
+const description = 'Resources for family members and friends concerned about a loved one\'s roulette gambling. Learn warning signs, intervention strategies, and how to protect your family.'
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/safe-gaming-center/family-support"
+    openGraph={{
+      title: 'Family Support Resources - Help for Concerned Families',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+  />
+
+  <div class="family-support-page">
+    <div class="container">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/safe-gaming-center">Safe Gaming Center</a></li>
+          <li aria-current="page">Family Support</li>
+        </ol>
+      </nav>
+
+      <!-- Page Header -->
+      <header class="page-header">
+        <div class="header-icon">
+          <Icon name="lucide:heart" aria-hidden="true" />
+        </div>
+        <h1>Family Support Resources</h1>
+        <p class="header-description">
+          Guidance and resources for family members and friends concerned about a loved one's roulette gambling. 
+          You're not alone, and there are effective ways to help.
+        </p>
+      </header>
+
+      <!-- Crisis Support Alert -->
+      <SafetyAlert
+        variant="crisis-support"
+        title="Family Crisis Support Available"
+        message="If you're concerned about immediate safety or someone is threatening self-harm, call 988 or 911 immediately."
+        actionText="Get Crisis Help"
+        actionUrl="/safe-gaming-center/get-support"
+        persistent={false}
+      />
+
+      <!-- Warning Signs Section -->
+      <section class="warning-signs">
+        <h2>Recognizing Roulette Gambling Problems</h2>
+        <p class="section-intro">
+          Roulette addiction is often called the "hidden addiction" because there are no physical signs. 
+          Watch for these specific behavioral and financial patterns.
+        </p>
+        
+        <div class="signs-categories">
+          <div class="signs-category">
+            <div class="category-icon financial">
+              <Icon name="lucide:dollar-sign" />
+            </div>
+            <h3>Financial Warning Signs</h3>
+            <ul class="signs-list">
+              <li>Unexplained cash withdrawals in round numbers ($100, $500, $1000)</li>
+              <li>Credit card advances or new credit cards appearing</li>
+              <li>Bills going unpaid despite apparent income</li>
+              <li>Selling personal items without clear reason</li>
+              <li>Borrowing money with vague explanations</li>
+              <li>Secretive about bank statements or financial documents</li>
+            </ul>
+          </div>
+
+          <div class="signs-category">
+            <div class="category-icon behavioral">
+              <Icon name="lucide:brain" />
+            </div>
+            <h3>Roulette-Specific Behaviors</h3>
+            <ul class="signs-list">
+              <li>Talking about "systems" or "strategies" to beat roulette</li>
+              <li>Tracking numbers or outcomes obsessively</li>
+              <li>Claiming to have "figured out" how to win</li>
+              <li>Spending excessive time researching roulette strategies</li>
+              <li>Downloading roulette apps or practice games</li>
+              <li>Discussing "hot" or "cold" numbers frequently</li>
+            </ul>
+          </div>
+
+          <div class="signs-category">
+            <div class="category-icon emotional">
+              <Icon name="lucide:heart-crack" />
+            </div>
+            <h3>Emotional & Social Changes</h3>
+            <ul class="signs-list">
+              <li>Extreme mood swings tied to wins/losses</li>
+              <li>Increased secrecy and defensive behavior</li>
+              <li>Social isolation from family and friends</li>
+              <li>Time distortion - being gone for hours without explanation</li>
+              <li>Neglecting work, family, or household responsibilities</li>
+              <li>Sleep disruption from late-night gambling</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to Help Section -->
+      <section class="how-to-help">
+        <h2>How to Help Your Loved One</h2>
+        
+        <div class="help-strategies">
+          <div class="strategy-card do">
+            <div class="card-header">
+              <Icon name="lucide:check-circle" />
+              <h3>What TO Do</h3>
+            </div>
+            <ul>
+              <li>Protect your finances immediately - secure joint accounts and credit</li>
+              <li>Use "I" statements: "I feel scared about our financial future"</li>
+              <li>Stay calm and choose timing carefully for conversations</li>
+              <li>Set and enforce clear boundaries consistently</li>
+              <li>Document gambling-related financial damage</li>
+              <li>Connect with support groups for families (Gam-Anon)</li>
+              <li>Consult with professionals about intervention planning</li>
+              <li>Take care of your own mental health and wellbeing</li>
+            </ul>
+          </div>
+
+          <div class="strategy-card dont">
+            <div class="card-header">
+              <Icon name="lucide:x-circle" />
+              <h3>What NOT to Do</h3>
+            </div>
+            <ul>
+              <li>Pay off gambling debts to "help them get a fresh start"</li>
+              <li>Give them money for "emergencies" without verification</li>
+              <li>Make excuses for their behavior to others</li>
+              <li>Take over all their responsibilities permanently</li>
+              <li>Give ultimatums without support systems in place</li>
+              <li>Engage in screaming matches about gambling</li>
+              <li>Threaten consequences you won't actually enforce</li>
+              <li>Isolate them completely from family communication</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Financial Protection Section -->
+      <section class="financial-protection">
+        <h2>Protect Your Family's Finances</h2>
+        <p class="section-intro">
+          Taking immediate financial protective steps is crucial. These are not punitive measures - 
+          they're necessary safeguards for your family's security.
+        </p>
+        
+        <div class="protection-steps">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Secure Accounts</h3>
+            <p>Require both signatures for withdrawals over $100. Remove their name from credit cards and lines of credit they could access without your permission.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Monitor Credit</h3>
+            <p>Check all three credit bureaus monthly. Set up alerts for new credit inquiries or account openings. Consider freezing credit if necessary.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Create Emergency Funds</h3>
+            <p>Establish accounts in your name only for emergencies. Ensure you have independent access to funds if needed.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Document Everything</h3>
+            <p>Keep detailed records of all gambling-related financial damage. This documentation may be crucial for legal or treatment purposes.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">5</div>
+            <h3>Get Professional Advice</h3>
+            <p>Consult with a financial advisor familiar with gambling addiction. They can help assess damage and create protection strategies.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">6</div>
+            <h3>Consider Legal Separation</h3>
+            <p>In severe cases, legal separation of finances may be necessary to protect family assets from further gambling losses.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Support Resources for Families -->
+      <section class="family-resources">
+        <h2>Support Resources for Families</h2>
+        <div class="resources-grid">
+          
+          <div class="resource-card">
+            <div class="resource-icon">
+              <Icon name="lucide:users" />
+            </div>
+            <h3>Gam-Anon Support Groups</h3>
+            <p>Support groups specifically for families affected by gambling addiction. Connect with others who understand what you're going through.</p>
+            <div class="resource-contact">
+              <strong>Website:</strong> <a href="https://www.gam-anon.org" target="_blank">gam-anon.org</a><br>
+              <strong>Phone:</strong> <a href="tel:1-718-352-1671">1-718-352-1671</a>
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="resource-icon">
+              <Icon name="lucide:phone-call" />
+            </div>
+            <h3>National Helpline</h3>
+            <p>24/7 support for families affected by gambling problems. Trained counselors can provide guidance and local referrals.</p>
+            <div class="resource-contact">
+              <strong>Helpline:</strong> <a href="tel:1-800-522-4700">1-800-522-4700</a><br>
+              <strong>Text:</strong> Text HOME to 741741
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="resource-icon">
+              <Icon name="lucide:heart-handshake" />
+            </div>
+            <h3>Individual Counseling</h3>
+            <p>Professional therapy to help you process the trauma and stress of loving someone with a gambling addiction.</p>
+            <div class="resource-contact">
+              <strong>Find Therapists:</strong> Use our <a href="/safe-gaming-center/get-support">resource finder</a><br>
+              <strong>Insurance:</strong> Many plans cover mental health services
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="resource-icon">
+              <Icon name="lucide:scale" />
+            </div>
+            <h3>Legal Resources</h3>
+            <p>Attorneys familiar with gambling addiction cases can help protect your assets and understand your legal options.</p>
+            <div class="resource-contact">
+              <strong>Consultation:</strong> Seek attorneys experienced with gambling debt<br>
+              <strong>Documentation:</strong> Keep records of all gambling-related losses
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recovery Information -->
+      <section class="recovery-info">
+        <h2>Understanding the Recovery Process</h2>
+        <div class="recovery-content">
+          <div class="recovery-timeline">
+            <h3>What Recovery Looks Like</h3>
+            <div class="timeline-phases">
+              <div class="phase">
+                <strong>Early Recovery (0-3 months):</strong>
+                <p>Acknowledging the problem, attending counseling, financial transparency, mood swings (normal withdrawal), intense cravings.</p>
+              </div>
+              <div class="phase">
+                <strong>Middle Recovery (3-12 months):</strong>
+                <p>Developing healthy coping strategies, rebuilding trust through actions, possible slips (common, not failure), emotional stability returns.</p>
+              </div>
+              <div class="phase">
+                <strong>Long-term Recovery (1+ years):</strong>
+                <p>Sustained abstinence, rebuilt financial habits, restored family relationships, healthy life balance, helping others.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="recovery-expectations">
+            <h3>Realistic Expectations</h3>
+            <ul>
+              <li>Recovery is not linear - expect setbacks and difficult days</li>
+              <li>Trust rebuilding takes time, often years of consistent actions</li>
+              <li>Financial recovery may take even longer than emotional recovery</li>
+              <li>Professional help is usually necessary for lasting change</li>
+              <li>Your role is support without enabling - maintain boundaries</li>
+              <li>Celebrate small victories and maintain your own support system</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Crisis Planning -->
+      <section class="crisis-planning">
+        <div class="crisis-alert">
+          <Icon name="lucide:alert-triangle" />
+          <div class="crisis-content">
+            <h2>When to Consider Separation</h2>
+            <p>Consider immediate separation if there are:</p>
+            <ul>
+              <li>Threats of violence toward you or children</li>
+              <li>Evidence of illegal activity to fund gambling</li>
+              <li>Suicidal threats or self-harm behaviors</li>
+              <li>Complete financial destruction with no willingness to get help</li>
+              <li>Children being harmed emotionally or financially</li>
+            </ul>
+            <div class="crisis-actions">
+              <a href="tel:911" class="emergency-button">Call 911</a>
+              <a href="tel:988" class="emergency-button">Call 988 (Crisis Line)</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation to Other Sections -->
+      <section class="related-sections">
+        <h2>More Safe Gaming Resources</h2>
+        <div class="sections-grid">
+          <a href="/safe-gaming-center/roulette-risks" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:brain" />
+            </div>
+            <h3>Understanding Roulette Risks</h3>
+            <p>Learn about roulette-specific psychological patterns and risk factors.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/safety-tools" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:shield-check" />
+            </div>
+            <h3>Personal Safety Tools</h3>
+            <p>Self-assessment and tools for the person with gambling problems.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/get-support" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:users" />
+            </div>
+            <h3>Get Professional Support</h3>
+            <p>Find counselors, crisis support, and treatment resources.</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style lang="scss">
+  .family-support-page {
+    padding: var(--space-xl) 0;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-m);
+    }
+  }
+
+  .breadcrumb {
+    margin-bottom: var(--space-l);
+    
+    ol {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: var(--space-s);
+      font-size: var(--font-size--1);
+      
+      li {
+        display: flex;
+        align-items: center;
+        
+        &:not(:last-child)::after {
+          content: '›';
+          margin-left: var(--space-s);
+          color: var(--color-neutral-500);
+        }
+        
+        a {
+          color: var(--color-primary-500);
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        
+        &[aria-current="page"] {
+          color: var(--color-neutral-600);
+        }
+      }
+    }
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    
+    .header-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto var(--space-l);
+      background: #fef7ed;
+      border-radius: var(--radius-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ea580c;
+      
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    
+    h1 {
+      font-size: var(--font-size-5);
+      color: var(--foreground-color);
+      margin-bottom: var(--space-m);
+    }
+    
+    .header-description {
+      font-size: var(--font-size-1);
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .warning-signs {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-m);
+      color: var(--foreground-color);
+    }
+    
+    .section-intro {
+      text-align: center;
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto var(--space-xl);
+      line-height: 1.6;
+    }
+    
+    .signs-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .signs-category {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      
+      .category-icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+        
+        &.financial {
+          background: #fef3c7;
+          color: #d97706;
+        }
+        
+        &.behavioral {
+          background: var(--color-primary-100);
+          color: var(--color-primary-500);
+        }
+        
+        &.emotional {
+          background: #fecaca;
+          color: #dc2626;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-2);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-m);
+      }
+      
+      .signs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          position: relative;
+          padding-left: var(--space-m);
+          margin-bottom: var(--space-s);
+          color: var(--color-neutral-700);
+          line-height: 1.6;
+          
+          &::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            font-size: var(--font-size--1);
+          }
+        }
+      }
+    }
+  }
+
+  .how-to-help {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .help-strategies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .strategy-card {
+      background: var(--background-color);
+      border: 2px solid;
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      
+      &.do {
+        border-color: #10b981;
+        
+        .card-header {
+          color: #059669;
+          
+          svg {
+            color: #10b981;
+          }
+        }
+      }
+      
+      &.dont {
+        border-color: #ef4444;
+        
+        .card-header {
+          color: #dc2626;
+          
+          svg {
+            color: #ef4444;
+          }
+        }
+      }
+      
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+        
+        h3 {
+          font-size: var(--font-size-2);
+          margin: 0;
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          position: relative;
+          padding-left: var(--space-m);
+          margin-bottom: var(--space-s);
+          color: var(--color-neutral-700);
+          line-height: 1.6;
+        }
+      }
+      
+      &.do ul li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: bold;
+      }
+      
+      &.dont ul li::before {
+        content: '✗';
+        position: absolute;
+        left: 0;
+        color: #ef4444;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .financial-protection {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-m);
+      color: var(--foreground-color);
+    }
+    
+    .section-intro {
+      text-align: center;
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto var(--space-xl);
+      line-height: 1.6;
+    }
+    
+    .protection-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .step-card {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      text-align: center;
+      
+      .step-number {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-primary-500);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: var(--font-size-1);
+        margin: 0 auto var(--space-m);
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+
+  .family-resources {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .resource-card {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      
+      .resource-icon {
+        width: 3rem;
+        height: 3rem;
+        background: #fef7ed;
+        color: #ea580c;
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin-bottom: var(--space-m);
+      }
+      
+      .resource-contact {
+        padding: var(--space-s);
+        background: var(--color-neutral-100);
+        border-radius: var(--radius-s);
+        font-size: var(--font-size--1);
+        line-height: 1.5;
+        
+        a {
+          color: var(--color-primary-500);
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .recovery-info {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .recovery-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .recovery-timeline,
+    .recovery-expectations {
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      
+      h3 {
+        color: var(--foreground-color);
+        margin-bottom: var(--space-m);
+      }
+      
+      .timeline-phases {
+        .phase {
+          margin-bottom: var(--space-m);
+          
+          strong {
+            display: block;
+            color: var(--color-primary-500);
+            margin-bottom: var(--space-xs);
+          }
+          
+          p {
+            color: var(--color-neutral-700);
+            line-height: 1.6;
+            margin: 0;
+          }
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          position: relative;
+          padding-left: var(--space-m);
+          margin-bottom: var(--space-s);
+          color: var(--color-neutral-700);
+          line-height: 1.6;
+          
+          &::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary-500);
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .crisis-planning {
+    margin-bottom: var(--space-3xl);
+    
+    .crisis-alert {
+      background: linear-gradient(135deg, #fecaca, #fed7d7);
+      border: 2px solid #f87171;
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      display: flex;
+      gap: var(--space-m);
+      align-items: flex-start;
+      
+      > svg {
+        width: 2rem;
+        height: 2rem;
+        color: #dc2626;
+        flex-shrink: 0;
+        margin-top: var(--space-xs);
+      }
+      
+      .crisis-content {
+        flex: 1;
+        
+        h2 {
+          color: #991b1b;
+          margin-bottom: var(--space-m);
+        }
+        
+        p {
+          color: #7f1d1d;
+          margin-bottom: var(--space-s);
+        }
+        
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 var(--space-m) 0;
+          
+          li {
+            position: relative;
+            padding-left: var(--space-m);
+            margin-bottom: var(--space-xs);
+            color: #7f1d1d;
+            
+            &::before {
+              content: '⚠️';
+              position: absolute;
+              left: 0;
+            }
+          }
+        }
+        
+        .crisis-actions {
+          display: flex;
+          gap: var(--space-s);
+          
+          .emergency-button {
+            padding: var(--space-s) var(--space-m);
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-s);
+            font-weight: 700;
+            transition: all var(--animation-speed-fast);
+            
+            &:hover {
+              background: #b91c1c;
+              transform: translateY(-1px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .related-sections {
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .sections-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-l);
+    }
+    
+    .section-card {
+      display: block;
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      text-decoration: none;
+      transition: all var(--animation-speed-fast) var(--cubic-bezier);
+      
+      &:hover {
+        border-color: var(--color-primary-300);
+        transform: translateY(-2px);
+        box-shadow: var(--elevation-2);
+      }
+      
+      .section-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-primary-100);
+        color: var(--color-primary-500);
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+
+  // Dark mode adjustments
+  .darkmode {
+    .page-header .header-icon {
+      background: #7c2d12;
+      color: #fed7aa;
+    }
+    
+    .signs-category,
+    .strategy-card,
+    .step-card,
+    .resource-card,
+    .recovery-timeline,
+    .recovery-expectations,
+    .section-card {
+      background: var(--color-neutral-800);
+      border-color: var(--color-neutral-700);
+      
+      &:hover {
+        border-color: var(--color-primary-400);
+      }
+    }
+    
+    .resource-contact {
+      background: var(--color-neutral-700);
+    }
+    
+    .crisis-alert {
+      background: linear-gradient(135deg, #7f1d1d, #991b1b);
+      border-color: #dc2626;
+    }
+  }
+</style>

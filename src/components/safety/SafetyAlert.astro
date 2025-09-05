@@ -1,0 +1,308 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  variant?: 'educational-tip' | 'self-check-reminder' | 'crisis-support'
+  title: string
+  message: string
+  actionText?: string
+  actionUrl?: string
+  persistent?: boolean
+  dismissible?: boolean
+}
+
+const { 
+  variant = 'educational-tip',
+  title,
+  message,
+  actionText,
+  actionUrl,
+  persistent = false,
+  dismissible = true 
+} = Astro.props
+
+// Map variants to appropriate icons
+const variantIcons = {
+  'educational-tip': 'lucide:lightbulb',
+  'self-check-reminder': 'lucide:clock',
+  'crisis-support': 'lucide:phone-call'
+}
+
+const alertId = `safety-alert-${Math.random().toString(36).substring(2, 15)}`
+---
+
+<div 
+  class={`safety-alert ${variant} ${persistent ? 'persistent' : ''}`}
+  id={alertId}
+  role={variant === 'crisis-support' ? 'alert' : 'status'}
+  aria-live={variant === 'crisis-support' ? 'assertive' : 'polite'}
+>
+  <div class="safety-alert-content">
+    <div class="alert-icon" aria-hidden="true">
+      <Icon name={variantIcons[variant]} />
+    </div>
+    
+    <div class="alert-text">
+      <h3 class="alert-title">{title}</h3>
+      <p class="alert-message">{message}</p>
+      
+      {actionText && actionUrl && (
+        <a 
+          href={actionUrl} 
+          class="button safety-action"
+          aria-label={`${actionText} - ${title}`}
+        >
+          {actionText}
+          <Icon name="lucide:arrow-right" aria-hidden="true" />
+        </a>
+      )}
+    </div>
+    
+    {dismissible && !persistent && (
+      <button 
+        class="dismiss-button"
+        aria-label={`Dismiss ${title} alert`}
+        onclick={`document.getElementById('${alertId}').style.display = 'none'`}
+      >
+        <Icon name="lucide:x" aria-hidden="true" />
+      </button>
+    )}
+  </div>
+</div>
+
+<style lang="scss">
+  .safety-alert {
+    border-radius: var(--radius-m);
+    padding: var(--space-m);
+    margin-bottom: var(--space-m);
+    border: 2px solid;
+    position: relative;
+    
+    &.educational-tip {
+      background-color: var(--color-secondary-100);
+      border-color: var(--color-secondary-300);
+      color: var(--color-neutral-800);
+      
+      .alert-icon {
+        color: var(--color-secondary-500);
+        background-color: var(--color-secondary-200);
+      }
+    }
+    
+    &.self-check-reminder {
+      background-color: var(--color-primary-100);
+      border-color: var(--color-primary-300);
+      color: var(--color-neutral-800);
+      
+      .alert-icon {
+        color: var(--color-primary-500);
+        background-color: var(--color-primary-200);
+      }
+    }
+    
+    &.crisis-support {
+      background-color: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
+      
+      .alert-icon {
+        color: #dc2626;
+        background-color: #fee2e2;
+      }
+      
+      .safety-action {
+        background-color: #dc2626;
+        color: white;
+        border-color: #dc2626;
+        
+        &:hover {
+          background-color: #b91c1c;
+          border-color: #b91c1c;
+          transform: translateY(-1px);
+        }
+      }
+    }
+    
+    &.persistent {
+      box-shadow: var(--elevation-3);
+      z-index: var(--z-index-3);
+    }
+  }
+
+  .safety-alert-content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+
+  .alert-icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-m);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-xs);
+    
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .alert-text {
+    flex: 1;
+    min-width: 0;
+    
+    .alert-title {
+      font-size: var(--font-size-1);
+      font-weight: 700;
+      margin: 0 0 var(--space-xs) 0;
+      line-height: 1.3;
+    }
+    
+    .alert-message {
+      font-size: var(--font-size-0);
+      line-height: 1.5;
+      margin: 0 0 var(--space-m) 0;
+    }
+    
+    .safety-action {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--font-size--1);
+      padding: var(--space-xs) var(--space-s);
+      
+      svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        transition: transform var(--animation-speed-fast) var(--cubic-bezier);
+      }
+      
+      &:hover svg {
+        transform: translateX(2px);
+      }
+    }
+  }
+
+  .dismiss-button {
+    position: absolute;
+    top: var(--space-s);
+    right: var(--space-s);
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--radius-s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    color: var(--color-neutral-600);
+    
+    &:hover {
+      background-color: var(--color-neutral-300);
+      color: var(--color-neutral-800);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-400);
+      outline-offset: 2px;
+    }
+    
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  // Dark mode adjustments
+  .darkmode {
+    .safety-alert {
+      &.educational-tip {
+        background-color: var(--color-secondary-900);
+        border-color: var(--color-secondary-600);
+        color: var(--color-neutral-200);
+        
+        .alert-icon {
+          background-color: var(--color-secondary-800);
+        }
+      }
+      
+      &.self-check-reminder {
+        background-color: var(--color-primary-900);
+        border-color: var(--color-primary-600);
+        color: var(--color-neutral-200);
+        
+        .alert-icon {
+          background-color: var(--color-primary-800);
+        }
+      }
+      
+      &.crisis-support {
+        background-color: #450a0a;
+        border-color: #dc2626;
+        color: #fecaca;
+        
+        .alert-icon {
+          background-color: #7f1d1d;
+        }
+      }
+    }
+    
+    .dismiss-button {
+      color: var(--color-neutral-400);
+      
+      &:hover {
+        background-color: var(--color-neutral-700);
+        color: var(--color-neutral-200);
+      }
+    }
+  }
+
+  // Enhanced accessibility for crisis mode
+  .crisis-support {
+    .safety-action {
+      min-height: var(--target-size-max);
+      padding: var(--space-s) var(--space-m);
+      font-weight: 700;
+    }
+    
+    .dismiss-button {
+      min-height: var(--target-size-max);
+      min-width: var(--target-size-max);
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .safety-alert-content {
+      gap: var(--space-s);
+    }
+    
+    .alert-icon {
+      width: 2rem;
+      height: 2rem;
+      margin-top: 0;
+    }
+    
+    .alert-text {
+      .alert-title {
+        font-size: var(--font-size-0);
+      }
+      
+      .alert-message {
+        font-size: var(--font-size--1);
+      }
+    }
+    
+    .crisis-support .safety-action {
+      width: 100%;
+      justify-content: center;
+      margin-top: var(--space-s);
+    }
+  }
+</style>

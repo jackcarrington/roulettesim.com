@@ -1,0 +1,15 @@
+# <!-- Powered by BMAD™ Core -->
+bundle:
+  name: Team Content Strategy
+  icon: 📝
+  description: Specialized team for content marketing, SEO strategy, topical mapping, and casino/gambling content development. Perfect for roulette simulator sites and casino affiliate projects.
+agents:
+  - bmad-orchestrator
+  - topical-map          # Ronald - Semantic SEO & Topical Maps
+  - analyst              # Research and competitive analysis
+  - ux-expert           # Content UX and user journey optimization
+  - pm                  # Content calendar and project management
+workflows:
+  - content-strategy.yaml
+  - seo-optimization.yaml
+  - casino-content.yaml

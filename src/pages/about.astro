@@ -1,0 +1,209 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import Feature from '@components/Feature.astro'
+import { Icon } from 'astro-icon/components'
+
+const title = 'About RouletteSim - Educational Roulette Platform | Roulettesim.com'
+const description = 'Learn about RouletteSim.com\'s mission to provide authentic roulette education through professional simulators and expert strategies.'
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RouletteSim",
+  "url": "https://roulettesim.com",
+  "description": "Educational roulette platform providing authentic casino game practice and expert strategies",
+  "foundingDate": "2024",
+  "sameAs": [
+    "https://roulettesim.com"
+  ],
+  "mainEntityOfPage": "https://roulettesim.com/about"
+}
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/about"
+    openGraph={{
+      title: 'About RouletteSim - Educational Roulette Platform',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+    schema={aboutSchema}
+  />
+  
+  <!-- Hero Section -->
+  <section class="hero my-24">
+    <div class="container">
+      <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+        <div class="flex flex-col items-center gap-8 md:items-start">
+          <h1 class="text-center text-6xl md:text-left lg:text-8xl">
+            About <span class="text-gradient">RouletteSim</span>
+          </h1>
+          <p class="text-xl text-center md:text-left max-w-2xl" style="color: var(--foreground-color);">
+            We're dedicated to providing authentic roulette education through professional simulators and expert strategies. Our mission is to make learning roulette accessible, engaging, and genuinely valuable for players of all levels.
+          </p>
+        </div>
+        <div class="hidden lg:flex justify-center items-center">
+          <div class="w-96 h-96 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary-100), var(--color-secondary-100));">
+            <Icon name="lucide:graduation-cap" class="w-48 h-48" style="color: var(--color-primary-400);" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Values Section -->
+  <section class="my-16 py-16" style="background-color: var(--color-neutral-200);">
+    <div class="container">
+      <h2 class="mb-12 text-4xl font-bold text-center">Our Mission</h2>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <Feature icon="lucide:book-open" title="Educational Excellence">
+          We believe learning should be comprehensive and accessible. Our platform combines authentic gameplay with expert educational content to provide the most complete roulette learning experience available.
+        </Feature>
+        <Feature icon="lucide:shield-check" title="Authentic Experience">
+          Practice with real casino mechanics using games from top providers like Evolution Gaming, NetEnt, and Playtech. No simplified simulations - just authentic roulette gameplay.
+        </Feature>
+        <Feature icon="lucide:users" title="Accessible Design">
+          Built with WCAG AA compliance and accessibility-first principles. Everyone deserves access to quality roulette education, regardless of ability or experience level.
+        </Feature>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise & Credibility Section -->
+  <section class="my-16">
+    <div class="container">
+      <h2 class="mb-12 text-4xl font-bold text-center">Why Trust RouletteSim</h2>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="p-6 rounded-lg shadow-sm border" style="background-color: var(--background-color); border-color: var(--border-color-subtle);">
+          <div class="mb-4">
+            <Icon name="lucide:handshake" class="w-12 h-12 text-blue-600 mb-3" />
+            <h3 class="text-xl font-semibold mb-2">Industry Partnerships</h3>
+          </div>
+          <p style="color: var(--foreground-color);">
+            Integrated with leading game providers including Evolution Gaming, NetEnt, and Playtech to deliver authentic casino experiences.
+          </p>
+        </div>
+        
+        <div class="p-6 rounded-lg shadow-sm border" style="background-color: var(--background-color); border-color: var(--border-color-subtle);">
+          <div class="mb-4">
+            <Icon name="lucide:brain" class="w-12 h-12 text-cyan-600 mb-3" />
+            <h3 class="text-xl font-semibold mb-2">Expert Methodology</h3>
+          </div>
+          <p style="color: var(--foreground-color);">
+            Our educational approach is based on proven learning principles, combining theoretical knowledge with practical application in a risk-free environment.
+          </p>
+        </div>
+        
+        <div class="p-6 rounded-lg shadow-sm border" style="background-color: var(--background-color); border-color: var(--border-color-subtle);">
+          <div class="mb-4">
+            <Icon name="lucide:heart-handshake" class="w-12 h-12 text-blue-600 mb-3" />
+            <h3 class="text-xl font-semibold mb-2">Responsible Gaming</h3>
+          </div>
+          <p style="color: var(--foreground-color);">
+            We prioritize education over gambling, promoting responsible gaming practices and helping players understand the mathematics behind roulette.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology & Approach Section -->
+  <section class="my-16 py-16" style="background-color: var(--color-neutral-200);">
+    <div class="container">
+      <h2 class="mb-12 text-4xl font-bold text-center">How We Build Authentic Experiences</h2>
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+          <div>
+            <div class="mb-6">
+              <Icon name="lucide:zap" class="w-12 h-12 text-blue-600 mb-3" />
+              <h3 class="text-2xl font-semibold mb-3">Real Game Integration</h3>
+            </div>
+            <p class="mb-4" style="color: var(--foreground-color);">
+              Our platform integrates with the SlotsLaunch API to provide access to authentic casino games. This means you're practicing with the same mechanics and interfaces used in real casinos.
+            </p>
+            <p style="color: var(--foreground-color);">
+              No simplified animations or fake gameplay - just genuine roulette experiences that prepare you for the real thing.
+            </p>
+          </div>
+          
+          <div>
+            <div class="mb-6">
+              <Icon name="lucide:shield" class="w-12 h-12 text-cyan-600 mb-3" />
+              <h3 class="text-2xl font-semibold mb-3">Privacy-First Analytics</h3>
+            </div>
+            <p class="mb-4" style="color: var(--foreground-color);">
+              We track your learning progress using privacy-first analytics that respect your data. All tracking is session-based and requires your explicit consent.
+            </p>
+            <p style="color: var(--foreground-color);">
+              No third-party trackers, no personal data sharing - just helpful insights to improve your learning experience.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+          <div class="mb-6">
+            <Icon name="lucide:accessibility" class="w-12 h-12 text-blue-600 mb-3 mx-auto" />
+            <h3 class="text-2xl font-semibold mb-3">Accessibility Standards</h3>
+          </div>
+          <p class="max-w-3xl mx-auto" style="color: var(--foreground-color);">
+            Built with WCAG AA compliance from the ground up. We use the Atkinson Hyperlegible font for improved readability, 
+            maintain proper contrast ratios, and ensure full keyboard navigation support. Quality roulette education should be accessible to everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section class="my-16">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-4xl font-bold mb-6">Ready to Master Roulette?</h2>
+        <p class="text-xl mb-8" style="color: var(--foreground-color);">
+          Start your roulette education journey today with authentic casino games and expert strategies. 
+          Practice risk-free and build confidence before playing with real money.
+        </p>
+        <div class="flex flex-col gap-3 min-[500px]:flex-row justify-center">
+          <a class="button has-icon" href="/games">
+            <Icon name="lucide:play" />
+            Start Playing
+          </a>
+          <a class="button has-icon color-secondary" href="/strategy">
+            <Icon name="lucide:book-open" />
+            Learn Strategies
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .text-gradient {
+    background: linear-gradient(
+      315deg,
+      light-dark(var(--color-primary-300), var(--color-secondary-100)) 25%,
+      light-dark(var(--color-secondary-300), var(--color-primary-200))
+    );
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 0.75rem;
+    }
+  }
+</style>

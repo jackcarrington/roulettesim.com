@@ -1,0 +1,14 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#00d1b7;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="url(#bg)" stroke="#b9bec4" stroke-width="2"/>
+  <circle cx="150" cy="100" r="60" fill="none" stroke="#1e40af" stroke-width="3"/>
+  <circle cx="150" cy="100" r="40" fill="none" stroke="#00d1b7" stroke-width="2"/>
+  <circle cx="150" cy="100" r="20" fill="none" stroke="#1e40af" stroke-width="2"/>
+  <circle cx="150" cy="100" r="6" fill="#1e40af"/>
+  <text x="150" y="170" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="14">Roulette Game</text>
+</svg>

@@ -1,0 +1,852 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import SEOHead from '@components/seo/SEOHead.astro'
+import SafetyAlert from '@components/safety/SafetyAlert.astro'
+import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
+
+// Get safety-related educational content
+const educationalContent = await getCollection('educational', ({ data }) => {
+  return data.category === 'risk-education' || 
+         (data.responsibleGambling && data.rouletteSpecific)
+})
+
+const title = 'Understanding Roulette Risks - Safe Gaming Center | Roulettesim.com'
+const description = 'Learn about the unique psychological risks of roulette, house edge psychology, betting fallacies, and warning signs of problematic gambling patterns.'
+
+const rouletteRisksSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Understanding Roulette Risks",
+  "description": "Educational resources about roulette-specific gambling risks and psychological patterns",
+  "url": "https://roulettesim.com/safe-gaming-center/roulette-risks",
+  "mainEntityOfPage": "https://roulettesim.com/safe-gaming-center/roulette-risks",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://roulettesim.com"
+      },
+      {
+        "@type": "ListItem", 
+        "position": 2,
+        "name": "Safe Gaming Center",
+        "item": "https://roulettesim.com/safe-gaming-center"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Understanding Roulette Risks",
+        "item": "https://roulettesim.com/safe-gaming-center/roulette-risks"
+      }
+    ]
+  }
+}
+---
+
+<DefaultLayout title={title} description={description}>
+  <SEOHead 
+    title={title}
+    description={description}
+    canonical="https://roulettesim.com/safe-gaming-center/roulette-risks"
+    openGraph={{
+      title: 'Understanding Roulette Risks - Educational Resources',
+      description,
+      image: 'https://roulettesim.com/social-preview-image.png',
+      type: 'website'
+    }}
+    schema={rouletteRisksSchema}
+  />
+
+  <div class="roulette-risks-page">
+    <div class="container">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/safe-gaming-center">Safe Gaming Center</a></li>
+          <li aria-current="page">Understanding Roulette Risks</li>
+        </ol>
+      </nav>
+
+      <!-- Page Header -->
+      <header class="page-header">
+        <div class="header-icon">
+          <Icon name="lucide:brain" aria-hidden="true" />
+        </div>
+        <h1>Understanding Roulette Risks</h1>
+        <p class="header-description">
+          Learn about the unique psychological patterns and risks specific to roulette gambling. 
+          Understanding these patterns is the first step toward maintaining healthy gambling habits.
+        </p>
+      </header>
+
+      <!-- Crisis Support Alert -->
+      <SafetyAlert
+        variant="crisis-support"
+        title="Need immediate help?"
+        message="If you're struggling with gambling urges or are in crisis, professional help is available 24/7."
+        actionText="Get Crisis Support"
+        actionUrl="/safe-gaming-center/get-support"
+        persistent={false}
+      />
+
+      <!-- Key Risk Categories -->
+      <section class="risk-categories">
+        <h2>Roulette-Specific Risk Patterns</h2>
+        <div class="categories-grid">
+          
+          <!-- House Edge Psychology -->
+          <article class="risk-category">
+            <div class="category-icon psychology">
+              <Icon name="lucide:brain" />
+            </div>
+            <h3>House Edge Psychology</h3>
+            <p>
+              Understanding why your brain ignores the mathematical certainty of the casino's advantage and how cognitive biases fuel continued play despite inevitable losses.
+            </p>
+            <div class="risk-level moderate">
+              <Icon name="lucide:alert-triangle" />
+              <span>Moderate Risk</span>
+            </div>
+            <ul class="key-points">
+              <li>American Roulette: 5.26% house edge on every bet</li>
+              <li>European Roulette: 2.70% house edge guaranteed</li>
+              <li>No betting system can overcome mathematical disadvantage</li>
+              <li>Cognitive biases make players ignore these facts</li>
+            </ul>
+          </article>
+
+          <!-- Betting Fallacies -->
+          <article class="risk-category">
+            <div class="category-icon fallacies">
+              <Icon name="lucide:zap" />
+            </div>
+            <h3>Common Betting Fallacies</h3>
+            <p>
+              The dangerous myths that cost roulette players millions annually, from "hot numbers" to "due" outcomes and dealer signature theories.
+            </p>
+            <div class="risk-level high">
+              <Icon name="lucide:alert-circle" />
+              <span>High Risk</span>
+            </div>
+            <ul class="key-points">
+              <li>"Hot" numbers are not more likely to hit again</li>
+              <li>Previous results don't affect future spins</li>
+              <li>Betting systems cannot guarantee profits</li>
+              <li>Pattern recognition fails in random events</li>
+            </ul>
+          </article>
+
+          <!-- Time Distortion -->
+          <article class="risk-category">
+            <div class="category-icon time">
+              <Icon name="lucide:clock" />
+            </div>
+            <h3>Time Distortion & Trance States</h3>
+            <p>
+              How roulette's hypnotic spinning wheel creates dissociative states that make players lose track of time, money, and rational decision-making.
+            </p>
+            <div class="risk-level high">
+              <Icon name="lucide:alert-circle" />
+              <span>High Risk</span>
+            </div>
+            <ul class="key-points">
+              <li>Spinning wheel induces trance-like states</li>
+              <li>73% of problem players report time distortion</li>
+              <li>Rhythm of spins prevents rational thinking</li>
+              <li>Dissociation from reality and consequences</li>
+            </ul>
+          </article>
+
+          <!-- Emotional Escalation -->
+          <article class="risk-category">
+            <div class="category-icon emotional">
+              <Icon name="lucide:trending-up" />
+            </div>
+            <h3>Emotional Escalation Cycles</h3>
+            <p>
+              The rapid emotional highs and lows created by roulette's 30-60 second betting cycles and how they prevent emotional processing and sound judgment.
+            </p>
+            <div class="risk-level high">
+              <Icon name="lucide:alert-circle" />
+              <span>High Risk</span>
+            </div>
+            <ul class="key-points">
+              <li>Rapid betting cycles prevent emotional processing</li>
+              <li>Win/loss emotional rollercoaster creates addiction</li>
+              <li>Chase losses with progressively larger bets</li>
+              <li>Desperation leads to dangerous financial decisions</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Educational Articles -->
+      <section class="educational-content">
+        <h2>In-Depth Educational Resources</h2>
+        <p class="section-intro">
+          Our expert-authored articles provide comprehensive analysis of roulette risks, 
+          based on peer-reviewed research and clinical experience treating gambling problems.
+        </p>
+        
+        <div class="articles-grid">
+          {educationalContent.map((article) => (
+            <article class="educational-article">
+              <div class="article-header">
+                <div class="article-meta">
+                  <span class="reading-time">
+                    <Icon name="lucide:clock" />
+                    {article.data.readingTime} min read
+                  </span>
+                  {article.data.rouletteSpecific && (
+                    <span class="roulette-specific">
+                      <Icon name="lucide:target" />
+                      Roulette Specific
+                    </span>
+                  )}
+                </div>
+                <h3>
+                  <a href={`/strategy/${article.slug}`}>
+                    {article.data.title}
+                  </a>
+                </h3>
+                <p class="article-description">{article.data.description}</p>
+              </div>
+              
+              <div class="author-credentials">
+                <Icon name="lucide:user-check" />
+                <div class="author-info">
+                  <strong>{article.data.authorCredentials.name}</strong>
+                  <span>{article.data.authorCredentials.title}</span>
+                </div>
+              </div>
+              
+              <div class="article-footer">
+                <div class="support-level {article.data.supportLevel}">
+                  <Icon name="lucide:shield" />
+                  <span>
+                    {article.data.supportLevel === 'educational' ? 'Educational' :
+                     article.data.supportLevel === 'moderate-concern' ? 'Moderate Concern' : 'Crisis Level'}
+                  </span>
+                </div>
+                
+                <a 
+                  href={`/strategy/${article.slug}`} 
+                  class="read-article-button button color-secondary"
+                  aria-label={`Read full article: ${article.data.title}`}
+                >
+                  Read Article
+                  <Icon name="lucide:arrow-right" />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Self-Assessment Promotion -->
+      <section class="assessment-promotion">
+        <div class="promotion-content">
+          <div class="promotion-icon">
+            <Icon name="lucide:clipboard-check" />
+          </div>
+          <div class="promotion-text">
+            <h3>Assess Your Roulette Risk Level</h3>
+            <p>
+              Take our comprehensive self-assessment designed specifically for roulette players. 
+              Get personalized insights and recommendations based on your responses.
+            </p>
+          </div>
+          <div class="promotion-actions">
+            <a href="/safe-gaming-center/safety-tools" class="button">
+              Take Self-Assessment
+              <Icon name="lucide:arrow-right" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigation to Other Sections -->
+      <section class="related-sections">
+        <h2>Explore More Safe Gaming Resources</h2>
+        <div class="sections-grid">
+          <a href="/safe-gaming-center/safety-tools" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:shield-check" />
+            </div>
+            <h3>Personal Safety Tools</h3>
+            <p>Access self-assessment quizzes, limit-setting tools, and personalized recommendations.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/get-support" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:users" />
+            </div>
+            <h3>Get Professional Support</h3>
+            <p>Connect with counselors, crisis support, and treatment resources.</p>
+          </a>
+          
+          <a href="/safe-gaming-center/family-support" class="section-card">
+            <div class="section-icon">
+              <Icon name="lucide:heart" />
+            </div>
+            <h3>Family Resources</h3>
+            <p>Help for family members concerned about a loved one's gambling.</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style lang="scss">
+  .roulette-risks-page {
+    padding: var(--space-xl) 0;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-m);
+    }
+  }
+
+  .breadcrumb {
+    margin-bottom: var(--space-l);
+    
+    ol {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: var(--space-s);
+      font-size: var(--font-size--1);
+      
+      li {
+        display: flex;
+        align-items: center;
+        
+        &:not(:last-child)::after {
+          content: '›';
+          margin-left: var(--space-s);
+          color: var(--color-neutral-500);
+        }
+        
+        a {
+          color: var(--color-primary-500);
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        
+        &[aria-current="page"] {
+          color: var(--color-neutral-600);
+        }
+      }
+    }
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    
+    .header-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto var(--space-l);
+      background: var(--color-primary-100);
+      border-radius: var(--radius-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-500);
+      
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    
+    h1 {
+      font-size: var(--font-size-5);
+      color: var(--foreground-color);
+      margin-bottom: var(--space-m);
+    }
+    
+    .header-description {
+      font-size: var(--font-size-1);
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .risk-categories {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .risk-category {
+    background: var(--background-color);
+    border: 2px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
+    padding: var(--space-l);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    
+    &:hover {
+      border-color: var(--color-primary-300);
+      transform: translateY(-2px);
+      box-shadow: var(--elevation-2);
+    }
+    
+    .category-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-m);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-m);
+      
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      
+      &.psychology {
+        background: var(--color-primary-100);
+        color: var(--color-primary-500);
+      }
+      
+      &.fallacies {
+        background: #fef3c7;
+        color: #f59e0b;
+      }
+      
+      &.time {
+        background: #f3e8ff;
+        color: #8b5cf6;
+      }
+      
+      &.emotional {
+        background: #fecaca;
+        color: #ef4444;
+      }
+    }
+    
+    h3 {
+      font-size: var(--font-size-2);
+      color: var(--foreground-color);
+      margin-bottom: var(--space-s);
+    }
+    
+    p {
+      color: var(--color-neutral-700);
+      line-height: 1.6;
+      margin-bottom: var(--space-m);
+    }
+    
+    .risk-level {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-s);
+      border-radius: var(--radius-s);
+      font-size: var(--font-size--1);
+      font-weight: 600;
+      margin-bottom: var(--space-m);
+      
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+      
+      &.moderate {
+        background: #fef3c7;
+        color: #f59e0b;
+      }
+      
+      &.high {
+        background: #fecaca;
+        color: #ef4444;
+      }
+    }
+    
+    .key-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        position: relative;
+        padding-left: var(--space-m);
+        margin-bottom: var(--space-xs);
+        color: var(--color-neutral-600);
+        font-size: var(--font-size--1);
+        line-height: 1.5;
+        
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: var(--color-primary-400);
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .educational-content {
+    margin-bottom: var(--space-3xl);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-m);
+      color: var(--foreground-color);
+    }
+    
+    .section-intro {
+      text-align: center;
+      color: var(--color-neutral-700);
+      max-width: 60ch;
+      margin: 0 auto var(--space-xl);
+      line-height: 1.6;
+    }
+    
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .educational-article {
+    background: var(--background-color);
+    border: 2px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
+    padding: var(--space-l);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+    
+    &:hover {
+      border-color: var(--color-primary-300);
+      transform: translateY(-2px);
+      box-shadow: var(--elevation-2);
+    }
+    
+    .article-header {
+      margin-bottom: var(--space-m);
+      
+      .article-meta {
+        display: flex;
+        gap: var(--space-s);
+        margin-bottom: var(--space-s);
+        
+        .reading-time,
+        .roulette-specific {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          padding: var(--space-5xs) var(--space-xs);
+          border-radius: var(--radius-s);
+          font-size: var(--font-size--2);
+          font-weight: 600;
+          
+          svg {
+            width: 0.875rem;
+            height: 0.875rem;
+          }
+        }
+        
+        .reading-time {
+          background: var(--color-neutral-200);
+          color: var(--color-neutral-600);
+        }
+        
+        .roulette-specific {
+          background: var(--color-secondary-200);
+          color: var(--color-secondary-800);
+        }
+      }
+      
+      h3 {
+        margin-bottom: var(--space-s);
+        
+        a {
+          color: var(--foreground-color);
+          text-decoration: none;
+          
+          &:hover {
+            color: var(--color-primary-500);
+          }
+        }
+      }
+      
+      .article-description {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+      }
+    }
+    
+    .author-credentials {
+      display: flex;
+      align-items: center;
+      gap: var(--space-s);
+      padding: var(--space-s);
+      background: var(--color-neutral-200);
+      border-radius: var(--radius-s);
+      margin-bottom: var(--space-m);
+      
+      svg {
+        width: 1rem;
+        height: 1rem;
+        color: var(--color-primary-500);
+        flex-shrink: 0;
+      }
+      
+      .author-info {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5xs);
+        
+        strong {
+          color: var(--foreground-color);
+          font-size: var(--font-size--1);
+        }
+        
+        span {
+          color: var(--color-neutral-600);
+          font-size: var(--font-size--2);
+        }
+      }
+    }
+    
+    .article-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .support-level {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs) var(--space-s);
+        border-radius: var(--radius-s);
+        font-size: var(--font-size--2);
+        font-weight: 600;
+        
+        svg {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+        
+        &.educational {
+          background: var(--color-primary-100);
+          color: var(--color-primary-700);
+        }
+        
+        &.moderate-concern {
+          background: #fef3c7;
+          color: #f59e0b;
+        }
+        
+        &.crisis {
+          background: #fecaca;
+          color: #ef4444;
+        }
+      }
+      
+      .read-article-button {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        font-size: var(--font-size--1);
+        padding: var(--space-xs) var(--space-s);
+        
+        svg {
+          width: 0.875rem;
+          height: 0.875rem;
+          transition: transform var(--animation-speed-fast) var(--cubic-bezier);
+        }
+        
+        &:hover svg {
+          transform: translateX(2px);
+        }
+      }
+    }
+  }
+
+  .assessment-promotion {
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-secondary-100));
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+    
+    .promotion-content {
+      display: flex;
+      align-items: center;
+      gap: var(--space-l);
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .promotion-icon {
+        width: 4rem;
+        height: 4rem;
+        background: var(--color-primary-500);
+        color: white;
+        border-radius: var(--radius-l);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        
+        svg {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+      
+      .promotion-text {
+        flex: 1;
+        
+        h3 {
+          font-size: var(--font-size-2);
+          color: var(--foreground-color);
+          margin-bottom: var(--space-s);
+        }
+        
+        p {
+          color: var(--color-neutral-700);
+          line-height: 1.6;
+          margin: 0;
+        }
+      }
+      
+      .promotion-actions {
+        .button {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-xs);
+          
+          svg {
+            width: 1rem;
+            height: 1rem;
+            transition: transform var(--animation-speed-fast) var(--cubic-bezier);
+          }
+          
+          &:hover svg {
+            transform: translateX(2px);
+          }
+        }
+      }
+    }
+  }
+
+  .related-sections {
+    h2 {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      color: var(--foreground-color);
+    }
+    
+    .sections-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-l);
+    }
+    
+    .section-card {
+      display: block;
+      background: var(--background-color);
+      border: 2px solid var(--border-color-subtle);
+      border-radius: var(--radius-l);
+      padding: var(--space-l);
+      text-decoration: none;
+      transition: all var(--animation-speed-fast) var(--cubic-bezier);
+      
+      &:hover {
+        border-color: var(--color-primary-300);
+        transform: translateY(-2px);
+        box-shadow: var(--elevation-2);
+      }
+      
+      .section-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-primary-100);
+        color: var(--color-primary-500);
+        border-radius: var(--radius-m);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-m);
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      h3 {
+        font-size: var(--font-size-1);
+        color: var(--foreground-color);
+        margin-bottom: var(--space-s);
+      }
+      
+      p {
+        color: var(--color-neutral-700);
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+  }
+
+  // Dark mode adjustments
+  .darkmode {
+    .risk-category,
+    .educational-article,
+    .section-card {
+      background: var(--color-neutral-800);
+      border-color: var(--color-neutral-700);
+      
+      &:hover {
+        border-color: var(--color-primary-400);
+      }
+    }
+    
+    .author-credentials {
+      background: var(--color-neutral-700);
+    }
+    
+    .assessment-promotion {
+      background: linear-gradient(135deg, var(--color-primary-900), var(--color-secondary-900));
+    }
+  }
+</style>
