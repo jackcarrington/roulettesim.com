@@ -27,6 +27,9 @@ const { loading = 'eager' }: Props = Astro.props
     color: var(--foreground-color);
     
     img {
+      // Default: no filter for light mode
+      filter: none;
+      
       // In dark mode, invert the logo colors to make it white
       @media (prefers-color-scheme: dark) {
         filter: invert(1) brightness(1);
@@ -35,6 +38,16 @@ const { loading = 'eager' }: Props = Astro.props
       // Also support the .darkmode class for manual dark mode toggle
       :global(.darkmode) & {
         filter: invert(1) brightness(1);
+      }
+      
+      // Ensure light mode works when explicitly set
+      @media (prefers-color-scheme: light) {
+        filter: none;
+      }
+      
+      // Also support light mode class if it exists
+      :global(.lightmode) & {
+        filter: none;
       }
     }
   }
