@@ -10,10 +10,14 @@
   NODE_VERSION = "20.18.1"
   NPM_FLAGS = "--legacy-peer-deps"
 
+# Use an Edge Function to manage CSP and strip stale headers set elsewhere
+[[edge_functions]]
+  function = "remove-stale-csp"
+  path = "/*"
+
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-src https://slotslaunch.com https://*.slotslaunch.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
