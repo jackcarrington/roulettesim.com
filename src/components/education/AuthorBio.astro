@@ -1,0 +1,241 @@
+---
+/**
+ * AuthorBio Component
+ * 
+ * Displays author credentials and bio information under post content
+ * Follows established design system patterns and shadcn-inspired structure
+ */
+
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  name: string;
+  title: string;
+  credentials: string[];
+  bio?: string;
+  avatar?: string;
+  className?: string;
+}
+
+const { 
+  name, 
+  title, 
+  credentials, 
+  bio,
+  avatar,
+  className = '' 
+} = Astro.props;
+
+// Generate initials for fallback avatar
+const initials = name
+  .split(' ')
+  .map(word => word.charAt(0))
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<div class={`author-bio ${className}`}>
+  <div class="author-bio__avatar">
+    {avatar ? (
+      <img 
+        src={avatar} 
+        alt={`${name} avatar`}
+        class="author-bio__avatar-image"
+      />
+    ) : (
+      <div class="author-bio__avatar-fallback" aria-label={`${name} avatar`}>
+        {initials}
+      </div>
+    )}
+  </div>
+  
+  <div class="author-bio__content">
+    <div class="author-bio__header">
+      <h4 class="author-bio__name">{name}</h4>
+      <p class="author-bio__title">{title}</p>
+    </div>
+    
+    {bio && (
+      <p class="author-bio__description">{bio}</p>
+    )}
+    
+    <div class="author-bio__credentials">
+      <div class="author-bio__credentials-header">
+        <Icon name="lucide:shield-check" />
+        <span>Credentials</span>
+      </div>
+      <ul class="author-bio__credentials-list">
+        {credentials.map((credential) => (
+          <li class="author-bio__credential-item">
+            <Icon name="lucide:check" />
+            <span>{credential}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .author-bio {
+    background: var(--background-color);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-l);
+    padding: var(--space-l);
+    margin-top: var(--space-2xl);
+    display: flex;
+    gap: var(--space-l);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+  }
+  
+  .author-bio:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: var(--elevation-1);
+  }
+  
+  /* Avatar Section */
+  .author-bio__avatar {
+    flex-shrink: 0;
+  }
+  
+  .author-bio__avatar-image,
+  .author-bio__avatar-fallback {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-l);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .author-bio__avatar-image {
+    object-fit: cover;
+    border: 2px solid var(--color-primary-200);
+  }
+  
+  .author-bio__avatar-fallback {
+    background: linear-gradient(135deg, var(--color-primary-200), var(--color-secondary-200));
+    color: var(--color-primary-500);
+    font-weight: 700;
+    font-size: var(--font-size-1);
+    border: 2px solid var(--color-primary-200);
+  }
+  
+  /* Content Section */
+  .author-bio__content {
+    flex-grow: 1;
+    min-width: 0; /* Prevent flex item overflow */
+  }
+  
+  .author-bio__header {
+    margin-bottom: var(--space-s);
+  }
+  
+  .author-bio__name {
+    font-size: var(--font-size-2);
+    font-weight: 700;
+    color: var(--foreground-color);
+    margin: 0 0 var(--space-2xs) 0;
+    line-height: 1.2;
+  }
+  
+  .author-bio__title {
+    color: var(--color-primary-500);
+    font-size: var(--font-size-0);
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .author-bio__description {
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    font-size: var(--font-size-0);
+    margin: var(--space-s) 0;
+  }
+  
+  /* Credentials Section */
+  .author-bio__credentials {
+    margin-top: var(--space-m);
+  }
+  
+  .author-bio__credentials-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-secondary-500);
+    font-weight: 600;
+    font-size: var(--font-size--1);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+  
+  .author-bio__credentials-header svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .author-bio__credentials-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+  
+  .author-bio__credential-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+    color: var(--color-neutral-700);
+    font-size: var(--font-size--1);
+    line-height: 1.5;
+  }
+  
+  .author-bio__credential-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-secondary-400);
+    margin-top: 2px; /* Align with text baseline */
+    flex-shrink: 0;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 640px) {
+    .author-bio {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-m);
+      padding: var(--space-m);
+    }
+    
+    .author-bio__avatar-image,
+    .author-bio__avatar-fallback {
+      width: 64px;
+      height: 64px;
+    }
+    
+    .author-bio__name {
+      font-size: var(--font-size-1);
+    }
+    
+    .author-bio__credentials-list {
+      align-items: center;
+    }
+    
+    .author-bio__credential-item {
+      justify-content: center;
+    }
+  }
+  
+  /* Dark mode adjustments */
+  @media (prefers-color-scheme: dark) {
+    .author-bio__description,
+    .author-bio__credential-item {
+      color: var(--color-neutral-300);
+    }
+  }
+</style>

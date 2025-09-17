@@ -7,15 +7,21 @@ import icon from 'astro-icon'
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath } from 'url'
 
+import netlify from '@astrojs/netlify/functions';
+
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
   site: 'https://roulettesim.com',
-  output: 'static',
+  output: 'server',
+  adapter: netlify({}),
+
   server: {
     port: 4321
   },
+
   integrations: [mdx(), react(), sitemap(), icon(), compress()],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -42,4 +48,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: netlify(),
 })

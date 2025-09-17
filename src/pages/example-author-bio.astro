@@ -1,0 +1,127 @@
+---
+/**
+ * Example page showcasing the AuthorBio component
+ * This demonstrates how the component appears in context
+ */
+
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import AuthorBio from '@components/education/AuthorBio.astro';
+
+const pageTitle = "Author Bio Component Example";
+const pageDescription = "Example showcasing the AuthorBio component implementation";
+
+// Example author data (matching your content structure)
+const authorData = {
+  name: "James Carter",
+  title: "Senior Casino Game Analyst", 
+  credentials: [
+    "15+ years casino industry experience",
+    "Certified Gaming Professional", 
+    "Mathematics degree with focus on probability theory"
+  ],
+  bio: "James has dedicated his career to analyzing casino games and helping players understand the mathematics behind gaming. His expertise spans across all major casino games with a particular focus on roulette variants and probability theory."
+};
+---
+
+<DefaultLayout title={pageTitle} description={pageDescription}>
+  <main class="container">
+    <article class="content-article">
+      <header class="article-header">
+        <h1>Complete Roulette Rules Guide</h1>
+        <p class="article-lead">Master roulette with our comprehensive rules guide covering betting options, payouts, and gameplay for European, American, and French variants.</p>
+      </header>
+      
+      <div class="article-content">
+        <h2>Understanding the Basics</h2>
+        <p>Roulette is one of the most iconic casino games, combining elements of chance with strategic betting. The game revolves around a spinning wheel with numbered pockets and a betting layout where players can place various types of wagers.</p>
+        
+        <h3>The Roulette Wheel</h3>
+        <p>The standard European roulette wheel contains 37 pockets numbered 0 through 36. The American version includes an additional 00 pocket, bringing the total to 38. This seemingly small difference has a significant impact on the house edge and your winning probabilities.</p>
+        
+        <h3>Betting Options</h3>
+        <p>Roulette offers a wide variety of betting options, from simple color bets to complex corner and street wagers. Understanding these options and their corresponding payouts is essential for developing an effective playing strategy.</p>
+        
+        <p>The key to enjoying roulette is understanding that it's a game of pure chance. While betting systems and strategies can make the game more engaging, no system can overcome the built-in house edge.</p>
+      </div>
+      
+      <!-- Author Bio Component -->
+      <AuthorBio 
+        name={authorData.name}
+        title={authorData.title}
+        credentials={authorData.credentials}
+        bio={authorData.bio}
+      />
+    </article>
+  </main>
+</DefaultLayout>
+
+<style>
+  .container {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    padding: var(--space-m) var(--grid-gutter);
+  }
+  
+  .content-article {
+    max-width: 70ch;
+    margin: 0 auto;
+  }
+  
+  .article-header {
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+  }
+  
+  .article-header h1 {
+    font-size: var(--font-size-4);
+    font-weight: 700;
+    color: var(--foreground-color);
+    margin-bottom: var(--space-m);
+    line-height: 1.1;
+  }
+  
+  .article-lead {
+    font-size: var(--font-size-1);
+    color: var(--color-neutral-700);
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .article-content {
+    line-height: 1.7;
+    color: var(--foreground-color);
+  }
+  
+  .article-content h2 {
+    font-size: var(--font-size-2);
+    font-weight: 700;
+    color: var(--foreground-color);
+    margin: var(--space-xl) 0 var(--space-m) 0;
+  }
+  
+  .article-content h3 {
+    font-size: var(--font-size-1);
+    font-weight: 600;
+    color: var(--foreground-color);
+    margin: var(--space-l) 0 var(--space-s) 0;
+  }
+  
+  .article-content p {
+    margin-bottom: var(--space-m);
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: var(--space-s) var(--space-s);
+    }
+    
+    .article-header h1 {
+      font-size: var(--font-size-3);
+    }
+    
+    .article-lead {
+      font-size: var(--font-size-0);
+    }
+  }
+</style>
