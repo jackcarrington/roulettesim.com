@@ -5,9 +5,10 @@ import Feature from '@components/Feature.astro'
 import GameGridPro from '@components/game/GameGridPro.tsx'
 import SEOHead from '@components/seo/SEOHead.astro'
 import { api } from '../services/apiClient.ts';
+import type { RouletteGame } from '../types/game.ts';
 
-let games = [];
-let error = null;
+let games: RouletteGame[] = [];
+let error: string | null = null;
 
 try {
   games = await api.getRouletteGames();

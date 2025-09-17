@@ -11,6 +11,7 @@ export interface CasinoRecommendation {
     reputation: number;
   };
   matchingScore: number;
+  conversionPriority: number; // Priority for conversion optimization (1-5, lower = higher priority)
   affiliateUrl: string;
   geographicAvailability: string[];
   conversionData: {

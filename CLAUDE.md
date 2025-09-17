@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🚨 CRITICAL FOR DEVELOPMENT AGENTS: 
+**BEFORE ANY CODING WORK:** You MUST read the agent development briefing document at `.bmad-core/data/agent-dev-briefing.md` and acknowledge understanding. This ensures you follow established CSS variables, component patterns, and MCP research requirements. **NO EXCEPTIONS.**
+
 ## Project Overview
 
 This is **roulettesim.com** - an educational roulette platform that integrates with the SlotsLaunch API to provide authentic casino game practice. The platform serves educational content about roulette variants, game discovery, and includes embedded game iframes with analytics tracking and casino recommendations.
@@ -15,6 +18,19 @@ This is **roulettesim.com** - an educational roulette platform that integrates w
 - **API Integration**: SlotsLaunch API for live game data via iframe embedding
 - **Analytics**: Custom privacy-compliant session tracking with localStorage
 - **Testing**: Vitest unit tests, Playwright e2e tests, Axe accessibility tests
+
+### React Integration & SSR
+- **Setup**: React integration via `@astrojs/react` (add with `npx astro add react`)
+- **Default Behavior**: React components render to static HTML on server
+- **Hydration**: Use client directives for interactivity:
+  - `client:load` - Immediate hydration (high priority)
+  - `client:idle` - Hydrate when page loads (medium priority)
+  - `client:visible` - Hydrate when in viewport (low priority)
+  - `client:media={QUERY}` - Conditional based on media query
+  - `client:only="react"` - Client-only rendering (skip SSR)
+- **Props**: Only serializable data (string, number, Array, Object, Date, etc.)
+- **Children**: Pass via standard React patterns or Astro named slots
+- **Islands Architecture**: React components are isolated "islands" - can't import .astro components inside them
 
 ### Directory Structure
 ```

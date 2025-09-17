@@ -3,7 +3,7 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import SocialShares from '@components/SocialShares.astro'
 import SEOHead from '@components/seo/SEOHead.astro'
-import { createEducationalSchema } from '@utils/seoHelpers.ts'
+import { createEducationalSchema } from '@utils/seoHelpers'
 
 export async function getStaticPaths() {
   const { getCollection, render } = await import('astro:content');

@@ -104,7 +104,7 @@ class AnalyticsService {
   }
 
   // Conversion Signal Management
-  private addConversionSignal(type: SessionEvent['type'], strength: number): void {
+  private addConversionSignal(type: 'game-engagement' | 'education-completion' | 'casino-interest', strength: number): void {
     if (!this.session) return;
 
     this.session.conversionSignals.push({

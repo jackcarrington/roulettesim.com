@@ -1,4 +1,4 @@
-import type { RouletteGame } from './slugHelpers';
+import type { RouletteGame } from '../types/game.ts';
 
 export function createGameSchema(game: RouletteGame, gameUrl: string) {
   return {

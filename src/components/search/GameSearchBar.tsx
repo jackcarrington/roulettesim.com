@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Search, X, Filter } from 'lucide-react';
 import { Input } from '@components/components/ui/input';
 import { Button } from '@components/components/ui/button';
-import { 
+import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from '@components/components/ui/command';

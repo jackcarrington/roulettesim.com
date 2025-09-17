@@ -1,5 +1,8 @@
 import type { RouletteVariant } from './game.ts';
 
+// Re-export RouletteVariant for other modules
+export type { RouletteVariant };
+
 export interface UserSession {
   sessionId: string;
   gamePreferences: {
