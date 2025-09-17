@@ -17,7 +17,27 @@ export default defineConfig({
   adapter: netlify({}),
 
   server: {
-    port: 4321
+    port: 4321,
+    headers: {
+      'Content-Security-Policy': [
+        "default-src 'self'",
+        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com",
+        "style-src 'self'",
+        "img-src 'self' data: https:",
+        "font-src 'self' data:",
+        "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
+        "frame-src https://slotslaunch.com https://*.slotslaunch.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'self'",
+        'upgrade-insecure-requests'
+      ].join('; '),
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'SAMEORIGIN',
+      'Permissions-Policy': 'geolocation=(self)'
+    }
   },
 
   integrations: [mdx(), react(), sitemap(), icon(), compress()],

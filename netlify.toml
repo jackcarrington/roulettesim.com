@@ -10,15 +10,23 @@
   NODE_VERSION = "20.18.1"
   NPM_FLAGS = "--legacy-peer-deps"
 
-# Use an Edge Function to manage CSP and strip stale headers set elsewhere
-[[edge_functions]]
-  function = "remove-stale-csp"
-  path = "/*"
+# Static asset headers only - SSR routes will set headers via server response
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/*"
+  for = "*.js"
   [headers.values]
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "SAMEORIGIN"
-    Permissions-Policy = "geolocation=(self)"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
