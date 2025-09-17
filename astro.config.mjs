@@ -31,12 +31,15 @@ export default defineConfig({
         "base-uri 'self'",
         "form-action 'self'",
         "frame-ancestors 'self'",
+        "worker-src 'self'",
+        "manifest-src 'self'",
+        "media-src 'self'",
         'upgrade-insecure-requests'
       ].join('; '),
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'SAMEORIGIN',
-      'Permissions-Policy': 'geolocation=(self)'
+      'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()'
     }
   },
 
