@@ -251,15 +251,13 @@ const supportConfig = supportLevelConfig[article.supportLevel]
   }
   
   // Dark mode adjustments
-  .darkmode & {
-    .educational-article {
-      background: light-dark(var(--background-color), var(--color-neutral-900));
-      border-color: light-dark(var(--border-color-subtle), var(--color-neutral-700));
-      
-      &:hover {
-        border-color: light-dark(var(--color-primary-400), var(--color-primary-300));
-        box-shadow: var(--elevation-2);
-      }
+  :global(.darkmode) .educational-article {
+    background: light-dark(var(--background-color), var(--color-neutral-900));
+    border-color: light-dark(var(--border-color-subtle), var(--color-neutral-700));
+    
+    &:hover {
+      border-color: light-dark(var(--color-primary-400), var(--color-primary-300));
+      box-shadow: var(--elevation-2);
     }
   }
 </style>
