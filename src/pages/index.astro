@@ -8,10 +8,7 @@ import { api } from '../services/apiClient.ts';
 import type { RouletteGame } from '../types/game.ts';
 
 // Use promise-based loading to avoid blocking TTFB
-const gamesPromise = api.getRouletteGames().catch(err => {
-  console.error('Failed to load games:', err);
-  return [] as RouletteGame[];
-});
+const gamesPromise = api.getRouletteGames();
 
 const title = 'Roulette Simulator - Practice & Master Roulette | Roulettesim.com';
 const description = 'Ultimate roulette simulator with authentic casino games. Practice European, American, and French roulette variants risk-free. Master strategies with our professional roulette simulator.';
