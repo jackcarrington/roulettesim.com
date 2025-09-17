@@ -17,7 +17,7 @@ export default defineConfig({
   adapter: netlify({}),
 
   build: {
-    inlineStylesheets: 'always' // Force inline all CSS to eliminate render blocking
+    inlineStylesheets: 'always' // Force inline optimized CSS to eliminate render blocking
   },
 
   server: {
