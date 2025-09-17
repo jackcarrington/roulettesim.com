@@ -52,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "@vitest/ui": "^3.2.4",
+    "ajv": "^8.17.1",
     "astro": "^5.8.0",
     "astro-compress": "^2.3.8",
     "astro-eslint-parser": "^1.2.2",
