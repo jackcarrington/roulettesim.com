@@ -5,6 +5,9 @@ import { Card } from 'accessible-astro-components'
 import { getCollection } from 'astro:content'
 import SEOHead from '@components/seo/SEOHead.astro'
 
+// Enable static prerendering for faster TTFB
+export const prerender = true;
+
 const educationalContent = await getCollection('educational');
 
 // Sort by featured first, then by category

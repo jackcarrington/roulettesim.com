@@ -74,7 +74,7 @@ const schema = createGameSchema(currentGame, gameUrl);
     <div class="container">
       <header class="game-header mb-6">
         <nav class="breadcrumb mb-4">
-          <a href="/" style="color: var(--link-color);" class="hover:underline">← Back to Homepage</a>
+          <a href="/" class="hover:underline link-color">← Back to Homepage</a>
         </nav>
         
         <h1 class="text-3xl font-bold mb-2">{currentGame.name}</h1>
@@ -174,7 +174,8 @@ const schema = createGameSchema(currentGame, gameUrl);
     margin: 0 auto;
     padding: 0 1rem;
   }
-  
+  .link-color { color: var(--link-color); }
+
   .game-layout {
     min-height: 500px;
   }

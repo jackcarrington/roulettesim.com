@@ -7,15 +7,11 @@ import SEOHead from '@components/seo/SEOHead.astro'
 import { api } from '../services/apiClient.ts';
 import type { RouletteGame } from '../types/game.ts';
 
-let games: RouletteGame[] = [];
-let error: string | null = null;
-
-try {
-  games = await api.getRouletteGames();
-} catch (err) {
-  error = err instanceof Error ? err.message : 'Failed to load games';
+// Use promise-based loading to avoid blocking TTFB
+const gamesPromise = api.getRouletteGames().catch(err => {
   console.error('Failed to load games:', err);
-}
+  return [] as RouletteGame[];
+});
 
 const title = 'Roulette Simulator - Practice & Master Roulette | Roulettesim.com';
 const description = 'Ultimate roulette simulator with authentic casino games. Practice European, American, and French roulette variants risk-free. Master strategies with our professional roulette simulator.';
@@ -62,15 +58,8 @@ const homepageSchema = {
       </div>
       
       
-      {error ? (
-        <div class="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto">
-          <h3 class="font-semibold mb-2">Simulator temporarily unavailable</h3>
-          <p>{error}</p>
-          <p class="mt-2 text-sm">Please try again later or explore our <a href="/strategy" class="underline font-medium">strategy guides</a>.</p>
-        </div>
-      ) : null}
-
-      <GameGridPro games={games} client:visible />
+      <!-- Games will load asynchronously - no blocking TTFB -->
+      <GameGridPro gamesPromise={gamesPromise} client:visible />
     </div>
   </section>
 

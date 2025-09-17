@@ -95,7 +95,12 @@ export const GET: APIRoute = async ({ url }) => {
     };
 
     return new Response(JSON.stringify({ games: filteredGames }), {
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'public, max-age=1800, s-maxage=3600', // 30min client, 1hr server
+        'CDN-Cache-Control': 'public, max-age=3600', // 1hr CDN cache
+        'Netlify-CDN-Cache-Control': 'public, max-age=3600'
+      }
     });
 
   } catch (error) {
@@ -104,11 +109,15 @@ export const GET: APIRoute = async ({ url }) => {
     // Return cached data if available
     const anyCachedData = Object.values(cache)[0];
     if (anyCachedData) {
-      return new Response(JSON.stringify({ 
+      return new Response(JSON.stringify({
         games: anyCachedData.data,
         notice: "API unavailable, using cached data"
       }), {
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=300, s-maxage=600', // Shorter cache for fallback
+          'X-Cache-Status': 'fallback'
+        }
       });
     }
 

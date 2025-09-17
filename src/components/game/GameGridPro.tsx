@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { RouletteGame } from '../../types/game';
 import { generateGameSlug } from '../../utils/slugHelpers';
 import { useGameSearch } from '../../hooks/useGameSearch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@components/components/ui/card';
-import { 
-  Pagination, 
-  PaginationContent, 
-  PaginationItem, 
-  PaginationLink, 
-  PaginationNext, 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
   PaginationPrevious,
-  PaginationEllipsis 
+  PaginationEllipsis
 } from '@components/components/ui/pagination';
 import GameSearchBar from '../search/GameSearchBar';
 import { Play, Star } from 'lucide-react';
 
 interface GameGridProProps {
-  games: RouletteGame[];
+  games?: RouletteGame[];
+  gamesPromise?: Promise<RouletteGame[]>;
   variant?: string;
   itemsPerPage?: number;
 }
 
-export default function GameGridPro({ games, variant, itemsPerPage = 20 }: GameGridProProps) {
+export default function GameGridPro({ games: initialGames, gamesPromise, variant, itemsPerPage = 20 }: GameGridProProps) {
+  const [games, setGames] = useState<RouletteGame[]>(initialGames || []);
+  const [loading, setLoading] = useState(!!gamesPromise);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (gamesPromise) {
+      gamesPromise
+        .then(gameData => {
+          setGames(gameData);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error('Failed to load games:', err);
+          setError(err.message || 'Failed to load games');
+          setLoading(false);
+        });
+    }
+  }, [gamesPromise]);
   const [currentPage, setCurrentPage] = useState(1);
   
   // Initialize search with variant filter if specified
@@ -148,6 +167,31 @@ export default function GameGridPro({ games, variant, itemsPerPage = 20 }: GameG
         <div className="mx-auto max-w-md">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No games available</h3>
           <p className="text-gray-600">Please check back later or try a different variant.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="game-grid-section">
+        <div className="text-center py-16">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading roulette games...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="game-grid-section">
+        <div className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto text-center">
+          <h3 className="font-semibold mb-2">Games temporarily unavailable</h3>
+          <p className="mb-2">{error}</p>
+          <p className="text-sm">Please try again later or explore our <a href="/strategy" className="underline font-medium">strategy guides</a>.</p>
         </div>
       </div>
     );

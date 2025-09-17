@@ -147,20 +147,17 @@ const availabilityLabels = {
 
     <div class="resources-grid">
       {displayResources.map((resource) => {
-        const config = resourceTypeConfig[resource.type]
+        const config = resourceTypeConfig[resource.type];
         return (
-          <article class="resource-card" data-resource-type={resource.type}>
+          <article class={`resource-card type-${resource.type}`} data-resource-type={resource.type}>
             <div class="resource-header">
-              <div 
-                class="resource-icon" 
-                style={`color: ${config.color}; background: ${config.bgColor};`}
-              >
+              <div class="resource-icon">
                 <Icon name={config.icon} />
               </div>
               
               <div class="resource-meta">
                 <h5 class="resource-name">{resource.name}</h5>
-                <div class="resource-type-badge" style={`background: ${config.bgColor}; color: ${config.color};`}>
+                <div class="resource-type-badge">
                   {resource.type.replace('-', ' ')}
                 </div>
               </div>

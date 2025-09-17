@@ -43,13 +43,13 @@ const aboutSchema = {
           <h1 class="text-center text-6xl md:text-left lg:text-8xl">
             About <span class="text-gradient">RouletteSim</span>
           </h1>
-          <p class="text-xl text-center md:text-left max-w-2xl" style="color: var(--foreground-color);">
+          <p class="text-xl text-center md:text-left max-w-2xl fg-text">
             We're dedicated to providing authentic roulette education through professional simulators and expert strategies. Our mission is to make learning roulette accessible, engaging, and genuinely valuable for players of all levels.
           </p>
         </div>
         <div class="hidden lg:flex justify-center items-center">
-          <div class="w-96 h-96 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--color-primary-100), var(--color-secondary-100));">
-            <Icon name="lucide:graduation-cap" class="w-48 h-48" style="color: var(--color-primary-400);" />
+          <div class="w-96 h-96 rounded-full flex items-center justify-center bg-grad-hero">
+            <Icon name="lucide:graduation-cap" class="w-48 h-48 icon-primary-400" />
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const aboutSchema = {
   </section>
 
   <!-- Mission & Values Section -->
-  <section class="my-16 py-16" style="background-color: var(--color-neutral-200);">
+  <section class="my-16 py-16 bg-neutral-200">
     <div class="container">
       <h2 class="mb-12 text-4xl font-bold text-center">Our Mission</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -79,22 +79,22 @@ const aboutSchema = {
     <div class="container">
       <h2 class="mb-12 text-4xl font-bold text-center">Why Trust RouletteSim</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div class="p-6 rounded-lg shadow-sm border" style="background-color: var(--background-color); border-color: var(--border-color-subtle);">
+        <div class="p-6 rounded-lg shadow-sm border card-surface">
           <div class="mb-4">
             <Icon name="lucide:handshake" class="w-12 h-12 text-blue-600 mb-3" />
             <h3 class="text-xl font-semibold mb-2">Industry Partnerships</h3>
           </div>
-          <p style="color: var(--foreground-color);">
+          <p class="fg-text">
             Integrated with leading game providers including Evolution Gaming, NetEnt, and Playtech to deliver authentic casino experiences.
           </p>
         </div>
         
-        <div class="p-6 rounded-lg shadow-sm border" style="background-color: var(--background-color); border-color: var(--border-color-subtle);">
+        <div class="p-6 rounded-lg shadow-sm border card-surface">
           <div class="mb-4">
             <Icon name="lucide:brain" class="w-12 h-12 text-cyan-600 mb-3" />
             <h3 class="text-xl font-semibold mb-2">Expert Methodology</h3>
           </div>
-          <p style="color: var(--foreground-color);">
+          <p class="fg-text">
             Our educational approach is based on proven learning principles, combining theoretical knowledge with practical application in a risk-free environment.
           </p>
         </div>
@@ -104,7 +104,7 @@ const aboutSchema = {
             <Icon name="lucide:heart-handshake" class="w-12 h-12 text-blue-600 mb-3" />
             <h3 class="text-xl font-semibold mb-2">Responsible Gaming</h3>
           </div>
-          <p style="color: var(--foreground-color);">
+          <p class="fg-text">
             We prioritize education over gambling, promoting responsible gaming practices and helping players understand the mathematics behind roulette.
           </p>
         </div>
@@ -123,10 +123,10 @@ const aboutSchema = {
               <Icon name="lucide:zap" class="w-12 h-12 text-blue-600 mb-3" />
               <h3 class="text-2xl font-semibold mb-3">Real Game Integration</h3>
             </div>
-            <p class="mb-4" style="color: var(--foreground-color);">
+            <p class="mb-4 fg-text">
               Our platform integrates with the SlotsLaunch API to provide access to authentic casino games. This means you're practicing with the same mechanics and interfaces used in real casinos.
             </p>
-            <p style="color: var(--foreground-color);">
+            <p class="fg-text">
               No simplified animations or fake gameplay - just genuine roulette experiences that prepare you for the real thing.
             </p>
           </div>
@@ -136,10 +136,10 @@ const aboutSchema = {
               <Icon name="lucide:shield" class="w-12 h-12 text-cyan-600 mb-3" />
               <h3 class="text-2xl font-semibold mb-3">Privacy-First Analytics</h3>
             </div>
-            <p class="mb-4" style="color: var(--foreground-color);">
+            <p class="mb-4 fg-text">
               We track your learning progress using privacy-first analytics that respect your data. All tracking is session-based and requires your explicit consent.
             </p>
-            <p style="color: var(--foreground-color);">
+            <p class="fg-text">
               No third-party trackers, no personal data sharing - just helpful insights to improve your learning experience.
             </p>
           </div>
@@ -150,7 +150,7 @@ const aboutSchema = {
             <Icon name="lucide:accessibility" class="w-12 h-12 text-blue-600 mb-3 mx-auto" />
             <h3 class="text-2xl font-semibold mb-3">Accessibility Standards</h3>
           </div>
-          <p class="max-w-3xl mx-auto" style="color: var(--foreground-color);">
+          <p class="max-w-3xl mx-auto fg-text">
             Built with WCAG AA compliance from the ground up. We use the Atkinson Hyperlegible font for improved readability, 
             maintain proper contrast ratios, and ensure full keyboard navigation support. Quality roulette education should be accessible to everyone.
           </p>
@@ -164,7 +164,7 @@ const aboutSchema = {
     <div class="container">
       <div class="text-center max-w-3xl mx-auto">
         <h2 class="text-4xl font-bold mb-6">Ready to Master Roulette?</h2>
-        <p class="text-xl mb-8" style="color: var(--foreground-color);">
+        <p class="text-xl mb-8 fg-text">
           Start your roulette education journey today with authentic casino games and expert strategies. 
           Practice risk-free and build confidence before playing with real money.
         </p>
@@ -194,6 +194,13 @@ const aboutSchema = {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  /* CSP-safe replacements for previously inline styles */
+  .fg-text { color: var(--foreground-color); }
+  .bg-neutral-200 { background-color: var(--color-neutral-200); }
+  .card-surface { background-color: var(--background-color); border-color: var(--border-color-subtle); }
+  .bg-grad-hero { background: linear-gradient(135deg, var(--color-primary-100), var(--color-secondary-100)); }
+  .icon-primary-400 { color: var(--color-primary-400); }
 
   .container {
     max-width: 1200px;
