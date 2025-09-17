@@ -6,26 +6,27 @@ import { api } from '../../services/apiClient.ts';
 import { generateGameSlug, type RouletteGame } from '../../utils/slugHelpers.ts';
 import { createGameSchema } from '../../utils/seoHelpers.ts';
 
-export async function getStaticPaths() {
-  const games = await api.getRouletteGames();
-  
-  return games.map(game => {
-    const slug = generateGameSlug(game);
-    return {
-      params: { gameId: slug },
-      props: { game, slug }
-    };
-  });
-}
-
+// SSR runtime lookup: find the game by slug from the available games
 const { gameId } = Astro.params;
-const { game, slug } = Astro.props;
 
-if (!gameId || !game) {
+if (!gameId) {
   return Astro.redirect('/games');
 }
 
-const currentGame = game;
+let currentGame: RouletteGame | null = null;
+let slug = gameId;
+
+try {
+  const games = await api.getRouletteGames();
+  currentGame = games.find((g) => generateGameSlug(g) === gameId) ?? null;
+} catch (e) {
+  currentGame = null;
+}
+
+if (!currentGame) {
+  return Astro.redirect('/games');
+}
+
 const gameUrl = `https://roulettesim.com/games/${slug}`;
 
 const title = `${currentGame.name} - Free Roulette Demo | Roulettesim.com`;
