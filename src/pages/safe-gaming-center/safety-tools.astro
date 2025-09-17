@@ -363,7 +363,7 @@ const description = 'Access self-assessment tools, limit-setting features, and p
                   </div>
                   <div class="breathing-exercise">
                     <button class="tool-button start-breathing">Start 3-Minute Breathing Exercise</button>
-                    <div class="breathing-guide" id="breathing-timer" style="display: none;">
+                    <div class="breathing-guide is-hidden" id="breathing-timer">
                       <div class="breath-circle"></div>
                       <p class="breath-instruction">Breathe in slowly...</p>
                     </div>
@@ -521,6 +521,8 @@ const description = 'Access self-assessment tools, limit-setting features, and p
       margin: 0 auto;
       padding: 0 var(--space-m);
     }
+
+  .is-hidden { display: none; }
   }
 
   .breadcrumb {

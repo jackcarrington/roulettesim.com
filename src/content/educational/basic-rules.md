@@ -127,11 +127,11 @@ Want a quick reference you can use anywhere? Download our **free Roulette Rules 
 - Essential strategy tips for beginners
 - Your complete learning path from demo games to real money play
 
-<div style="text-align: center; margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px;">
-  <a href="/tools/roulette-rules-cheat-sheet" target="_blank" style="display: inline-block; background: white; color: #333; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+<div class="cta-block">
+  <a href="/tools/roulette-rules-cheat-sheet" target="_blank" class="cta-button">
     📄 Download Free Cheat Sheet
   </a>
-  <p style="color: white; margin: 1rem 0 0; font-size: 0.9rem;">Print-friendly PDF • No email required • Instant access</p>
+  <p class="cta-subtext">Print-friendly PDF • No email required • Instant access</p>
 </div>
 
 ## Ready to Play? Your Action Plan
