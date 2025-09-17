@@ -3,7 +3,8 @@ import DefaultLayout from '@layouts/DefaultLayout.astro';
 import GameFrame from '@components/game/GameFrame.astro';
 import SEOHead from '@components/seo/SEOHead.astro';
 import { api } from '../../services/apiClient.ts';
-import { generateGameSlug, type RouletteGame } from '../../utils/slugHelpers.ts';
+import { generateGameSlug } from '../../utils/slugHelpers.ts';
+import type { RouletteGame } from '../../types/game.ts';
 import { createGameSchema } from '../../utils/seoHelpers.ts';
 
 // SSR runtime lookup: find the game by slug from the available games
@@ -16,9 +17,29 @@ if (!gameId) {
 let currentGame: RouletteGame | null = null;
 let slug = gameId;
 
+function normalize(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+function slugCandidates(g: RouletteGame): string[] {
+  const longForm = generateGameSlug(g); // variant-name-provider
+  const variant = normalize(g.variant);
+  const name = normalize(g.name);
+  const provider = normalize(g.provider);
+  const nameWithoutVariant = name.startsWith(`${variant}-`)
+    ? name.slice(variant.length + 1)
+    : name;
+  const shortForm = `${nameWithoutVariant}-${provider}`;
+  return [longForm, shortForm];
+}
+
 try {
   const games = await api.getRouletteGames();
-  currentGame = games.find((g) => generateGameSlug(g) === gameId) ?? null;
+  currentGame = games.find((g) => slugCandidates(g).includes(gameId)) ?? null;
 } catch (e) {
   currentGame = null;
 }
@@ -77,13 +98,13 @@ const schema = createGameSchema(currentGame, gameUrl);
           <div class="game-controls mt-4 flex flex-wrap gap-3">
             <button 
               class="control-btn bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onclick="window.location.reload()"
+              data-action="refresh-game"
             >
               🔄 Refresh Game
             </button>
             <button 
               class="control-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onclick="document.querySelector('iframe')?.requestFullscreen()"
+              data-action="fullscreen-game"
             >
               ⛶ Fullscreen
             </button>
@@ -204,3 +225,6 @@ const schema = createGameSchema(currentGame, gameUrl);
     }
   }
 </style>
+
+<!-- CSP-compliant external script for page interactions -->
+<script type="module" src="/scripts/games-page.js"></script>

@@ -233,7 +233,7 @@ import {
               Ah yes, and I be the <strong>second</strong> Modal. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Sed, a! Ratione eaque temporibus alias tempora pariatur dolorem.
             </p>
-            <button class="button" onclick="closeModal()">Confirm action</button>
+            <button class="button" id="modal2-confirm">Confirm action</button>
           </Modal>
         </div>
         <div class="space-content">
@@ -348,3 +348,6 @@ import {
     </div>
   </section>
 </DefaultLayout>
+
+<!-- CSP-compliant external script for page interactions -->
+<script type="module" src="/scripts/accessible-components.js"></script>

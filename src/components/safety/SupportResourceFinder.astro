@@ -124,11 +124,11 @@ const availabilityLabels = {
       </div>
       
       <div class="search-actions">
-        <button type="button" class="button search-button" onclick="findResources()">
+        <button type="button" class="button search-button" data-action="find-resources">
           <Icon name="lucide:search" />
           Find Support Resources
         </button>
-        <button type="button" class="button color-secondary" onclick="enableGeolocation()">
+        <button type="button" class="button color-secondary" data-action="enable-geolocation">
           <Icon name="lucide:map-pin" />
           Use My Location
         </button>
@@ -261,100 +261,8 @@ const availabilityLabels = {
   </div>
 </div>
 
-<script>
-  // Client-side functionality for search and geolocation
-  declare global {
-    function findResources(): void;
-    function enableGeolocation(): void;
-  }
-  
-  window.findResources = function() {
-    const locationInput = document.getElementById('location-input') as HTMLInputElement;
-    const typeSelect = document.getElementById('resource-type') as HTMLSelectElement;
-    
-    const location = locationInput.value.trim();
-    const resourceType = typeSelect.value;
-    
-    // In a real implementation, this would make an API call
-    // For now, we'll just filter the existing results
-    const resourceCards = document.querySelectorAll('.resource-card');
-    let visibleCount = 0;
-    
-    resourceCards.forEach((card) => {
-      const cardElement = card as HTMLElement;
-      const cardType = cardElement.dataset.resourceType;
-      
-      const typeMatches = !resourceType || cardType === resourceType;
-      
-      if (typeMatches) {
-        cardElement.style.display = 'block';
-        visibleCount++;
-      } else {
-        cardElement.style.display = 'none';
-      }
-    });
-    
-    // Update results count
-    const resultsInfo = document.querySelector('.results-info span');
-    if (resultsInfo) {
-      resultsInfo.textContent = `${visibleCount} resources found${location ? ` near ${location}` : ''}`;
-    }
-  };
-  
-  window.enableGeolocation = function() {
-    const locationInput = document.getElementById('location-input') as HTMLInputElement;
-    const geoButton = document.querySelector('.search-actions .color-secondary');
-    
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser');
-      return;
-    }
-    
-    // Update button state
-    if (geoButton) {
-      geoButton.textContent = 'Getting location...';
-      (geoButton as HTMLButtonElement).disabled = true;
-    }
-    
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        
-        // In a real implementation, reverse geocode to get city/state
-        locationInput.value = 'Current Location';
-        locationInput.placeholder = `Lat: ${lat.toFixed(2)}, Lng: ${lng.toFixed(2)}`;
-        
-        // Reset button
-        if (geoButton) {
-          geoButton.innerHTML = '<svg>...</svg> Location Found';
-          setTimeout(() => {
-            geoButton.innerHTML = '<svg>...</svg> Use My Location';
-            (geoButton as HTMLButtonElement).disabled = false;
-          }, 2000);
-        }
-        
-        // Automatically trigger search
-        findResources();
-      },
-      (error) => {
-        console.error('Geolocation error:', error);
-        alert('Unable to get your location. Please enter it manually.');
-        
-        // Reset button
-        if (geoButton) {
-          geoButton.innerHTML = '<svg>...</svg> Use My Location';
-          (geoButton as HTMLButtonElement).disabled = false;
-        }
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 300000 // 5 minutes
-      }
-    );
-  };
-</script>
+<!-- CSP-compliant external script for this component's behavior -->
+<script type="module" src="/scripts/support-resource-finder.js"></script>
 
 <style lang="scss">
   .support-resource-finder {
