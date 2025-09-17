@@ -16,6 +16,10 @@ export default defineConfig({
   output: 'server',
   adapter: netlify({}),
 
+  build: {
+    inlineStylesheets: 'always' // Force inline all CSS to eliminate render blocking
+  },
+
   server: {
     port: 4321,
     headers: {
