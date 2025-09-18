@@ -7,8 +7,7 @@ import SEOHead from '@components/seo/SEOHead.astro'
 import { api } from '../services/apiClient.ts';
 import type { RouletteGame } from '../types/game.ts';
 
-// Use promise-based loading to avoid blocking TTFB
-const gamesPromise = api.getRouletteGames();
+// GameGridPro will handle loading games internally to avoid promise serialization issues
 
 const title = 'Roulette Simulator - Practice & Master Roulette | Roulettesim.com';
 const description = 'Ultimate roulette simulator with authentic casino games. Practice European, American, and French roulette variants risk-free. Master strategies with our professional roulette simulator.';
@@ -55,8 +54,8 @@ const homepageSchema = {
       </div>
       
       
-      <!-- Games will load asynchronously - no blocking TTFB -->
-      <GameGridPro gamesPromise={gamesPromise} client:visible />
+      <!-- Games will load asynchronously on the client -->
+      <GameGridPro client:visible />
     </div>
   </section>
 

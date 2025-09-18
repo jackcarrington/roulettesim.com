@@ -24,11 +24,17 @@ interface GameGridProProps {
 
 export default function GameGridPro({ games: initialGames, gamesPromise, variant, itemsPerPage = 20 }: GameGridProProps) {
   const [games, setGames] = useState<RouletteGame[]>(initialGames || []);
-  const [loading, setLoading] = useState(!!gamesPromise);
+  const [loading, setLoading] = useState(!initialGames);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (gamesPromise) {
+    // If we already have games or a promise was provided, don't fetch again
+    if (initialGames && initialGames.length > 0) {
+      setLoading(false);
+      return;
+    }
+
+    if (gamesPromise && typeof gamesPromise.then === 'function') {
       gamesPromise
         .then(gameData => {
           setGames(gameData);
@@ -39,8 +45,24 @@ export default function GameGridPro({ games: initialGames, gamesPromise, variant
           setError(err.message || 'Failed to load games');
           setLoading(false);
         });
+    } else if (!initialGames) {
+      // No games or promise provided, fetch them ourselves
+      const loadGames = async () => {
+        try {
+          const { api } = await import('../../services/apiClient');
+          const gameData = await api.getRouletteGames();
+          setGames(gameData);
+          setLoading(false);
+        } catch (err: any) {
+          console.error('Failed to load games:', err);
+          setError(err.message || 'Failed to load games');
+          setLoading(false);
+        }
+      };
+
+      loadGames();
     }
-  }, [gamesPromise]);
+  }, [initialGames, gamesPromise]);
   const [currentPage, setCurrentPage] = useState(1);
   
   // Initialize search with variant filter if specified
