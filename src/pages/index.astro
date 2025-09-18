@@ -54,8 +54,81 @@ const homepageSchema = {
       </div>
       
       
-      <!-- Games will load asynchronously on the client -->
-      <GameGridPro client:visible />
+      <!-- Games loaded via API with fallback to mock data -->
+      <div class="games-container">
+        <script>
+          fetch('/api/games')
+            .then(r => r.json())
+            .then(data => {
+              const container = document.querySelector('.games-container');
+              if (data.games && data.games.length > 0) {
+                container.innerHTML = `
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                    ${data.games.map(game => `
+                      <div class="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-white rounded-lg shadow">
+                        <div class="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
+                          <div class="text-gray-500 text-sm">Game Preview</div>
+                          <div class="absolute top-2 right-2">
+                            <div class="px-2 py-1 rounded text-xs font-medium ${
+                              game.variant === 'european' ? 'bg-green-100 text-green-800' :
+                              game.variant === 'american' ? 'bg-red-100 text-red-800' :
+                              game.variant === 'french' ? 'bg-blue-100 text-blue-800' :
+                              'bg-gray-100 text-gray-800'
+                            }">${game.variant}</div>
+                          </div>
+                        </div>
+                        <div class="p-4">
+                          <h3 class="text-lg font-semibold line-clamp-1 mb-2">${game.name}</h3>
+                          <p class="text-sm text-gray-600 mb-2">${game.provider}</p>
+                          <div class="space-y-2 mb-4">
+                            <div class="flex justify-between text-sm">
+                              <span class="text-gray-600">Betting Range:</span>
+                              <span class="font-medium">$${game.metadata.minBet} - $${game.metadata.maxBet}</span>
+                            </div>
+                            ${game.metadata.features ? `
+                              <div class="flex flex-wrap gap-1">
+                                ${game.metadata.features.slice(0, 3).map(feature => `
+                                  <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">${feature}</span>
+                                `).join('')}
+                              </div>
+                            ` : ''}
+                          </div>
+                          <button class="button w-full justify-center">
+                            Play Game
+                          </button>
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                  ${data.notice ? `<div class="text-center"><p class="text-orange-600 bg-orange-50 px-4 py-2 rounded-lg inline-block">${data.notice}</p></div>` : ''}
+                `;
+              } else {
+                container.innerHTML = `
+                  <div class="text-center py-12">
+                    <div class="mx-auto max-w-md">
+                      <h3 class="text-lg font-semibold text-gray-900 mb-2">No games available</h3>
+                      <p class="text-gray-600">Please check back later or try a different variant.</p>
+                    </div>
+                  </div>
+                `;
+              }
+            })
+            .catch(e => {
+              console.error('API Error:', e);
+              document.querySelector('.games-container').innerHTML = `
+                <div class="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto text-center">
+                  <h3 class="font-semibold mb-2">Games temporarily unavailable</h3>
+                  <p class="mb-2">Unable to load games at this time.</p>
+                  <p class="text-sm">Please try again later or explore our <a href="/strategy" class="underline font-medium">strategy guides</a>.</p>
+                </div>
+              `;
+            });
+        </script>
+        <div class="text-center py-16">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p class="text-gray-600">Loading roulette games...</p>
+        </div>
+      </div>
     </div>
   </section>
 

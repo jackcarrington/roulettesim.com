@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ url }) => {
 
     // Fetch from SlotsLaunch API using documented format
     const slotsLaunchToken = import.meta.env.SLOTSLAUNCH_API_TOKEN;
-    
+
     if (!slotsLaunchToken) {
       throw new Error('SLOTSLAUNCH_API_TOKEN not configured');
     }
@@ -105,7 +105,7 @@ export const GET: APIRoute = async ({ url }) => {
 
   } catch (error) {
     console.error('SlotsLaunch API error:', error);
-    
+
     // Return cached data if available
     const anyCachedData = Object.values(cache)[0];
     if (anyCachedData) {
@@ -121,14 +121,48 @@ export const GET: APIRoute = async ({ url }) => {
       });
     }
 
-    // Fallback to empty games list with error
-    return new Response(JSON.stringify({ 
-      games: [],
-      error: "Games temporarily unavailable" 
-    }), { 
-      status: 503,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    // Fallback to mock data
+    try {
+      const { getRouletteGames } = await import('../../services/mockGameService.ts');
+      const mockGames = await getRouletteGames();
+
+      // Apply filtering to mock data if specified
+      let filteredMockGames = mockGames;
+      const searchParams = new URL(url).searchParams;
+      const variant = searchParams.get('variant');
+      const provider = searchParams.get('provider');
+
+      if (variant) {
+        filteredMockGames = filteredMockGames.filter(game => game.variant === variant);
+      }
+      if (provider) {
+        filteredMockGames = filteredMockGames.filter(game =>
+          game.provider.toLowerCase().includes(provider.toLowerCase())
+        );
+      }
+
+      return new Response(JSON.stringify({
+        games: filteredMockGames,
+        notice: "API unavailable, using demo games"
+      }), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, max-age=300, s-maxage=600', // Shorter cache for fallback
+          'X-Cache-Status': 'mock-fallback'
+        }
+      });
+    } catch (mockError) {
+      console.error('Mock data fallback failed:', mockError);
+
+      // Final fallback to empty games list with error
+      return new Response(JSON.stringify({
+        games: [],
+        error: "Games temporarily unavailable"
+      }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
   }
 };
 

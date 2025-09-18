@@ -4,15 +4,31 @@
 
 [dev]
   command = "npm run dev"
-  port = 4321
+  targetPort = 4321
 
 [build.environment]
   NODE_VERSION = "20.18.1"
   NPM_FLAGS = "--legacy-peer-deps"
 
-# Static asset headers only - SSR routes will set headers via server response
+# Netlify CSP Nonce Plugin - handles dynamic nonce generation
+[[plugins]]
+  package = "@netlify/plugin-csp-nonce"
+  [plugins.inputs]
+    reportOnly = false
+    unsafeEval = false
+    excludedPath = [
+      "/api/*",
+      "/outbound-link/*"
+    ]
+
+# Cache headers for static assets
 [[headers]]
   for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -30,3 +46,13 @@
   for = "*.woff2"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Additional security headers (CSP handled by middleware)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

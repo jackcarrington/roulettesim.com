@@ -59,6 +59,32 @@ export default defineConfig({
         },
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('jsx-runtime')) {
+                return 'vendor-react';
+              }
+              if (id.includes('@sentry') || id.includes('spotlight')) {
+                return 'vendor-sentry';
+              }
+              return 'vendor-other';
+            }
+          }
+        }
+      },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        }
+      },
+      chunkSizeWarningLimit: 100
+    },
     plugins: [tailwindcss()],
     resolve: {
       alias: {
