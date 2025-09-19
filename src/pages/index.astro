@@ -79,7 +79,10 @@ const homepageSchema = {
                     ${data.games.map(game => `
                       <div class="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-white rounded-lg shadow max-w-sm mx-auto">
                         <div class="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                          ${game.thumbnail ? `<img src="${game.thumbnail}" alt="${game.name.replace(/['"]/g, '').replace(/&/g, '&amp;')} preview" class="w-full h-full object-cover object-center" style="max-height: 200px;" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\"text-gray-500 text-sm\\">Game Preview</div>'">` : `<div class="text-gray-500 text-sm">Game Preview</div>`}
+                          ${game.thumbnail ?
+                            `<img src="${game.thumbnail}" alt="${game.name.replace(/['"]/g, '').replace(/&/g, '&amp;')} preview" class="w-full h-full object-cover object-center game-thumbnail" style="max-height: 200px;" loading="lazy">` :
+                            `<div class="text-gray-500 text-sm">Game Preview</div>`
+                          }
                           <div class="absolute top-2 right-2">
                             <div class="px-2 py-1 rounded text-xs font-medium ${
                               game.variant === 'european' ? 'bg-green-100 text-green-800' :
@@ -128,6 +131,17 @@ const homepageSchema = {
                   </div>
                   ${data.notice ? `<div class="text-center"><p class="text-orange-600 bg-orange-50 px-4 py-2 rounded-lg inline-block">${data.notice}</p></div>` : ''}
                 `;
+
+                // Handle image load errors after DOM insertion
+                setTimeout(() => {
+                  const gameImages = container.querySelectorAll('.game-thumbnail');
+                  gameImages.forEach(img => {
+                    img.onerror = function() {
+                      this.parentElement.innerHTML = '<div class="text-gray-500 text-sm">Game Preview</div>';
+                    };
+                  });
+                }, 100);
+
               } else {
                 container.innerHTML = `
                   <div class="text-center py-12">
