@@ -57,6 +57,12 @@ const homepageSchema = {
       <!-- Games loaded via API with fallback to mock data -->
       <div class="games-container">
         <script>
+          function generateGameSlug(game) {
+            return game.name.toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-+|-+$/g, '');
+          }
+
           fetch('/api/games')
             .then(r => r.json())
             .then(data => {
@@ -67,7 +73,17 @@ const homepageSchema = {
                     ${data.games.map(game => `
                       <div class="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-white rounded-lg shadow">
                         <div class="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
-                          <div class="text-gray-500 text-sm">Game Preview</div>
+                          ${game.thumbnail ? `
+                            <img
+                              src="${game.thumbnail}"
+                              alt="${game.name} preview"
+                              class="w-full h-full object-cover"
+                              loading="lazy"
+                              onerror="this.parentElement.innerHTML='<div class=\\"text-gray-500 text-sm\\">Game Preview</div>'"
+                            />
+                          ` : `
+                            <div class="text-gray-500 text-sm">Game Preview</div>
+                          `}
                           <div class="absolute top-2 right-2">
                             <div class="px-2 py-1 rounded text-xs font-medium ${
                               game.variant === 'european' ? 'bg-green-100 text-green-800' :
@@ -76,6 +92,13 @@ const homepageSchema = {
                               'bg-gray-100 text-gray-800'
                             }">${game.variant}</div>
                           </div>
+                          ${game.metadata && game.metadata.popularity > 70 ? `
+                            <div class="absolute top-2 left-2">
+                              <div class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-medium flex items-center">
+                                <span class="mr-1">⭐</span>Popular
+                              </div>
+                            </div>
+                          ` : ''}
                         </div>
                         <div class="p-4">
                           <h3 class="text-lg font-semibold line-clamp-1 mb-2">${game.name}</h3>
@@ -85,7 +108,7 @@ const homepageSchema = {
                               <span class="text-gray-600">Betting Range:</span>
                               <span class="font-medium">$${game.metadata.minBet} - $${game.metadata.maxBet}</span>
                             </div>
-                            ${game.metadata.features ? `
+                            ${game.metadata.features && game.metadata.features.length > 0 ? `
                               <div class="flex flex-wrap gap-1">
                                 ${game.metadata.features.slice(0, 3).map(feature => `
                                   <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">${feature}</span>
@@ -93,9 +116,16 @@ const homepageSchema = {
                               </div>
                             ` : ''}
                           </div>
-                          <button class="button w-full justify-center">
+                          <a
+                            href="/games/${generateGameSlug(game)}"
+                            class="button w-full justify-center has-icon"
+                            aria-label="Play ${game.name} roulette game"
+                          >
+                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
                             Play Game
-                          </button>
+                          </a>
                         </div>
                       </div>
                     `).join('')}
@@ -107,7 +137,8 @@ const homepageSchema = {
                   <div class="text-center py-12">
                     <div class="mx-auto max-w-md">
                       <h3 class="text-lg font-semibold text-gray-900 mb-2">No games available</h3>
-                      <p class="text-gray-600">Please check back later or try a different variant.</p>
+                      <p class="text-gray-600 mb-4">Please check back later or try a different variant.</p>
+                      <a href="/games" class="button color-secondary">Browse All Games</a>
                     </div>
                   </div>
                 `;
@@ -119,7 +150,11 @@ const homepageSchema = {
                 <div class="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-8 max-w-2xl mx-auto text-center">
                   <h3 class="font-semibold mb-2">Games temporarily unavailable</h3>
                   <p class="mb-2">Unable to load games at this time.</p>
-                  <p class="text-sm">Please try again later or explore our <a href="/strategy" class="underline font-medium">strategy guides</a>.</p>
+                  <p class="text-sm mb-4">Please try again later or explore our educational content.</p>
+                  <div class="flex gap-2 justify-center">
+                    <a href="/games" class="button color-secondary">Browse Games</a>
+                    <a href="/strategy" class="button">Strategy Guides</a>
+                  </div>
                 </div>
               `;
             });

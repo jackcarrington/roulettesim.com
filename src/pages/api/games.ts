@@ -23,6 +23,7 @@ export const GET: APIRoute = async ({ url }) => {
     const slotsLaunchToken = import.meta.env.SLOTSLAUNCH_API_TOKEN;
 
     if (!slotsLaunchToken) {
+      console.warn('SLOTSLAUNCH_API_TOKEN not configured - using mock data');
       throw new Error('SLOTSLAUNCH_API_TOKEN not configured');
     }
 
