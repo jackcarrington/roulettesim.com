@@ -58,9 +58,15 @@ const homepageSchema = {
       <div class="games-container">
         <script>
           function generateGameSlug(game) {
+            // Use game ID if available, otherwise generate from name
+            if (game.id) {
+              return game.id.toString().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+            }
+            // Simplified slug generation to match [gameId].astro routing
             return game.name.toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
-              .replace(/^-+|-+$/g, '');
+              .replace(/^-+|-+$/g, '')
+              .substring(0, 50); // Limit length
           }
 
           fetch('/api/games')
@@ -71,13 +77,14 @@ const homepageSchema = {
                 container.innerHTML = `
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
                     ${data.games.map(game => `
-                      <div class="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-white rounded-lg shadow">
+                      <div class="group hover:shadow-lg transition-all duration-300 overflow-hidden bg-white rounded-lg shadow max-w-sm mx-auto">
                         <div class="aspect-video relative overflow-hidden bg-gray-100 flex items-center justify-center">
                           ${game.thumbnail ? `
                             <img
                               src="${game.thumbnail}"
-                              alt="${game.name} preview"
-                              class="w-full h-full object-cover"
+                              alt="${game.name.replace(/['"]/g, '').replace(/&/g, '&amp;')} preview"
+                              class="w-full h-full object-cover object-center"
+                              style="max-height: 200px;"
                               loading="lazy"
                               onerror="this.parentElement.innerHTML='<div class=\\"text-gray-500 text-sm\\">Game Preview</div>'"
                             />
@@ -101,8 +108,8 @@ const homepageSchema = {
                           ` : ''}
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold line-clamp-1 mb-2">${game.name}</h3>
-                          <p class="text-sm text-gray-600 mb-2">${game.provider}</p>
+                          <h3 class="text-lg font-semibold line-clamp-1 mb-2">${game.name.replace(/['"]/g, '').replace(/&/g, '&amp;')}</h3>
+                          <p class="text-sm text-gray-600 mb-2">${game.provider.replace(/['"]/g, '').replace(/&/g, '&amp;')}</p>
                           <div class="space-y-2 mb-4">
                             <div class="flex justify-between text-sm">
                               <span class="text-gray-600">Betting Range:</span>
@@ -119,7 +126,7 @@ const homepageSchema = {
                           <a
                             href="/games/${generateGameSlug(game)}"
                             class="button w-full justify-center has-icon"
-                            aria-label="Play ${game.name} roulette game"
+                            aria-label="Play ${game.name.replace(/['"]/g, '').replace(/&/g, '&amp;')} roulette game"
                           >
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M8 5v14l11-7z"/>
