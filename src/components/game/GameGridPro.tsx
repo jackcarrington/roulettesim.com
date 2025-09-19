@@ -261,7 +261,7 @@ export default function GameGridPro({ games: initialGames, gamesPromise, variant
                 <span>{game.provider}</span>
                 {game.metadata.popularity > 70 && (
                   <div className="flex items-center text-yellow-600">
-                    <Star className="w-3 h-3 fill-current" />
+                    <Star className="w-3 h-3 fill-current" aria-hidden="true" />
                     <span className="ml-1 text-xs">Popular</span>
                   </div>
                 )}
@@ -289,11 +289,12 @@ export default function GameGridPro({ games: initialGames, gamesPromise, variant
                 )}
               </div>
               
-              <a 
+              <a
                 href={`/games/${generateGameSlug(game)}`}
                 className="button w-full justify-center has-icon"
+                aria-label={`Play ${game.name} roulette game`}
               >
-                <Play className="w-4 h-4" />
+                <Play className="w-4 h-4" aria-hidden="true" />
                 Play Game
               </a>
             </CardContent>
