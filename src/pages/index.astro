@@ -58,15 +58,20 @@ const homepageSchema = {
       <div class="games-container">
         <script>
           function generateGameSlug(game) {
-            // Use game ID if available, otherwise generate from name
-            if (game.id) {
-              return game.id.toString().toLowerCase().replace(/[^a-z0-9-]/g, '-');
-            }
-            // Simplified slug generation to match [gameId].astro routing
-            return game.name.toLowerCase()
-              .replace(/[^a-z0-9]+/g, '-')
-              .replace(/^-+|-+$/g, '')
-              .substring(0, 50); // Limit length
+            // Generate descriptive slug matching server-side logic: variant-name-provider
+            const variant = game.variant.toLowerCase()
+              .replace(/[^a-z0-9\s-]/g, '')
+              .replace(/\s+/g, '-');
+
+            const name = game.name.toLowerCase()
+              .replace(/[^a-z0-9\s-]/g, '')
+              .replace(/\s+/g, '-');
+
+            const provider = game.provider.toLowerCase()
+              .replace(/[^a-z0-9\s-]/g, '')
+              .replace(/\s+/g, '-');
+
+            return `${variant}-${name}-${provider}`;
           }
 
           fetch('/api/games')
